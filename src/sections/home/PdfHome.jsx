@@ -9,7 +9,7 @@ import {
 } from '../../data/localization'
 import Container from '../../components/common/Container'
 import Reveal from '../../components/common/Reveal'
-import videoSource from '../../../../vid.mp4'
+import videoSource from '../../../vid.mp4'
 
 const highlights = [
   'Solution complète : terrain + maison',
