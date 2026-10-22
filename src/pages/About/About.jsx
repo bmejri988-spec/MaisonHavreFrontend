@@ -75,7 +75,7 @@ function About() {
       ========================================================= */}
       <section id="story" className="py-24 md:py-32 lg:py-40">
         <Container>
-          <div className="grid gap-14 lg:grid-cols-[0.8fr_1.2fr] lg:gap-24">
+          <div className="grid gap-1Une manière4 lg:grid-cols-[0.8fr_1.2fr] lg:gap-24">
             {/* Image */}
             <Reveal className="order-2 lg:order-1">
               <div className="group relative h-105 overflow-hidden md:h-140 lg:h-162">

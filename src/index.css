@@ -437,18 +437,111 @@ img {
   object-fit: cover;
 }
 
+/* =========================================================
+   PDF HOME — Maison Havre
+   Same palette + fonts as the rest of the site.
+   ========================================================= */
 .aurea-pdf-home {
+  --aurea-night: #0c2b30;
+  --aurea-night-light: #12393f;
+  --aurea-gold: #c9a45c;
+  --aurea-gold-dark: #927444;
+  --aurea-sand: #e4dccb;
+  --aurea-paper: #f7f5f0;
+  --pdf-body: #44565a;
+  --pdf-line: rgb(12 43 48 / 14%);
+  --pdf-label: color-mix(in srgb, var(--aurea-gold-dark) 78%, var(--aurea-night));
+  --pdf-serif: 'Fraunces', Georgia, serif;
   color: var(--aurea-night);
   background: var(--aurea-paper);
 }
 
+/* ---------- Sections & backgrounds ---------- */
+.aurea-pdf-section {
+  padding-block: clamp(72px, 9vw, 132px);
+}
+
+.aurea-pdf-section.is-paper {
+  background: var(--aurea-paper);
+}
+
+.aurea-pdf-section.is-sand {
+  background: var(--aurea-sand);
+}
+
+.aurea-pdf-section.is-night {
+  color: #fff;
+  background: var(--aurea-night);
+}
+
+/* ---------- Typography ---------- */
+.aurea-pdf-home h2 {
+  margin: 18px 0 0;
+  font-family: var(--pdf-serif);
+  font-size: clamp(34px, 4.4vw, 60px);
+  font-weight: 400;
+  line-height: 1.06;
+  letter-spacing: -0.02em;
+  text-wrap: balance;
+}
+
+.aurea-pdf-home h3 {
+  margin: 14px 0 0;
+  font-family: var(--pdf-serif);
+  font-size: clamp(28px, 3vw, 40px);
+  font-weight: 400;
+  line-height: 1.1;
+  letter-spacing: -0.01em;
+}
+
+.aurea-pdf-section p {
+  max-width: 60ch;
+  margin: 20px 0 0;
+  color: var(--pdf-body);
+  font-size: 17px;
+  line-height: 1.7;
+}
+
+.aurea-pdf-section.is-night p {
+  color: rgb(255 255 255 / 74%);
+}
+
+/* Small section markers (2.1, 2.2 …) */
+.aurea-pdf-eyebrow,
+.aurea-pdf-kicker {
+  display: inline-flex;
+  align-items: center;
+  gap: 12px;
+  color: var(--aurea-gold);
+  font-size: 14px;
+  font-weight: 600;
+  letter-spacing: 0.01em;
+}
+
+.aurea-pdf-eyebrow::before,
+.aurea-pdf-kicker::before {
+  width: 28px;
+  height: 1px;
+  background: currentColor;
+  content: '';
+}
+
+.aurea-pdf-eyebrow-dark {
+  color: var(--pdf-label);
+}
+
+.is-night .aurea-pdf-eyebrow-dark {
+  color: var(--aurea-gold);
+}
+
+/* ---------- Hero ---------- */
 .aurea-pdf-hero {
   position: relative;
   display: flex;
-  min-height: 760px;
+  min-height: clamp(680px, 94svh, 900px);
   align-items: flex-end;
   overflow: hidden;
-  color: var(--color-white);
+  color: #fff;
   background: var(--aurea-night);
 }
 
@@ -462,35 +555,26 @@ img {
 
 .aurea-pdf-hero > img {
   object-fit: cover;
+  object-position: center 60%;
 }
 
 .aurea-pdf-hero-overlay {
-  background: linear-gradient(180deg, rgb(7 17 13 / 35%), rgb(7 17 13 / 88%));
+  background: linear-gradient(
+    0deg,
+    rgb(12 43 48 / 94%) 0%,
+    rgb(12 43 48 / 62%) 40%,
+    rgb(12 43 48 / 18%) 100%
+  );
 }
 
-.aurea-pdf-eyebrow,
-.aurea-pdf-kicker {
-  display: block;
-  color: var(--aurea-gold);
-  font-size: 10px;
-  font-weight: 700;
-  letter-spacing: .28em;
-  text-transform: uppercase;
-}
-
-.aurea-pdf-eyebrow-dark {
-  color: var(--aurea-gold-dark);
-}
-
-.aurea-pdf-hero h1,
-.aurea-pdf-section h2 {
-  max-width: 900px;
-  margin: 20px 0 0;
-  font-family: var(--font-serif);
-  font-size: clamp(48px, 7vw, 100px);
+.aurea-pdf-hero h1 {
+  max-width: 22ch;
+  margin: 22px 0 0;
+  font-family: var(--pdf-serif);
+  font-size: clamp(40px, 5.8vw, 82px);
   font-weight: 400;
-  letter-spacing: -.045em;
-  line-height: .91;
+  line-height: 1.02;
+  letter-spacing: -0.03em;
 }
 
 .aurea-pdf-hero h1 em {
@@ -499,281 +583,395 @@ img {
 }
 
 .aurea-pdf-hero p {
-  max-width: 520px;
-  margin: 30px 0 0;
-  color: rgb(255 255 255 / 76%);
-  font-size: 16px;
-  line-height: 1.7;
+  max-width: 540px;
+  margin: 28px 0 0;
+  color: rgb(255 255 255 / 82%);
+  font-size: 18px;
+  line-height: 1.65;
 }
 
-.aurea-pdf-section {
-  padding: 110px clamp(24px, 5vw, 72px);
+/* ---------- Feature lists ---------- */
+.aurea-pdf-features {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 14px 36px;
+  margin: 44px 0 0;
+  padding: 26px 0 0;
+  list-style: none;
+  border-top: 1px solid var(--pdf-line);
 }
 
-.aurea-pdf-intro,
-.aurea-pdf-product {
-  background: var(--aurea-paper);
-}
-
-.aurea-pdf-offer,
-.aurea-pdf-catalog {
-  background: var(--aurea-sand);
-}
-
-.aurea-pdf-expertise {
-  color: var(--color-white);
-  background: var(--aurea-night);
-}
-
-.aurea-pdf-section h2 {
-  max-width: 700px;
-  font-size: clamp(42px, 5vw, 72px);
-}
-
-.aurea-pdf-lead,
-.aurea-pdf-split p,
-.aurea-pdf-video-layout p {
-  max-width: 650px;
-  margin-top: 24px;
-  color: var(--aurea-muted);
-  font-size: 17px;
-  line-height: 1.8;
-}
-
-.aurea-pdf-intro .aurea-pdf-lead {
-  margin-bottom: 38px;
-}
-
-.aurea-pdf-intro .grid {
-  max-width: 760px;
-}
-
-.aurea-pdf-section-heading {
-  margin-bottom: 48px;
-}
-
-.aurea-pdf-video-layout,
-.aurea-pdf-split {
-  display: grid;
-  grid-template-columns: minmax(0, 1.15fr) minmax(0, .85fr);
-  gap: clamp(32px, 6vw, 92px);
+.aurea-pdf-features li {
+  display: inline-flex;
   align-items: center;
+  gap: 10px;
+  color: var(--aurea-night);
+  font-size: 15px;
+  font-weight: 500;
+  line-height: 1.4;
 }
 
-.aurea-pdf-video-card {
+.aurea-pdf-features li > span {
+  display: grid;
+  width: 22px;
+  height: 22px;
+  flex: none;
+  place-items: center;
+  color: var(--aurea-night);
+  background: var(--aurea-gold);
+  border-radius: 50%;
+}
+
+.is-night .aurea-pdf-features {
+  border-top-color: rgb(255 255 255 / 20%);
+}
+
+.is-night .aurea-pdf-features li {
+  color: rgb(255 255 255 / 90%);
+}
+
+.aurea-pdf-features--hero {
+  margin-top: 48px;
+  border-top-color: rgb(255 255 255 / 28%);
+}
+
+.aurea-pdf-features--hero li {
+  color: rgb(255 255 255 / 92%);
+}
+
+/* ---------- Read more ---------- */
+.aurea-pdf-readmore button {
+  margin-top: 14px;
+  padding: 4px 0;
+  color: var(--pdf-label);
+  font-family: 'Figtree', sans-serif;
+  font-size: 15px;
+  font-weight: 600;
+  text-decoration: underline;
+  text-decoration-thickness: 1px;
+  text-underline-offset: 5px;
+  background: none;
+  border: 0;
+  cursor: pointer;
+}
+
+.is-night .aurea-pdf-readmore button {
+  color: var(--aurea-gold);
+}
+
+.aurea-pdf-readmore button:focus-visible {
+  outline: 2px solid var(--aurea-gold);
+  outline-offset: 4px;
+}
+
+/* ---------- Section heading (title left / intro right) ---------- */
+.aurea-pdf-heading {
+  display: grid;
+  grid-template-columns: minmax(0, 1.15fr) minmax(0, 0.85fr);
+  gap: clamp(24px, 5vw, 80px);
+  align-items: end;
+}
+
+.aurea-pdf-heading p {
+  margin: 0;
+}
+
+/* ---------- Video ---------- */
+.aurea-pdf-video {
   position: relative;
   overflow: hidden;
-  border: 1px solid rgb(29 41 35 / 15%);
   background: var(--aurea-night);
-  box-shadow: 0 22px 50px rgb(29 41 35 / 16%);
+  border-radius: 8px;
+  box-shadow: 0 28px 50px -28px rgb(12 43 48 / 55%);
 }
 
-.aurea-pdf-video-card video {
+.aurea-pdf-video video {
   display: block;
   width: 100%;
-  aspect-ratio: 16 / 10;
+  aspect-ratio: 16 / 9;
   object-fit: cover;
 }
 
 .aurea-pdf-video-label {
-  display: flex;
+  position: absolute;
+  top: 16px;
+  left: 16px;
+  display: inline-flex;
   align-items: center;
   gap: 8px;
-  padding: 13px 16px;
+  padding: 7px 14px 7px 12px;
   color: var(--aurea-sand);
-  font-size: 11px;
-  letter-spacing: .12em;
-  text-transform: uppercase;
+  font-size: 13px;
+  font-weight: 500;
+  background: rgb(12 43 48 / 78%);
+  border-radius: 999px;
+  backdrop-filter: blur(6px);
+  pointer-events: none;
 }
 
-.aurea-pdf-video-layout h3 {
-  margin-top: 14px;
-  font-family: var(--font-serif);
-  font-size: clamp(34px, 4vw, 54px);
-  font-weight: 400;
-  line-height: .98;
-}
-
-.aurea-pdf-step-grid {
+/* ---------- Solution: video + copy ---------- */
+.aurea-pdf-solution {
   display: grid;
-  grid-template-columns: repeat(3, 1fr);
-  margin-top: 76px;
-  border-top: 1px solid rgb(29 41 35 / 18%);
+  grid-template-columns: minmax(0, 1.25fr) minmax(0, 1fr);
+  gap: clamp(32px, 5vw, 80px);
+  align-items: center;
+  margin-top: clamp(40px, 5vw, 72px);
 }
 
-.aurea-pdf-step-grid article {
-  min-height: 210px;
-  padding: 26px 24px 20px 0;
-  border-right: 1px solid rgb(29 41 35 / 18%);
+.aurea-pdf-solution--end {
+  grid-template-columns: minmax(0, 0.7fr) minmax(0, 1.3fr);
+  margin-top: 0;
 }
 
-.aurea-pdf-step-grid article:not(:first-child) {
-  padding-left: 24px;
+.aurea-pdf-solution .aurea-pdf-kicker {
+  color: var(--pdf-label);
 }
 
-.aurea-pdf-step-grid article:last-child {
-  border-right: 0;
-}
-
-.aurea-pdf-step-grid span {
-  color: var(--aurea-gold-dark);
-  font-size: 12px;
-  letter-spacing: .2em;
-}
-
-.aurea-pdf-step-grid h3 {
-  margin-top: 32px;
-  font-family: var(--font-serif);
-  font-size: 30px;
-  font-weight: 400;
-}
-
-.aurea-pdf-step-grid p {
-  max-width: 280px;
-  margin-top: 12px;
-  color: var(--aurea-muted);
-  font-size: 14px;
-  line-height: 1.6;
-}
-
-.aurea-pdf-split > img,
-.aurea-pdf-split > div > img {
-  width: 100%;
-  max-height: 620px;
-  min-height: 440px;
-  object-fit: cover;
+/* ---------- Split: photo + copy ---------- */
+.aurea-pdf-split {
+  display: grid;
+  grid-template-columns: minmax(0, 0.9fr) minmax(0, 1.1fr);
+  gap: clamp(32px, 6vw, 96px);
+  align-items: center;
 }
 
 .aurea-pdf-split-reverse {
-  grid-template-columns: minmax(0, .85fr) minmax(0, 1.15fr);
+  grid-template-columns: minmax(0, 1.1fr) minmax(0, 0.9fr);
 }
 
-.aurea-pdf-expertise .aurea-pdf-split p {
-  color: rgb(255 255 255 / 68%);
+/* One photo treatment across the page: chalet-gable silhouette */
+.aurea-pdf-photo {
+  display: block;
+  width: 100%;
+  object-fit: cover;
 }
 
-.aurea-pdf-expertise .aurea-pdf-eyebrow {
-  color: var(--aurea-sand);
+.aurea-pdf-photo--gable {
+  aspect-ratio: 4 / 5;
+  max-height: 600px;
+  clip-path: polygon(0 12%, 50% 0, 100% 12%, 100% 100%, 0 100%);
 }
 
-.aurea-pdf-expertise .grid {
-  margin-top: 30px;
+/* ---------- Catalog sliders ---------- */
+.aurea-pdf-catalog-layout {
+  margin-top: clamp(36px, 4vw, 56px);
 }
 
-.aurea-pdf-expertise li {
-  color: rgb(255 255 255 / 68%);
+.aurea-pdf-catalog-layout .aurea-catalog-section {
+  padding: 0;
+  background: transparent;
+  border: 0;
 }
 
-.aurea-pdf-link {
-  display: inline-flex;
+.aurea-pdf-catalog-layout .aurea-catalog-heading {
   align-items: center;
-  gap: 10px;
-  margin-top: 30px;
-  color: var(--aurea-night);
+  margin-bottom: 24px;
+}
+
+.aurea-pdf-catalog-layout .aurea-catalog-heading > div:first-child > span {
+  color: var(--pdf-label);
   font-size: 14px;
-  font-weight: 700;
+  letter-spacing: 0.01em;
+  text-transform: none;
 }
 
-.aurea-pdf-catalog .aurea-pdf-lead {
-  color: rgb(29 41 35 / 68%);
+.aurea-pdf-catalog-layout .aurea-catalog-heading h3 {
+  margin-top: 6px;
+  font-size: clamp(22px, 2.4vw, 30px);
 }
 
-.aurea-pdf-catalog-grid {
+.aurea-pdf-catalog-layout .aurea-catalog-controls {
+  gap: 10px;
+}
+
+.aurea-pdf-catalog-layout .aurea-catalog-controls button {
+  width: 44px;
+  height: 44px;
+  border-color: var(--pdf-line);
+}
+
+.aurea-pdf-catalog-layout .aurea-catalog-controls button:focus-visible,
+.aurea-pdf-catalog-layout .aurea-catalog-dots button:focus-visible {
+  outline: 2px solid var(--aurea-gold);
+  outline-offset: 3px;
+}
+
+.aurea-pdf-catalog-layout .aurea-catalog-card {
   display: grid;
-  grid-template-columns: repeat(3, 1fr);
+  grid-template-columns: minmax(0, 1.6fr) minmax(0, 1fr);
+  margin-top: 0;
+  background: #fff;
+  border: 1px solid var(--pdf-line);
+  border-radius: 10px;
+  box-shadow: none;
+}
+
+.aurea-pdf-catalog-layout .aurea-catalog-image {
+  min-height: 380px;
+  aspect-ratio: auto;
+}
+
+.aurea-pdf-catalog-layout .aurea-catalog-copy {
+  align-self: center;
+  padding: clamp(24px, 3vw, 44px);
+  background: transparent;
+}
+
+.aurea-pdf-catalog-layout .aurea-catalog-copy h4 {
+  font-size: clamp(26px, 2.8vw, 38px);
+  line-height: 1.1;
+}
+
+.aurea-pdf-catalog-layout .aurea-catalog-copy p {
+  min-height: 0;
+  max-width: 36ch;
+  margin-top: 12px;
+  font-size: 16px;
+  line-height: 1.6;
+}
+
+.aurea-pdf-catalog-layout .aurea-catalog-dots {
+  margin-top: 20px;
+}
+
+.aurea-pdf-catalog-layout .aurea-catalog-dots button {
+  width: 28px;
+  height: 4px;
+}
+
+/* ---------- Equipment list ---------- */
+.aurea-pdf-process-grid {
+  display: grid;
+  grid-template-columns: minmax(0, 0.8fr) minmax(0, 1.2fr);
+  gap: clamp(32px, 6vw, 96px);
+  align-items: start;
+}
+
+.aurea-pdf-process-intro {
+  position: sticky;
+  top: 120px;
+}
+
+.aurea-pdf-process-list {
+  border-top: 1px solid var(--pdf-line);
+}
+
+.aurea-pdf-process-row {
+  display: grid;
+  grid-template-columns: 56px minmax(0, 1fr);
   gap: 16px;
-  margin-top: 56px;
+  align-items: baseline;
+  padding: 26px 0;
+  border-bottom: 1px solid var(--pdf-line);
 }
 
-.aurea-pdf-catalog-card {
+.aurea-pdf-process-row > span {
+  color: var(--pdf-label);
+  font-family: var(--pdf-serif);
+  font-size: 20px;
+}
+
+.aurea-pdf-process-row > h3 {
+  margin: 0;
+  font-size: clamp(20px, 2vw, 26px);
+  line-height: 1.25;
+}
+
+/* ---------- Pool (closing image) ---------- */
+.aurea-pdf-pool {
   position: relative;
-  min-height: 310px;
-  padding: 30px;
-  color: var(--aurea-night);
-  background: var(--aurea-paper);
-  transition: transform .35s ease, box-shadow .35s ease;
-}
-
-.aurea-pdf-catalog-card:hover {
-  transform: translateY(-6px);
-  box-shadow: 0 18px 35px rgb(29 41 35 / 15%);
-}
-
-.aurea-pdf-catalog-card-gold {
-  background: var(--aurea-gold);
-}
-
-.aurea-pdf-catalog-card-dark {
-  color: var(--color-white);
+  display: flex;
+  min-height: clamp(460px, 58vw, 640px);
+  align-items: flex-end;
+  overflow: hidden;
+  padding-block: clamp(56px, 7vw, 96px);
+  color: #fff;
   background: var(--aurea-night);
 }
 
-.aurea-pdf-catalog-card span {
-  font-size: 10px;
-  font-weight: 700;
-  letter-spacing: .2em;
-  text-transform: uppercase;
-  opacity: .65;
-}
-
-.aurea-pdf-catalog-card h3 {
-  max-width: 260px;
-  margin-top: 40px;
-  font-family: var(--font-serif);
-  font-size: 34px;
-  font-weight: 400;
-  line-height: 1;
-}
-
-.aurea-pdf-catalog-card p {
-  max-width: 270px;
-  margin-top: 18px;
-  font-size: 14px;
-  line-height: 1.6;
-  opacity: .72;
-}
-
-.aurea-pdf-catalog-card small {
+.aurea-pdf-pool > img,
+.aurea-pdf-pool-overlay {
   position: absolute;
-  bottom: 30px;
-  left: 30px;
-  font-size: 11px;
-  letter-spacing: .08em;
-  opacity: .6;
+  inset: 0;
+  width: 100%;
+  height: 100%;
 }
 
-.aurea-pdf-catalog-card > svg {
-  position: absolute;
-  right: 30px;
-  bottom: 28px;
+.aurea-pdf-pool > img {
+  object-fit: cover;
 }
 
-@media (max-width: 800px) {
-  .aurea-pdf-hero {
-    min-height: 700px;
-  }
+.aurea-pdf-pool-overlay {
+  background: linear-gradient(0deg, rgb(12 43 48 / 88%) 0%, rgb(12 43 48 / 20%) 70%);
+}
 
-  .aurea-pdf-video-layout,
+.aurea-pdf-pool-content {
+  position: relative;
+  z-index: 1;
+}
+
+.aurea-pdf-pool h2 {
+  max-width: 18ch;
+}
+
+.aurea-pdf-pool p {
+  max-width: 52ch;
+  margin: 20px 0 0;
+  color: rgb(255 255 255 / 82%);
+  font-size: 17px;
+  line-height: 1.7;
+}
+
+/* ---------- Tablet / mobile ---------- */
+@media (max-width: 900px) {
+  .aurea-pdf-heading,
+  .aurea-pdf-solution,
+  .aurea-pdf-solution--end,
   .aurea-pdf-split,
-  .aurea-pdf-split-reverse {
-    grid-template-columns: 1fr;
+  .aurea-pdf-split-reverse,
+  .aurea-pdf-process-grid {
+    grid-template-columns: minmax(0, 1fr);
   }
 
-  .aurea-pdf-step-grid,
-  .aurea-pdf-catalog-grid {
-    grid-template-columns: 1fr;
+  .aurea-pdf-heading {
+    align-items: start;
+    gap: 20px;
   }
 
-  .aurea-pdf-step-grid article,
-  .aurea-pdf-step-grid article:not(:first-child) {
-    min-height: auto;
-    padding: 24px 0;
-    border-right: 0;
-    border-bottom: 1px solid rgb(29 41 35 / 18%);
-  }
-
-  .aurea-pdf-split-reverse > div:first-child {
+  .aurea-pdf-split-reverse > :first-child {
     order: 2;
+  }
+
+  .aurea-pdf-photo--gable {
+    aspect-ratio: 4 / 4.2;
+    max-height: 480px;
+  }
+
+  .aurea-pdf-process-intro {
+    position: static;
+  }
+
+  .aurea-pdf-catalog-layout .aurea-catalog-card {
+    grid-template-columns: minmax(0, 1fr);
+  }
+
+  .aurea-pdf-catalog-layout .aurea-catalog-image {
+    min-height: 0;
+    aspect-ratio: 4 / 3;
+  }
+
+  .aurea-pdf-hero {
+    min-height: 720px;
+  }
+
+  .aurea-pdf-features {
+    gap: 12px 24px;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .aurea-pdf-catalog-layout .aurea-catalog-image img {
+    animation: none;
   }
 }
 

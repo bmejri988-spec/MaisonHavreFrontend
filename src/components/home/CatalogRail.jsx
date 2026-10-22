@@ -8,7 +8,7 @@ import {
   localizedRegion,
 } from '../../data/localization'
 
-function CatalogSlider({ label, title, items, getDescription, getPath }) {
+export function CatalogSlider({ label, title, items, getDescription, getPath }) {
   const [activeIndex, setActiveIndex] = useState(0)
   const [loadedImages, setLoadedImages] = useState(() => new Set())
   const currentItem = items[activeIndex]
