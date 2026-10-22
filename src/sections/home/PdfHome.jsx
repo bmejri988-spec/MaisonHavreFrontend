@@ -188,7 +188,7 @@ function PdfHome() {
             <Reveal>
               <img
                 className="aurea-pdf-photo aurea-pdf-photo--gable"
-                src="/images/image.png"
+                src="https://jfoprtlfgdwaslsqizut.supabase.co/storage/v1/object/sign/images/image.png?token=eyJraWQiOiIyNmMxNTNhMy03ZWFhLTQ2YjktYmUwMS1hY2ZjYjllOTYwZmYiLCJhbGciOiJIUzI1NiJ9.eyJ1cmwiOiJpbWFnZXMvaW1hZ2UucG5nIiwic2NvcGUiOiJkb3dubG9hZCIsImlhdCI6MTc5MjY2NTg3NywiZXhwIjoxOTE4ODA5ODc3fQ.UFuWr1ONs7bkyd6T2d2mI6Z8P9POwcCbmm8OpqZu83A"
                 alt="Chalet en bois Maison Havre"
               />
             </Reveal>
@@ -258,7 +258,7 @@ function PdfHome() {
             <Reveal delay={0.1}>
               <img
                 className="aurea-pdf-photo aurea-pdf-photo--gable"
-                src="/images/planning.jpg"
+                src="https://jfoprtlfgdwaslsqizut.supabase.co/storage/v1/object/sign/images/planning.jpg?token=eyJraWQiOiIyNmMxNTNhMy03ZWFhLTQ2YjktYmUwMS1hY2ZjYjllOTYwZmYiLCJhbGciOiJIUzI1NiJ9.eyJ1cmwiOiJpbWFnZXMvcGxhbm5pbmcuanBnIiwic2NvcGUiOiJkb3dubG9hZCIsImlhdCI6MTc5MjY2NTg1NCwiZXhwIjoxOTE4ODA5ODU0fQ.35AIuRX12S2JLtjL8tFrjD_1qXflhSLeFI8xwSvT_XM"
                 alt="Paysage naturel tunisien"
               />
             </Reveal>
