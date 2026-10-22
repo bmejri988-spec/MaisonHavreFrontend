@@ -4,8 +4,8 @@ import { Link, NavLink } from 'react-router-dom'
 
 const navLinks = [
   { label: 'Accueil', path: '/' },
-  { label: 'Modèles', path: '/chalet-models' },
   { label: 'Terrains', path: '/terrains' },
+  { label: 'Modèles', path: '/chalet-models' },
   { label: 'Options', path: '/options' },
   { label: 'À propos', path: '/about' },
 ]
@@ -60,7 +60,7 @@ function Navbar({ contained = false }) {
           <div className="flex items-center gap-4">
             <Link
               to="/"
-          className="relative z-50 font-serif text-xl tracking-[0.12em] text-white md:text-[1rem]">
+          className="relative z-50 font-serif text-xl tracking-[0.129m] text-white md:text-[1rem]">
             MAISON.HAVRE
             </Link>
             <span className="hidden h-5 w-px bg-white/25 sm:block" />

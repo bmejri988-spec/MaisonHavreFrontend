@@ -1,6 +1,6 @@
 //const API_BASE_URL ='http://localhost:8000/api/catalog'
 const API_BASE_URL = import.meta.env.VITE_API_BASE_URL
-const CACHE_KEY = 'aurea:catalog:v1'
+const CACHE_KEY = 'aurea:catalog:v2'
 const CACHE_TTL_MS = 5 * 60 * 1000
 const resources = ['models', 'terrains', 'options']
 

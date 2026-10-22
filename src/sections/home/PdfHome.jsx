@@ -188,7 +188,7 @@ function PdfHome() {
             <Reveal>
               <img
                 className="aurea-pdf-photo aurea-pdf-photo--gable"
-                src="https://jfoprtlfgdwaslsqizut.supabase.co/storage/v1/object/sign/images/image.png?token=eyJraWQiOiIyNmMxNTNhMy03ZWFhLTQ2YjktYmUwMS1hY2ZjYjllOTYwZmYiLCJhbGciOiJIUzI1NiJ9.eyJ1cmwiOiJpbWFnZXMvaW1hZ2UucG5nIiwic2NvcGUiOiJkb3dubG9hZCIsImlhdCI6MTc5MjY2NTg3NywiZXhwIjoxOTE4ODA5ODc3fQ.UFuWr1ONs7bkyd6T2d2mI6Z8P9POwcCbmm8OpqZu83A"
+                src="https://jfoprtlfgdwaslsqizut.supabase.co/storage/v1/object/public/images/image.png"
                 alt="Chalet en bois Maison Havre"
               />
             </Reveal>
@@ -230,7 +230,7 @@ function PdfHome() {
               </span>
               <h2>Un accompagnement de la conception à la réalisation.</h2>
             </Reveal>
-            <Reveal delay={0.1}>
+            <Reveal delay={0.1} className="aurea-pdf-solution-end-video">
               <VideoCard src={videoSource2} label="Découvrez notre solution" />
             </Reveal>
           </div>
@@ -258,7 +258,7 @@ function PdfHome() {
             <Reveal delay={0.1}>
               <img
                 className="aurea-pdf-photo aurea-pdf-photo--gable"
-                src="https://jfoprtlfgdwaslsqizut.supabase.co/storage/v1/object/sign/images/planning.jpg?token=eyJraWQiOiIyNmMxNTNhMy03ZWFhLTQ2YjktYmUwMS1hY2ZjYjllOTYwZmYiLCJhbGciOiJIUzI1NiJ9.eyJ1cmwiOiJpbWFnZXMvcGxhbm5pbmcuanBnIiwic2NvcGUiOiJkb3dubG9hZCIsImlhdCI6MTc5MjY2NTg1NCwiZXhwIjoxOTE4ODA5ODU0fQ.35AIuRX12S2JLtjL8tFrjD_1qXflhSLeFI8xwSvT_XM"
+                src="/images/planning.jpg"
                 alt="Paysage naturel tunisien"
               />
             </Reveal>
@@ -288,6 +288,7 @@ function PdfHome() {
               items={terrains}
               getDescription={(terrain) => localizedRegion(terrain.region)}
               getPath={() => '/terrains'}
+              stacked
             />
           </div>
         </Container>
@@ -315,6 +316,7 @@ function PdfHome() {
               items={models}
               getDescription={(model) => `${localizedName(model)} · ${formatSurface(model)}`}
               getPath={() => '/chalet-models'}
+              stacked
             />
           </div>
         </Container>
@@ -323,17 +325,16 @@ function PdfHome() {
       {/* 6. Offre finitions et équipements */}
       <section className="aurea-pdf-section is-paper">
         <Container>
-          <div className="aurea-pdf-process-grid">
+          <div className="aurea-pdf-process-grid aurea-pdf-process-grid--equipment">
             <Reveal>
               <div className="aurea-pdf-process-intro">
                 <SectionTitle
-                  eyebrow="De l’idée à la maison"
+                  eyebrow="Finitions et équipements"
                   title="Choisissez le standing et qui vous ressemble et composez les équipements qui vous conviennent."
-                  description="Avec nos partenaires, nous offrons des solutions pour :"
+                  description="Avec nos partenaires, nous offrons des solutions pour:"
                 />
               </div>
             </Reveal>
-
             <div className="aurea-pdf-process-list">
               {equipmentItems.map((item, index) => (
                 <Reveal key={item.number} delay={index * 0.08}>
@@ -347,28 +348,23 @@ function PdfHome() {
           </div>
         </Container>
       </section>
-      {/* 
-      <section id="offre-finitions" className="aurea-pdf-section is-sand">
+
+      {/* 7. Offre piscine */}
+      <section id="offre-maisons" className="aurea-pdf-section is-sand">
         <Container>
-          <Reveal>
-            <span className="aurea-pdf-eyebrow aurea-pdf-eyebrow-dark">
-              Offre finitions et équipements
-            </span>
-            <h2>Ajoutez les détails qui rendent votre havre personnel.</h2>
-          </Reveal>
+          <div className="aurea-pdf-heading">
+            <Reveal>
+              <span className="aurea-pdf-eyebrow aurea-pdf-eyebrow-dark">
+                Offre piscines
+              </span>
+            </Reveal>
+          </div>
+
           <div className="aurea-pdf-catalog-layout">
-            <CatalogSlider
-              label="Catalogue des options"
-              title="Composez vos finitions."
-              items={options}
-              getDescription={(option) => localizedDescription(option)}
-              getPath={() => '/options'}
-            />
+            <img src="/images/piscine.jpg" alt="Piscine Maison Havre" />
           </div>
         </Container>
       </section>
-      */}
-
     </div>
   )
 }

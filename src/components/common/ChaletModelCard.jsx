@@ -19,55 +19,38 @@ function ChaletModelCard({ model, index = 0 }) {
     >
       <Link
         to="/chalet-models"
-        className="group block"
+        className="aurea-catalog-card aurea-catalog-card--grid group"
       >
-        {/* Image */}
-        <div className="relative aspect-4/5 overflow-hidden bg-[#EFEBE2]">
+        <div className="aurea-catalog-image">
 
           <img
             src={model.image}
             alt={model.name}
-            className="h-full w-full object-cover transition-transform duration-1000 ease-out group-hover:scale-105"
+            className="transition-transform duration-700 group-hover:scale-105"
           />
 
-          <div className="absolute inset-0 bg-linear-to-t from-black/70 via-transparent to-black/5" />
-
-          {/* Category */}
-          <div className="absolute left-5 top-5">
-            <span className="bg-white/90 px-3 py-2 text-[10px] font-semibold uppercase tracking-[0.2em] text-[#1D2923] backdrop-blur-sm">
+          <span className="absolute left-3 top-3 rounded-full bg-white/90 px-3 py-1.5 text-[10px] font-semibold uppercase tracking-[0.15em] text-[#1D2923] backdrop-blur-sm">
               {localizedCategory(model.category)}
-            </span>
-          </div>
-
-          {/* Arrow */}
-          <div className="absolute right-5 top-5 flex h-11 w-11 items-center justify-center rounded-full bg-white text-[#1D2923] transition-transform duration-500 group-hover:rotate-45">
+          </span>
+          <span className="aurea-catalog-arrow transition-transform duration-500 group-hover:rotate-45">
             <ArrowUpRight size={18} strokeWidth={1.6} />
-          </div>
+          </span>
+        </div>
 
-          {/* Bottom */}
-          <div className="absolute bottom-0 left-0 right-0 p-6 text-white md:p-7">
+        <div className="aurea-catalog-copy">
+          <h4>{model.name}</h4>
+          <p>{model.subtitle}</p>
 
-            <p className="max-w-sm text-xs leading-5 text-white/65">
-              {model.subtitle}
-            </p>
+          <div className="mt-3 flex items-center gap-5 border-t border-[#DDD8CD] pt-3 text-xs text-[#5A6A6C]">
+            <span className="flex items-center gap-2">
+              <Maximize2 size={13} />
+              {formatSurface(model)}
+            </span>
 
-            <h3 className="mt-3 font-serif text-5xl leading-none">
-              {model.name}
-            </h3>
-
-            <div className="mt-6 flex items-center gap-5 border-t border-white/20 pt-4 text-xs text-white/75">
-
-              <span className="flex items-center gap-2">
-                <Maximize2 size={13} />
-                {formatSurface(model)}
-              </span>
-
-              <span className="flex items-center gap-2">
-                <BedDouble size={13} />
-                {model.bedrooms} chambres
-              </span>
-
-            </div>
+            <span className="flex items-center gap-2">
+              <BedDouble size={13} />
+              {model.bedrooms} chambres
+            </span>
 
           </div>
         </div>

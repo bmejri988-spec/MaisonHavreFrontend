@@ -13,7 +13,7 @@ function OptionCard({
       layout
       type="button"
       onClick={() => onSelect?.(option)}
-      className={`group relative w-full overflow-hidden text-left ${
+      className={`aurea-catalog-card aurea-catalog-card--grid group relative w-full text-left ${
         selected
           ? 'ring-2 ring-[#B49A70] ring-offset-2 ring-offset-[#EFEBE2]'
           : ''
@@ -28,28 +28,22 @@ function OptionCard({
         ease: [0.22, 1, 0.36, 1],
       }}
     >
-      {/* Image */}
-      <div className="relative aspect-4/3 overflow-hidden">
+      <div className="aurea-catalog-image">
 
         <img
           src={option.image}
           alt={option.name}
-          className="h-full w-full object-cover transition-transform duration-700 ease-out group-hover:scale-105"
+          className="transition-transform duration-700 ease-out group-hover:scale-105"
         />
 
-        {/* Dark gradient */}
-        <div className="absolute inset-0 bg-linear-to-t from-black/75 via-black/10 to-transparent" />
-
-        {/* Popular */}
         {option.popular && (
-          <span className="absolute left-4 top-4 bg-[#B49A70] px-3 py-2 text-[9px] font-semibold uppercase tracking-[0.18em] text-[#1D2923]">
+          <span className="absolute left-3 top-3 rounded-full bg-white/90 px-3 py-1.5 text-[10px] font-semibold uppercase tracking-[0.15em] text-[#1D2923] backdrop-blur-sm">
             Populaire
           </span>
         )}
 
-        {/* Selection */}
         <motion.div
-          className={`absolute right-4 top-4 flex h-10 w-10 items-center justify-center rounded-full ${
+          className={`aurea-catalog-arrow ${
             selected
               ? 'bg-[#B49A70] text-[#1D2923]'
               : 'bg-white text-[#1D2923]'
@@ -107,32 +101,20 @@ function OptionCard({
             )}
           </AnimatePresence>
         </motion.div>
+      </div>
 
-        {/* Bottom */}
-        <div className="absolute bottom-0 left-0 right-0 p-5 text-white">
+      <div className="aurea-catalog-copy">
+        <h4>{localizedName(option)}</h4>
+        <p>{localizedDescription(option)}</p>
 
-          <h3 className="font-serif text-3xl leading-none">
-            {localizedName(option)}
-          </h3>
-
-          <p className="mt-2 max-w-sm text-xs leading-5 text-white/65">
-            {localizedDescription(option)}
-          </p>
-
-          <div className="mt-4 flex items-center justify-between border-t border-white/20 pt-3">
-
-            <span className="text-[10px] uppercase tracking-[0.15em] text-white/55">
-              {selected               ? 'Ajoutée au chalet' : 'Ajouter au chalet'}
-            </span>
-
-            <span className="text-xs font-medium">
-              {formatPrice(option.price, '+')}
-            </span>
-
-          </div>
-
+        <div className="mt-3 flex items-center justify-between border-t border-[#DDD8CD] pt-3">
+          <span className="text-[10px] uppercase tracking-[0.15em] text-[#5A6A6C]">
+            {selected ? 'Ajoutée au chalet' : 'Ajouter au chalet'}
+          </span>
+          <span className="text-xs font-medium text-[#1D2923]">
+            {formatPrice(option.price, '+')}
+          </span>
         </div>
-
       </div>
     </motion.button>
   )

@@ -65,10 +65,16 @@ img {
   --aurea-sand: #e4dccb;
   --aurea-paper: #f7f5f0;
   --aurea-muted: #77766f;
+  --aurea-catalog-width: max(320px, 33.333vw);
   display: grid;
-  grid-template-columns: minmax(0, 2fr) minmax(320px, 1fr);
+  grid-template-columns: minmax(0, 1fr) var(--aurea-catalog-width);
   min-height: 100vh;
   background: var(--aurea-night);
+  transition: grid-template-columns 380ms cubic-bezier(.16, 1, .3, 1);
+}
+
+.aurea-home--catalog-hidden {
+  grid-template-columns: minmax(0, 1fr) 0px;
 }
 
 .aurea-keyword {
@@ -160,19 +166,59 @@ img {
 
 .aurea-configurator {
   position: sticky;
+  align-self: start;
   top: 0;
-  display: flex;
-  flex-direction: column;
   height: 100vh;
   min-width: 0;
+  overflow: hidden;
+  background: var(--color-background);
+}
+
+.aurea-configurator__panel {
+  display: flex;
+  flex-direction: column;
+  width: var(--aurea-catalog-width);
+  height: 100%;
+  min-height: 0;
   color: #1a2a2d;
   background: var(--color-background);
   box-shadow: -18px 0 40px rgb(0 0 0 / 24%);
+  transition: opacity 250ms ease;
 }
 
-.aurea-configurator > .aurea-configurator__header,
-.aurea-configurator > .aurea-catalog-rail {
- flex-shrink: 0;
+.aurea-configurator__panel[aria-hidden='true'] {
+  opacity: 0;
+}
+
+.aurea-catalog-toggle {
+  position: fixed;
+  z-index: 101;
+  top: 50%;
+  right: calc(var(--aurea-catalog-width) - 23px);
+  display: grid;
+  width: 46px;
+  height: 46px;
+  place-items: center;
+  color: var(--aurea-night);
+  background: var(--aurea-gold);
+  border: 1px solid rgb(12 43 48 / 16%);
+  border-radius: 50%;
+  box-shadow: 0 4px 18px rgb(0 0 0 / 18%);
+  cursor: pointer;
+  transform: translateY(-50%);
+  transition:
+    right 380ms cubic-bezier(.16, 1, .3, 1),
+    background 180ms ease,
+    color 180ms ease;
+}
+
+.aurea-catalog-toggle:hover {
+  color: var(--color-background);
+  background: var(--aurea-night);
+}
+
+.aurea-home--catalog-hidden .aurea-catalog-toggle {
+  right: 0;
 }
 
 .aurea-configurator__header {
@@ -206,12 +252,14 @@ img {
 }
 
 .aurea-catalog-rail {
-  flex: 1;
+  flex: 1 1 auto;
   display: grid;
   align-content: start;
+  min-height: 0;
   gap: 0;
   overflow-y: auto;
   overscroll-behavior: contain;
+  background: var(--color-background);
 }
 
 .aurea-catalog-section {
@@ -284,11 +332,31 @@ img {
   box-shadow: 0 2px 12px rgb(12 43 48 / 10%);
 }
 
+.aurea-catalog-card--grid {
+  margin-top: 0;
+  font: inherit;
+  text-align: left;
+}
+
+button.aurea-catalog-card--grid {
+  padding: 0;
+  border: 0;
+  cursor: pointer;
+}
+
+.aurea-catalog-card--grid .aurea-catalog-image {
+  aspect-ratio: 1.7;
+}
+
 .aurea-catalog-image {
   position: relative;
-  aspect-ratio: 1.5;
+  aspect-ratio: 1.;
   overflow: hidden;
   background: var(--aurea-night-light);
+}
+
+.aurea-catalog-section:first-child .aurea-catalog-image {
+  aspect-ratio: 1.8;
 }
 
 .aurea-catalog-image img {
@@ -719,8 +787,15 @@ img {
 }
 
 .aurea-pdf-solution--end {
-  grid-template-columns: minmax(0, 0.7fr) minmax(0, 1.3fr);
+  grid-template-columns: minmax(0, 1fr);
+  gap: clamp(24px, 3vw, 40px);
+  align-items: start;
   margin-top: 0;
+}
+
+.aurea-pdf-solution-end-video {
+  width: min(100%, 900px);
+  justify-self: center;
 }
 
 .aurea-pdf-solution .aurea-pdf-kicker {
@@ -811,6 +886,15 @@ img {
   aspect-ratio: auto;
 }
 
+.aurea-pdf-catalog-layout .aurea-catalog-section--stacked .aurea-catalog-card {
+  display: block;
+}
+
+.aurea-pdf-catalog-layout .aurea-catalog-section--stacked .aurea-catalog-image {
+  min-height: 0;
+  aspect-ratio: 1.8;
+}
+
 .aurea-pdf-catalog-layout .aurea-catalog-copy {
   align-self: center;
   padding: clamp(24px, 3vw, 44px);
@@ -847,13 +931,25 @@ img {
   align-items: start;
 }
 
+.aurea-pdf-process-grid--equipment {
+  grid-template-columns: minmax(0, 1fr);
+}
+
 .aurea-pdf-process-intro {
   position: sticky;
   top: 120px;
 }
 
+.aurea-pdf-process-grid--equipment .aurea-pdf-process-intro {
+  position: static;
+}
+
 .aurea-pdf-process-list {
   border-top: 1px solid var(--pdf-line);
+}
+
+.aurea-pdf-process-grid--equipment .aurea-pdf-process-list {
+  margin-top: 28px;
 }
 
 .aurea-pdf-process-row {
@@ -970,6 +1066,11 @@ img {
 }
 
 @media (prefers-reduced-motion: reduce) {
+  .aurea-home,
+  .aurea-catalog-toggle {
+    transition: none;
+  }
+
   .aurea-pdf-catalog-layout .aurea-catalog-image img {
     animation: none;
   }
@@ -977,7 +1078,7 @@ img {
 
 @media (max-width: 1100px) {
   .aurea-home {
-    grid-template-columns: minmax(0, 1.6fr) minmax(290px, 1fr);
+    --aurea-catalog-width: max(290px, 38.462vw);
   }
 }
 
@@ -990,6 +1091,27 @@ img {
     position: relative;
     height: auto;
     min-height: 0;
+    overflow: visible;
+  }
+
+  .aurea-configurator__panel {
+    width: 100%;
+    height: auto;
+    min-height: 0;
+    overflow: visible;
+  }
+
+  .aurea-configurator__panel[aria-hidden='true'] {
+    opacity: 1;
+  }
+
+  .aurea-catalog-rail {
+    min-height: auto;
+    overflow: visible;
+  }
+
+  .aurea-catalog-toggle {
+    display: none;
   }
 
   .aurea-configurator__header {

@@ -8,11 +8,14 @@ import {
   localizedRegion,
 } from '../../data/localization'
 
-export function CatalogSlider({ label, title, items, getDescription, getPath }) {
+export function CatalogSlider({ label, title, items, getDescription, getPath, stacked = false }) {
   const [activeIndex, setActiveIndex] = useState(0)
   const [loadedImages, setLoadedImages] = useState(() => new Set())
   const currentItem = items[activeIndex]
   const image = currentItem?.gallery?.[0] || currentItem?.image
+
+  console.log('Current item:', currentItem)
+  console.log('Image URL:', image)
   const batchStart = Math.floor(activeIndex / 3) * 3
   const batchImages = useMemo(
     () => items.slice(batchStart, batchStart + 3)
@@ -36,11 +39,6 @@ export function CatalogSlider({ label, title, items, getDescription, getPath }) 
           setLoadedImages((current) => new Set(current).add(source))
         }
       }
-      preload.onerror = () => {
-        if (!cancelled) {
-          setLoadedImages((current) => new Set(current).add(source))
-        }
-      }
       preload.src = source
     })
 
@@ -60,7 +58,7 @@ export function CatalogSlider({ label, title, items, getDescription, getPath }) 
   }
 
   return (
-    <section className="aurea-catalog-section">
+    <section className={`aurea-catalog-section${stacked ? ' aurea-catalog-section--stacked' : ''}`}>
       <div className="aurea-catalog-heading">
         <div>
           <span>{label}</span>
