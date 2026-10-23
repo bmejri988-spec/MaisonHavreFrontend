@@ -226,7 +226,7 @@ function PdfHome() {
           <h2>3.Notre expertise</h2>
           <Reveal className="aurea-pdf-feature-hero">
             <img
-              src="/images/planning.jpg"
+              src="https://jfoprtlfgdwaslsqizut.supabase.co/storage/v1/object/public/images/planning.jpg"
               alt="Paysage naturel tunisien"
             />
             <div className="aurea-pdf-feature-hero-content">
