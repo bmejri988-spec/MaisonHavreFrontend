@@ -3,6 +3,7 @@ import { Link } from 'react-router-dom'
 import { motion } from 'framer-motion'
 import { formatPrice, formatSurface } from '../../data/repository'
 import { localizedRegion } from '../../data/localization'
+import ImageLightbox from './ImageLightbox'
 
 function TerrainCard({ terrain, index = 0 }) {
   return (
@@ -17,27 +18,26 @@ function TerrainCard({ terrain, index = 0 }) {
         ease: [0.22, 1, 0.36, 1],
       }}
     >
-      <Link
-        to="/terrains"
-        className="aurea-catalog-card aurea-catalog-card--grid group"
-      >
-        <div className="aurea-catalog-image">
-
+      <div className="aurea-catalog-card aurea-catalog-card--grid group">
+        <ImageLightbox
+          src={terrain.image}
+          alt={terrain.name}
+          className="aurea-catalog-image"
+        >
           <img
             src={terrain.image}
             alt={terrain.name}
             className="transition-transform duration-700 group-hover:scale-105"
           />
-
           <span className="aurea-catalog-count">
             {String(index + 1).padStart(2, '0')}
           </span>
           <span className="aurea-catalog-arrow transition-transform duration-500 group-hover:rotate-45">
             <ArrowUpRight size={18} strokeWidth={1.6} />
           </span>
-        </div>
+        </ImageLightbox>
 
-        <div className="aurea-catalog-copy">
+        <Link to="/terrains" className="aurea-catalog-copy block">
           <h4>{terrain.name}</h4>
           <p className="flex items-center gap-1.5">
             <MapPin size={12} strokeWidth={1.5} />
@@ -51,8 +51,8 @@ function TerrainCard({ terrain, index = 0 }) {
               {formatPrice(terrain.basePrice, 'À partir de ')}
             </span>
           </div>
-        </div>
-      </Link>
+        </Link>
+      </div>
     </motion.div>
   )
 }

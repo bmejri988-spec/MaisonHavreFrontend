@@ -345,8 +345,9 @@ function About() {
                   puis composez un projet à la mesure de votre vision.
                 </p>
 
+                {/* to="/build-your-own" */}
                 <Link
-                  to="/build-your-own"
+                  to=""
                   className="mt-9 inline-flex items-center gap-3 bg-[#1D2923] px-6 py-3.5 text-sm font-medium text-white transition-all duration-300 hover:bg-[#2D3C34]"
                 >
                   Composer votre chalet

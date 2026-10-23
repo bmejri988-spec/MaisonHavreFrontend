@@ -3,6 +3,7 @@ import { Link } from 'react-router-dom'
 import { motion } from 'framer-motion'
 import { formatSurface } from '../../data/repository'
 import { localizedCategory } from '../../data/localization'
+import ImageLightbox from './ImageLightbox'
 
 function ChaletModelCard({ model, index = 0 }) {
   return (
@@ -17,12 +18,12 @@ function ChaletModelCard({ model, index = 0 }) {
         ease: [0.22, 1, 0.36, 1],
       }}
     >
-      <Link
-        to="/chalet-models"
-        className="aurea-catalog-card aurea-catalog-card--grid group"
-      >
-        <div className="aurea-catalog-image">
-
+      <div className="aurea-catalog-card aurea-catalog-card--grid group">
+        <ImageLightbox
+          src={model.image}
+          alt={model.name}
+          className="aurea-catalog-image"
+        >
           <img
             src={model.image}
             alt={model.name}
@@ -35,9 +36,9 @@ function ChaletModelCard({ model, index = 0 }) {
           <span className="aurea-catalog-arrow transition-transform duration-500 group-hover:rotate-45">
             <ArrowUpRight size={18} strokeWidth={1.6} />
           </span>
-        </div>
+        </ImageLightbox>
 
-        <div className="aurea-catalog-copy">
+        <Link to="/chalet-models" className="aurea-catalog-copy block">
           <h4>{model.name}</h4>
           <p>{model.subtitle}</p>
 
@@ -53,8 +54,8 @@ function ChaletModelCard({ model, index = 0 }) {
             </span>
 
           </div>
-        </div>
-      </Link>
+        </Link>
+      </div>
     </motion.div>
   )
 }

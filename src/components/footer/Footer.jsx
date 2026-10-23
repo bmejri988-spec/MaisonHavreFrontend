@@ -46,7 +46,7 @@ function Footer() {
                 Options
               </Link>
 
-              <Link to="/build-your-own" className="text-sm text-white/65 transition-colors duration-300 hover:text-white">
+              <Link to="" className="text-sm text-white/65 transition-colors duration-300 hover:text-white">
                 Composer votre chalet
               </Link>
             </div>

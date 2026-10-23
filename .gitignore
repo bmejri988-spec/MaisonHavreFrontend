@@ -25,3 +25,6 @@ images/
 *jpg
 *png
 *jpeg
+
+!public/images/
+!public/images/hero-paper-texture.png

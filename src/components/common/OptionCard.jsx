@@ -2,17 +2,28 @@ import { ArrowUpRight, Check } from 'lucide-react'
 import { motion, AnimatePresence } from 'framer-motion'
 import { formatPrice } from '../../data/repository'
 import { localizedDescription, localizedName } from '../../data/localization'
+import ImageLightbox from './ImageLightbox'
 
 function OptionCard({
   option,
+  index = 0,
   selected = false,
   onSelect,
 }) {
   return (
-    <motion.button
+    <motion.div
       layout
-      type="button"
-      onClick={() => onSelect?.(option)}
+      initial={{ opacity: 0, y: 40 }}
+      whileInView={{
+        opacity: 1,
+        y: 0,
+        transition: {
+          duration: 0.7,
+          delay: index * 0.08,
+          ease: [0.22, 1, 0.36, 1],
+        },
+      }}
+      viewport={{ once: true, margin: '-60px' }}
       className={`aurea-catalog-card aurea-catalog-card--grid group relative w-full text-left ${
         selected
           ? 'ring-2 ring-[#B49A70] ring-offset-2 ring-offset-[#EFEBE2]'
@@ -28,8 +39,11 @@ function OptionCard({
         ease: [0.22, 1, 0.36, 1],
       }}
     >
-      <div className="aurea-catalog-image">
-
+      <ImageLightbox
+        src={option.image}
+        alt={localizedName(option)}
+        className="aurea-catalog-image"
+      >
         <img
           src={option.image}
           alt={option.name}
@@ -101,9 +115,13 @@ function OptionCard({
             )}
           </AnimatePresence>
         </motion.div>
-      </div>
+      </ImageLightbox>
 
-      <div className="aurea-catalog-copy">
+      <button
+        type="button"
+        onClick={() => onSelect?.(option)}
+        className="aurea-catalog-copy block w-full cursor-pointer border-0 text-left font-inherit"
+      >
         <h4>{localizedName(option)}</h4>
         <p>{localizedDescription(option)}</p>
 
@@ -115,8 +133,8 @@ function OptionCard({
             {formatPrice(option.price, '+')}
           </span>
         </div>
-      </div>
-    </motion.button>
+      </button>
+    </motion.div>
   )
 }
 
