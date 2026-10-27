@@ -4,10 +4,9 @@ import Container from '../../components/common/Container'
 import Reveal from '../../components/common/Reveal'
 import videoSource from '../../../video1.mp4'
 import videoSource2 from '../../../video2.mp4'
-import SectionTitle from '../../components/common/SectionTitle'
 
 const heroImage =
-  '/images/acceuil.jpg'
+  'https://jfoprtlfgdwaslsqizut.supabase.co/storage/v1/object/public/images/acceuil.jpg'
 
 const highlights = [
   'Solution complète : terrain + maison',
