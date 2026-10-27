@@ -167,7 +167,7 @@ function PdfHome() {
           </Reveal>
           <Reveal className="aurea-pdf-feature-hero aurea-pdf-feature-hero--original">
             <img
-              src="images/image.png"
+              src="https://jfoprtlfgdwaslsqizut.supabase.co/storage/v1/object/public/images/produit.png"
               alt="Chalet en bois Maison Havre"
             />
        
