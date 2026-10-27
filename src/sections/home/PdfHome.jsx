@@ -243,14 +243,9 @@ function PdfHome() {
       <section className="aurea-pdf-section is-paper">
         <Container>
           <div className="aurea-pdf-process-grid aurea-pdf-process-grid--equipment">
+            <h2>Finitions et équipements</h2>
             <Reveal>
-              <div className="aurea-pdf-process-intro">
-                <SectionTitle
-                  eyebrow="Finitions et équipements"
-                  title="Choisissez le standing et qui vous ressemble et composez les équipements qui vous conviennent."
-                  description="Avec nos partenaires, nous offrons des solutions pour:"
-                />
-              </div>
+              <h3>Choisissez le standing et qui vous ressemble et composez les équipements qui vous conviennent.</h3>
             </Reveal>
             <div className="aurea-pdf-process-list">
               {equipmentItems.map((item, index) => (
