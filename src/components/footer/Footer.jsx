@@ -12,9 +12,16 @@ function Footer() {
           <div>
             <Link
               to="/"
-              className="font-serif text-4xl"
+              aria-label="Accueil Maison Havre"
+              className="inline-flex items-center gap-3 font-serif text-4xl"
             >
-              MAISON HAVRE
+              <img
+                src="/maison-havre-logo.svg"
+                alt=""
+                aria-hidden="true"
+                className="h-10 w-10 brightness-0 invert"
+              />
+              <span>MAISON HAVRE</span>
             </Link>
 
             <p className="mt-5 max-w-sm text-sm leading-6 text-white/45">

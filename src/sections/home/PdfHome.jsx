@@ -2,12 +2,12 @@ import { Check } from 'lucide-react'
 import { useState } from 'react'  
 import Container from '../../components/common/Container'
 import Reveal from '../../components/common/Reveal'
-import videoSource from '../../../viddd.mp4'
-import videoSource2 from '../../../viddd2.mp4'
+import videoSource from '../../../video1.mp4'
+import videoSource2 from '../../../video2.mp4'
 import SectionTitle from '../../components/common/SectionTitle'
 
 const heroImage =
-  'https://jfoprtlfgdwaslsqizut.supabase.co/storage/v1/object/sign/images/Mediterranean.png?token=eyJraWQiOiIyNmMxNTNhMy03ZWFhLTQ2YjktYmUwMS1hY2ZjYjllOTYwZmYiLCJhbGciOiJIUzI1NiJ9.eyJ1cmwiOiJpbWFnZXMvTWVkaXRlcnJhbmVhbi5wbmciLCJzY29wZSI6ImRvd25sb2FkIiwiaWF0IjoxNzkyNTgxNDQ0LCJleHAiOjE5MTg3MjU0NDR9.1L06bQfzwa4CVoJBQoehh5AG80LNIebxW2CMhdAYWJg'
+  '/images/acceuil.jpg'
 
 const highlights = [
   'Solution complète : terrain + maison',
@@ -109,14 +109,15 @@ function PdfHome() {
             <div className="aurea-pdf-hero-content">
               <div className="aurea-pdf-hero-heading">
                 <h1>
-                  <h2>Havre de paix,</h2>
-                  vous pouvez aussi devenir propriétaire.
+                  <span>Havre de paix,</span>
+                  <span>devenez propriétaire</span>
                 </h1>
               </div>
-              <p>
-                Maisons et chalets écologiques, autonomes en énergie et en eau,
-                clé en main — pensés pour celles et ceux qui ont mérité leur vue
-                sur l’horizon.
+              <p style={{ fontSize: '1.2rem', lineHeight: '1.5rem', marginTop: '1rem' }}>
+                Solution pour maisons et chalets en bois,
+                <span className="aurea-pdf-hero-description-line">
+                  Écologiques, autonomes en eau et en électricité
+                </span>
               </p>
             </div>
           </Reveal>
@@ -129,13 +130,11 @@ function PdfHome() {
       {/* 2. Notre offre — 2.1 Notre solution */}
       <section id="notre-offre" className="aurea-pdf-section is-paper">
         <Container>
-          <h2>2.Notre Offre</h2>
+          <h2>Notre Offre</h2>
           <div>
             <Reveal>
-              <span className="aurea-pdf-eyebrow aurea-pdf-eyebrow-dark">
-                2.1 — Notre solution
-              </span>
-              <h2>Du choix du terrain jusqu’à la maison finie, clé en main.</h2>
+             
+              <h3>Du choix du terrain jusqu’à la maison finie, clé en main.</h3>
             </Reveal>
           </div>
           <div>
@@ -146,16 +145,14 @@ function PdfHome() {
             <Reveal delay={0.1}>
               <span className="aurea-pdf-kicker">L’offre, sur mesure</span>
               <ReadMore initialLength={210}>
-                Notre force, c’est la prise en charge complète. Vous composez
-                votre projet en trois étapes simples : vous choisissez
-                l’emplacement parmi une sélection de terrains validés pour
-                leur accès et leur potentiel. Vous choisissez votre maison dans
-                un catalogue de modèles en bois conçus avec nos fabricants
-                partenaires. Vous choisissez vos finitions — piscine,
-                équipements solaires, ameublement et aménagement paysager —
-                avec nos prestataires de confiance. Nous nous occupons du
-                reste : négociations, formalités administratives et juridiques,
-                suivi de chantier, jusqu’à la remise des clés.
+                {`Avec Maison Havre, bénéficiez d'une prise en charge complète. Composez votre projet en trois étapes simples :
+
+                  1. Sélectionnez l’emplacement de votre future maison parmi une sélection de terrains rigoureusement validés pour leur accès et leur potentiel.
+                  2. Personnalisez votre modèle en bois à partir de notre catalogue conçu avec nos fabricants partenaires.
+                  3. Ajoutez vos finitions et équipements selon vos besoins : piscine, installations solaires, ameublement et aménagement paysager.
+
+                  Nous nous occupons du reste : négociations, démarches administratives et juridiques, suivi de chantier, jusqu’à la remise des clés.`
+                }
               </ReadMore>
             </Reveal>
           </div>
@@ -166,37 +163,31 @@ function PdfHome() {
       {/* 2.2 Notre produit */}
       <section id="notre-produit" className="aurea-pdf-section is-sand">
         <Container>
+          <h2>Notre produit</h2>
           <Reveal className="aurea-pdf-feature-title">
-            <span className="aurea-pdf-eyebrow aurea-pdf-eyebrow-dark">
-              2.2 — Notre produit
-            </span>
-            <h2>Maison Havre — L’habitat qui vous ressemble</h2>
           </Reveal>
-          <Reveal className="aurea-pdf-feature-hero">
+          <Reveal className="aurea-pdf-feature-hero aurea-pdf-feature-hero--original">
             <img
-              src="https://jfoprtlfgdwaslsqizut.supabase.co/storage/v1/object/public/images/image.png"
+              src="images/image.png"
               alt="Chalet en bois Maison Havre"
             />
-            <div className="aurea-pdf-feature-hero-content">
-              <p>
-                Des chalets en bois sur des emplacements à fort caractère
-                (mer, hauteurs, campagne), à moins d’une heure de Tunis,
-                écologiques et 100 % autonomes : électricité photovoltaïque
-                avec stockage et eau via des bâches.
-              </p>
-            </div>
+       
           </Reveal>
           <Reveal delay={0.1} className="aurea-pdf-feature-copy">
             <ReadMore initialLength={220}>
-              Nous proposons des chalets en bois, installés sur des
-              emplacements choisis pour leur caractère exceptionnel — vue
-              imprenable sur la mer, sur les hauteurs ou en pleine nature —
-              toujours à moins d’une heure de Tunis. Des maisons écologiques,
-              confortables et surtout totalement autonomes : panneaux
-              photovoltaïques avec stockage pour l’électricité, bâches de
-              récupération pour l’eau. Plus de dépendance à la STEG ou à la
-              SONEDE, plus de coupures d’été à subir — votre havre fonctionne,
-              où qu’il soit.
+              Nous proposons des chalets en bois implantés
+              sur des sites d’exception : vue panoramique sur
+              la mer, nichés sur les hauteurs ou immergés en
+              pleine nature, toujours à moins d’une heure de
+              Tunis.
+              Écologiques, confortables et totalement
+              autonomes, nos logements sont équipés de
+              panneaux photovoltaïques avec stockage
+              d'énergie et de réservoirs/bâches de
+              récupération d'eau. Libéré des contraintes de la
+              STEG et de la SONEDE, vous ne subissez plus
+              les coupures d’été : votre havre de paix
+              fonctionne en toute indépendance, où qu’il soit.
             </ReadMore>
             <FeatureList items={productHighlights} />
           </Reveal>
@@ -207,11 +198,9 @@ function PdfHome() {
       <section id="solution-bout-en-bout" className="aurea-pdf-section is-paper">
         <Container>
           <div className="aurea-pdf-solution aurea-pdf-solution--end">
+            <h2>Notre solution de bout en bout</h2>
             <Reveal>
-              <span className="aurea-pdf-eyebrow aurea-pdf-eyebrow-dark">
-                2.3 — Solution de bout en bout
-              </span>
-              <h2>Un accompagnement de la conception à la réalisation.</h2>
+              <h3>Un accompagnement de la conception à la réalisation.</h3>
             </Reveal>
             <Reveal delay={0.1} className="aurea-pdf-solution-end-video">
               <VideoCard src={videoSource2} label="Découvrez notre solution" />
@@ -221,19 +210,23 @@ function PdfHome() {
       </section>
 
       {/* 3. Notre expertise */}
-      <section id="notre-expertise" className="aurea-pdf-section is-night">
+      <section
+        id="notre-expertise"
+        className="aurea-pdf-section is-night aurea-pdf-section--expertise"
+      >
+        <div className="aurea-pdf-expertise-background" aria-hidden="true">
+          <img
+            src="https://jfoprtlfgdwaslsqizut.supabase.co/storage/v1/object/public/images/planning.jpg"
+            alt=""
+          />
+        </div>
         <Container>
-          <h2>3.Notre expertise</h2>
-          <Reveal className="aurea-pdf-feature-hero">
-            <img
-              src="https://jfoprtlfgdwaslsqizut.supabase.co/storage/v1/object/public/images/planning.jpg"
-              alt="Paysage naturel tunisien"
-            />
-            <div className="aurea-pdf-feature-hero-content">
-              <h2>Conseil, étude, offre, réalisation, suivi</h2>
-            </div>
-          </Reveal>
-          <Reveal delay={0.1} className="aurea-pdf-feature-copy">
+          <h2>Notre expertise</h2>
+          <Reveal
+            delay={0.1}
+            className="aurea-pdf-feature-copy aurea-pdf-feature-copy--expertise"
+          >
+            <h3>Conseil, étude, offre, réalisation, suivi</h3>
             <ReadMore initialLength={190}>
               Ce projet, c’est 30 ans d’expérience en gestion de projet,
               l’exigence d’un ingénieur et la passion sincère d’un homme pour

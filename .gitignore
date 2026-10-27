@@ -14,13 +14,13 @@ dist/
 .vscode/
 .DS_Store
 
-*.mp4
 
 # Local migration artifacts
 modeles-contact-sheet.jpg
 terrains-contact-sheet.jpg
 
 images/
+video/*
 
 *jpg
 *png

@@ -127,9 +127,16 @@ function BuildYourOwn() {
 
           <Link
             to="/"
-            className="font-serif text-2xl tracking-wide"
+            aria-label="Accueil Maison Havre"
+            className="inline-flex items-center gap-3 font-serif text-2xl tracking-wide"
           >
-            MAISON HAVRE
+            <img
+              src="/maison-havre-logo.svg"
+              alt=""
+              aria-hidden="true"
+              className="h-8 w-8"
+            />
+            <span>MAISON HAVRE</span>
           </Link>
 
           <div className="flex items-center gap-5">

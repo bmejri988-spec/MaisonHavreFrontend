@@ -61,35 +61,16 @@ function Navbar({ contained = false }) {
               <Link
                 to="/"
                 aria-label="Accueil Maison Havre"
-                className="inline-flex shrink-0"
+                className="inline-flex h-9 w-9 shrink-0 items-center justify-center"
               >
-                <svg
-                  xmlns="http://www.w3.org/2000/svg"
-                  viewBox="0 0 512 512"
-                  role="img"
-                  aria-labelledby="title"
-                  className="h-7 w-7"
-                >
-                    <title id="title">Maison Havre — icône</title>
-                    <defs>
-                      <linearGradient id="gold" x1="0" y1="0" x2="1" y2="1">
-                        <stop offset="0" stop-color="#F8E0A0"/>
-                        <stop offset=".48" stop-color="#D7AC58"/>
-                        <stop offset="1" stop-color="#F4D58C"/>
-                      </linearGradient>
-                      <linearGradient id="green" x1="0" y1="0" x2="1" y2="1">
-                        <stop offset="0" stop-color="#10382E"/>
-                        <stop offset="1" stop-color="#06231D"/>
-                      </linearGradient>
-                    </defs>
-                    <rect width="512" height="512" rx="100" fill="url(#green)"/>
-                    <g fill="none" stroke="url(#gold)" strokeWidth="10" strokeLinecap="square" strokeLinejoin="round">
-                      <path d="M126 352 V215 A130 130 0 0 1 386 215 V352 H293"/>
-                      <path d="M126 352 H219"/>
-                    </g>
-                    <path d="M174 315 V204 Q174 196 162 190 H207 L256 263 L305 190 H350 Q338 196 338 204 V315 Q338 324 351 329 H295 Q308 324 308 315 V244 L263 307 L256 316 L249 307 L204 244 V315 Q204 324 217 329 H161 Q174 324 174 315Z" fill="url(#gold)"/>
-                    <path d="M256 352 C229 328 231 306 256 291 C281 306 283 328 256 352Z" fill="url(#green)" stroke="url(#gold)" strokeWidth="8"/>
-                </svg>
+                <img
+                  src="/maison-havre-logo.svg"
+                  alt=""
+                  aria-hidden="true"
+                  className={`h-8 w-8 ${
+                    contained && !scrolled ? '' : 'brightness-0 invert'
+                  }`}
+                />
               </Link>
             <Link
               to="/"

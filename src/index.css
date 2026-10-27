@@ -786,6 +786,41 @@ button.aurea-catalog-card--grid {
   background: var(--aurea-night); 
 }
 
+.aurea-pdf-section--expertise {
+  position: relative;
+  isolation: isolate;
+  overflow: hidden;
+  background: var(--aurea-night);
+}
+
+.aurea-pdf-expertise-background {
+  position: absolute;
+  z-index: -1;
+  inset: 0;
+  pointer-events: none;
+}
+
+.aurea-pdf-expertise-background::after {
+  position: absolute;
+  inset: 0;
+  background:
+    linear-gradient(90deg, rgb(12 43 48 / 82%), rgb(12 43 48 / 54%) 70%),
+    linear-gradient(0deg, rgb(12 43 48 / 58%), transparent 70%);
+  content: '';
+}
+
+.aurea-pdf-expertise-background img {
+  display: block;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: center;
+}
+
+.aurea-pdf-section--expertise > .mx-auto {
+  position: relative;
+}
+
 /* ---------- Typography ---------- */
 .aurea-pdf-home h2 {
   margin: 18px 0 0;
@@ -900,6 +935,14 @@ button.aurea-catalog-card--grid {
   letter-spacing: -0.03em;
 }
 
+.aurea-pdf-hero h1 span {
+  display: block;
+}
+
+.aurea-pdf-hero h1 span:last-child {
+  white-space: nowrap;
+}
+
 .aurea-pdf-hero h1 em {
   color: var(--aurea-sand);
   font-style: italic;
@@ -922,6 +965,11 @@ button.aurea-catalog-card--grid {
   font-size: clamp(12px, 1vw, 14px);
   line-height: 1.5;
   text-shadow: 0 2px 14px rgb(0 0 0 / 32%);
+}
+
+.aurea-pdf-hero-description-line {
+  display: block;
+  white-space: nowrap;
 }
 
 /* ---------- Feature lists ---------- */
@@ -989,6 +1037,10 @@ button.aurea-catalog-card--grid {
 }
 
 /* ---------- Read more ---------- */
+.aurea-pdf-readmore p {
+  white-space: pre-line;
+}
+
 .aurea-pdf-readmore button {
   margin-top: 14px;
   padding: 4px 0;
@@ -1130,6 +1182,14 @@ button.aurea-catalog-card--grid {
   object-position: center;
 }
 
+.aurea-pdf-feature-hero--expertise {
+  aspect-ratio: 16 / 9;
+}
+
+.aurea-pdf-feature-hero--expertise > img {
+  height: 100%;
+}
+
 .aurea-pdf-feature-hero-content {
   position: absolute;
   inset: 0;
@@ -1153,10 +1213,41 @@ button.aurea-catalog-card--grid {
   line-height: 1.6;
 }
 
+.aurea-pdf-feature-hero--original {
+  overflow: visible;
+  background: transparent;
+}
+
+.aurea-pdf-feature-hero--original > img {
+  height: auto;
+  object-fit: contain;
+}
+
+.aurea-pdf-feature-hero--original .aurea-pdf-feature-hero-content {
+  position: static;
+  padding: 20px 0 0;
+  color: inherit;
+  background: none;
+}
+
+.aurea-pdf-feature-hero--original .aurea-pdf-feature-hero-content p {
+  color: inherit;
+}
+
 .aurea-pdf-feature-copy {
   max-width: 850px;
   margin-top: clamp(24px, 3vw, 40px);
   text-align: left;
+}
+
+.aurea-pdf-feature-copy--expertise {
+  margin-top: clamp(32px, 5vw, 64px);
+}
+
+.aurea-pdf-feature-copy--expertise > h3 {
+  max-width: 22ch;
+  color: #fff;
+  font-size: clamp(30px, 4vw, 52px);
 }
 
 .aurea-home--catalog-hidden .aurea-pdf-hero-frame,
@@ -1398,6 +1489,10 @@ button.aurea-catalog-card--grid {
     height: clamp(400px, 72vw, 520px);
   }
 
+  .aurea-pdf-feature-hero--expertise > img {
+    height: 100%;
+  }
+
   .aurea-pdf-split-reverse > :first-child {
     order: 2;
   }
@@ -1441,9 +1536,17 @@ button.aurea-catalog-card--grid {
 }
 
 @media (max-width: 560px) {
+  .aurea-pdf-feature-hero--expertise {
+    aspect-ratio: 4 / 3;
+  }
+
   .aurea-pdf-feature-hero > img {
     height: 460px;
     object-position: center;
+  }
+
+  .aurea-pdf-feature-hero--expertise > img {
+    height: 100%;
   }
 
   .aurea-pdf-feature-hero-content {
