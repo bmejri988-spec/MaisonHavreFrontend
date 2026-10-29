@@ -16,7 +16,7 @@ function Footer() {
               className="inline-flex items-center gap-3 font-serif text-4xl"
             >
               <img
-                src="/maison-havre-logo.svg"
+                src="/favicon-32x32.png"
                 alt=""
                 aria-hidden="true"
                 className="h-10 w-10 brightness-0 invert"

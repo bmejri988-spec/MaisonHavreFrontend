@@ -10,23 +10,32 @@ const navLinks = [
   { label: 'À propos', path: '/about' },
 ]
 
-function Navbar({ contained = false }) {
+function Navbar({ contained = false, imageBackdrop = false }) {
   const [isOpen, setIsOpen] = useState(false)
   const [scrolled, setScrolled] = useState(false)
+  const [hasScrolled, setHasScrolled] = useState(false)
   const [isHidden, setIsHidden] = useState(false)
   const lastScrollY = useRef(0)
+  const positionClass = contained && !hasScrolled ? 'absolute' : 'fixed'
 
   useEffect(() => {
     const handleScroll = () => {
       const currentScrollY = window.scrollY
       const scrollDelta = currentScrollY - lastScrollY.current
 
-      setScrolled(currentScrollY > 60)
+      setHasScrolled(currentScrollY > 0)
 
       if (currentScrollY <= 0) {
+        setScrolled(false)
         setIsHidden(false)
-      } else if (Math.abs(scrollDelta) > 4) {
-        setIsHidden(scrollDelta > 0 && !isOpen)
+      } else if (scrollDelta > 6 && !isOpen) {
+        if (currentScrollY > 60) {
+          setScrolled(true)
+        }
+        setIsHidden(true)
+      } else if (scrollDelta < -2) {
+        setScrolled(false)
+        setIsHidden(false)
       }
 
       lastScrollY.current = currentScrollY
@@ -41,12 +50,18 @@ function Navbar({ contained = false }) {
 
   return (
     <header
-      className={`${contained ? 'absolute' : 'fixed'} left-0 top-0 z-50 w-full transition-all duration-500 ${
+      className={`${positionClass} left-0 top-0 z-50 ${
+        contained
+          ? 'w-[calc(100vw-var(--aurea-catalog-width))] max-[900px]:w-full'
+          : 'w-full'
+      } transition-all duration-500 ${
         isHidden ? '-translate-y-full' : 'translate-y-0'
       } ${
         scrolled
           ? 'bg-[#1D2923]/95 shadow-lg backdrop-blur-md'
-          : 'bg-transparent'
+          : imageBackdrop
+            ? 'bg-[#1D2923]/35 backdrop-blur-md'
+            : 'bg-transparent'
       }`}
     >
       <div
@@ -64,30 +79,38 @@ function Navbar({ contained = false }) {
                 className="inline-flex h-9 w-9 shrink-0 items-center justify-center"
               >
                 <img
-                  src="/maison-havre-logo.svg"
+                  src="/favicon-32x32.png"
                   alt=""
                   aria-hidden="true"
                   className={`h-8 w-8 ${
-                    contained && !scrolled ? '' : 'brightness-0 invert'
+                    contained && !imageBackdrop && !scrolled
+                      ? ''
+                      : 'brightness-0 invert'
                   }`}
                 />
               </Link>
             <Link
               to="/"
               className={`relative z-50 shrink-0 whitespace-nowrap font-serif text-xl tracking-[0.129m] md:text-[1rem] ${
-                contained && !scrolled ? 'text-[#0C2B30]' : 'text-white'
+                contained && !imageBackdrop && !scrolled
+                  ? 'text-[#0C2B30]'
+                  : 'text-white'
               }`}
             >
             MAISON HAVRE
             </Link>
             <span
               className={`hidden h-5 w-px sm:block ${
-                contained && !scrolled ? 'bg-[#0C2B30]/25' : 'bg-white/25'
+                contained && !imageBackdrop && !scrolled
+                  ? 'bg-[#0C2B30]/25'
+                  : 'bg-white/25'
               }`}
             />
             <span
               className={`hidden shrink-0 whitespace-nowrap text-[9px] font-semibold uppercase tracking-[0.19em] sm:block ${
-                contained && !scrolled ? 'text-[#0C2B30]/60' : 'text-white/55'
+                contained && !imageBackdrop && !scrolled
+                  ? 'text-[#0C2B30]/60'
+                  : 'text-white/55'
               }`}
             >
               Chalets d’exception
@@ -97,7 +120,7 @@ function Navbar({ contained = false }) {
           {/* Desktop */}
           <div
             className={`hidden items-center gap-1 rounded-full border p-1 backdrop-blur-md lg:flex ${
-              contained && !scrolled
+              contained && !scrolled && !imageBackdrop
                 ? 'border-[#0C2B30]/15 bg-white/45'
                 : 'border-white/15 bg-black/15'
             }`}
@@ -109,7 +132,7 @@ function Navbar({ contained = false }) {
                 className={({ isActive }) => `whitespace-nowrap rounded-full px-3 py-2 text-[11px] font-semibold tracking-wide transition-colors ${
                   isActive
                     ? 'bg-white text-[#0C2B30]'
-                    : contained && !scrolled
+                    : contained && !scrolled && !imageBackdrop
                       ? 'text-[#0C2B30]/70 hover:bg-[#0C2B30]/10 hover:text-[#0C2B30]'
                       : 'text-white/70 hover:bg-white/10 hover:text-white'
                 }`}
@@ -119,26 +142,16 @@ function Navbar({ contained = false }) {
             ))}
           </div>
 
-          <div className="hidden lg:block">
-            <Link
-              //</div>to="/build-your-own"
-              className="group inline-flex whitespace-nowrap items-center gap-2 rounded-full border border-[#C9A45C] bg-[#C9A45C] px-4 py-2.5 text-[11px] font-bold text-[#0C2B30] transition-all duration-300 hover:bg-[#E4DCCB]"
-            >
-              Composer votre chalet
-
-              <ArrowUpRight
-                size={14}
-                strokeWidth={1.8}
-                className="transition-transform group-hover:translate-x-0.5 group-hover:-translate-y-0.5"
-              />
-            </Link>
+          <div className="hidden lg:block"> 
           </div>
 
           {/* Mobile button */}
           <button
             onClick={() => setIsOpen(!isOpen)}
             className={`relative z-50 flex h-11 w-11 items-center justify-center lg:hidden ${
-              contained && !scrolled && !isOpen ? 'text-[#0C2B30]' : 'text-white'
+              contained && !imageBackdrop && !scrolled && !isOpen
+                ? 'text-[#0C2B30]'
+                : 'text-white'
             }`}
             aria-label="Ouvrir le menu"
           >

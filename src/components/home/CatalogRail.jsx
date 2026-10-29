@@ -1,7 +1,7 @@
 import { useEffect, useMemo, useState } from 'react'
 import { ArrowLeft, ArrowRight, ArrowUpRight } from 'lucide-react'
 import { AnimatePresence, motion } from 'framer-motion'
-import { Link } from 'react-router-dom'
+import { Link, useLocation, useNavigate } from 'react-router-dom'
 import { useCatalog } from '../../context/useCatalog'
 import {
   localizedDescription,
@@ -13,6 +13,8 @@ export function CatalogSlider({ label, desc, title, items, getDescription, getPa
   const [activeIndex, setActiveIndex] = useState(0)
   const [direction, setDirection] = useState(1)
   const [loadedImages, setLoadedImages] = useState(() => new Set())
+  const location = useLocation()
+  const navigate = useNavigate()
   const currentItem = items[activeIndex]
   const image = currentItem?.gallery?.[0] || currentItem?.image
 
@@ -63,11 +65,33 @@ export function CatalogSlider({ label, desc, title, items, getDescription, getPa
     setActiveIndex(index)
   }
 
+  const handleCatalogLink = (event) => {
+    if (
+      event.button !== 0 ||
+      event.metaKey ||
+      event.ctrlKey ||
+      event.shiftKey ||
+      event.altKey
+    ) {
+      return
+    }
+
+    event.preventDefault()
+    navigate(getPath(currentItem), {
+      state: {
+        homeScrollY:
+          location.pathname === '/'
+            ? window.scrollY
+            : location.state?.homeScrollY ?? 0,
+      },
+    })
+  }
+
   return (
     <section className={`aurea-catalog-section${stacked ? ' aurea-catalog-section--stacked' : ''}`}>
       <div className="aurea-catalog-heading">
         <div>
-          <span>{label}</span>
+          <span style={{ fontSize: '19px' }}>{label}</span>
           <h3>{title}</h3>
           <h4 className="aurea-catalog-desc">{desc}</h4>
           <span className="aurea-catalog-heading-cat">{cat}</span>
@@ -89,6 +113,7 @@ export function CatalogSlider({ label, desc, title, items, getDescription, getPa
               <Link
                 className="aurea-catalog-slide-link"
                 to={getPath(currentItem)}
+                onClick={handleCatalogLink}
                 aria-label={`${localizedName(currentItem)} — ${getDescription(currentItem)}`}
               >
                 {imageLoaded ? (
@@ -142,7 +167,7 @@ function CatalogRail() {
   return (
     <div className="aurea-catalog-rail">
       <CatalogSlider
-        label="offre . terrain"
+        label="offre terrain"
         title="Votre havre existe quelque part, à moins d’une heure de Tunis."
         desc="Nous allons le trouver, le construire et vous le remettre clé en main."
         cat="Catalogue des terrains"
@@ -161,7 +186,7 @@ function CatalogRail() {
       />
       <CatalogSlider
         label="Offre piscines"
-        title="Choisissez le standing et qui vous ressemble et composez les équipements qui vous conviennent."
+        title="Choisissez le standing qui vous ressemble et composez les équipements qui vous conviennent."
         items={options}
         getDescription={(option) => localizedDescription(option)}
         getPath={() => '/options'}

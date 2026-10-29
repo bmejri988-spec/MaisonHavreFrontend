@@ -1,6 +1,9 @@
 @import url('https://fonts.googleapis.com/css2?family=Figtree:wght@300;400;500;600;700&family=Fraunces:wght@400;500;600&display=swap');
-
 @import "tailwindcss";
+
+/* =========================================================
+   1. Global foundations
+   ========================================================= */
 
 :root {
   --color-background: #f7f5f0;
@@ -10,8 +13,12 @@
   --color-accent: #c9a45c;
   --color-text: #1a2a2d;
   --color-muted: #5a6a6c;
-  --color-white: #ffffff;
+  --color-white: #fff;
   --color-border: #ddd8cd;
+}
+
+* {
+  box-sizing: border-box;
 }
 
 html {
@@ -20,32 +27,23 @@ html {
 
 body {
   margin: 0;
+  overflow-x: hidden;
   background: var(--color-background);
   color: var(--color-text);
-  font-family: 'Figtree', sans-serif;
+  font-family: "Figtree", sans-serif;
   -webkit-font-smoothing: antialiased;
-  overflow-x: hidden;
 }
 
 h1,
 h2,
 h3,
 h4 {
-  font-family: 'Fraunces', Georgia, serif;
+  font-family: "Fraunces", Georgia, serif;
 }
 
 button,
 a {
-  font-family: 'Figtree', sans-serif;
-}
-
-* {
-  box-sizing: border-box;
-}
-
-::selection {
-  background: var(--color-primary);
-  color: var(--color-white);
+  font-family: "Figtree", sans-serif;
 }
 
 a {
@@ -57,6 +55,15 @@ img {
   max-width: 100%;
 }
 
+::selection {
+  background: var(--color-primary);
+  color: var(--color-white);
+}
+
+/* =========================================================
+   2. AUREA home layout and catalog
+   ========================================================= */
+
 .aurea-home {
   --aurea-night: #0c2b30;
   --aurea-night-light: #12393f;
@@ -65,16 +72,21 @@ img {
   --aurea-sand: #e4dccb;
   --aurea-paper: #f7f5f0;
   --aurea-muted: #77766f;
-  --aurea-catalog-width: max(320px, 33.333vw);
+  --aurea-catalog-width: max(320px, 30vw);
+
   display: grid;
   grid-template-columns: minmax(0, 1fr) var(--aurea-catalog-width);
   min-height: 100vh;
   background: var(--aurea-night);
-  transition: grid-template-columns 380ms cubic-bezier(.16, 1, .3, 1);
+  transition: grid-template-columns 380ms cubic-bezier(0.16, 1, 0.3, 1);
 }
 
 .aurea-home--catalog-hidden {
-  grid-template-columns: minmax(0, 1fr) 0px;
+  grid-template-columns: minmax(0, 1fr) 0;
+}
+
+.aurea-home--catalog-closing {
+  transition-duration: 720ms;
 }
 
 .aurea-keyword {
@@ -100,7 +112,7 @@ img {
   top: 0;
   bottom: 0;
   width: 12%;
-  content: '';
+  content: "";
   pointer-events: none;
 }
 
@@ -150,12 +162,6 @@ img {
   }
 }
 
-@media (prefers-reduced-motion: reduce) {
-  .aurea-values-track {
-    animation: none;
-  }
-}
-
 .aurea-story {
   position: relative;
   min-width: 0;
@@ -166,8 +172,8 @@ img {
 
 .aurea-configurator {
   position: sticky;
-  align-self: start;
   top: 0;
+  align-self: start;
   height: 100vh;
   min-width: 0;
   overflow: hidden;
@@ -175,19 +181,170 @@ img {
 }
 
 .aurea-configurator__panel {
+  position: relative;
   display: flex;
   flex-direction: column;
   width: var(--aurea-catalog-width);
   height: 100%;
   min-height: 0;
-  color: #1a2a2d;
   background: var(--color-background);
+  color: #1a2a2d;
   box-shadow: -18px 0 40px rgb(0 0 0 / 24%);
   transition: opacity 250ms ease;
 }
 
-.aurea-configurator__panel[aria-hidden='true'] {
+.aurea-configurator__panel[aria-hidden="true"] {
   opacity: 0;
+}
+
+.aurea-home--catalog-closing:not(.aurea-home--returning-home) .aurea-configurator__panel {
+  animation: aurea-catalog-suction 720ms cubic-bezier(0.65, 0, 0.9, 0.35) forwards;
+}
+
+.aurea-home--catalog-closing:not(.aurea-home--returning-home) .aurea-configurator__panel::after {
+  position: absolute;
+  z-index: 2;
+  inset: 0;
+  background: radial-gradient(
+    circle at center,
+    #000 0 8%,
+    #120d19 20%,
+    rgb(201 164 92 / 75%) 27%,
+    transparent 58%
+  );
+  content: "";
+  pointer-events: none;
+  animation: aurea-catalog-black-hole 720ms ease-in forwards;
+}
+
+.aurea-home-preview {
+  position: fixed;
+  z-index: 0;
+  inset: 0;
+  overflow: hidden;
+  opacity: 0;
+  pointer-events: none;
+  animation: aurea-home-reveal 900ms ease-out forwards;
+}
+
+.aurea-home-preview__content {
+  position: relative;
+  width: calc(100% - var(--aurea-catalog-width));
+}
+
+.aurea-home-preview__content > .aurea-story {
+  width: 100%;
+}
+
+.aurea-home--returning-home > .aurea-story {
+  z-index: 1;
+  transform-origin: var(--tunnel-origin-x, 100%) var(--tunnel-origin-y, 50vh);
+  transform-style: preserve-3d;
+  animation: aurea-tunnel-suction 900ms cubic-bezier(0.65, 0, 0.9, 0.35) forwards;
+}
+
+@keyframes aurea-tunnel-suction {
+  0% {
+    filter: brightness(1) saturate(1);
+    opacity: 1;
+    transform: perspective(1200px) scale(1) rotateX(0);
+  }
+
+  58% {
+    filter: brightness(0.65) saturate(0.8);
+    opacity: 0.95;
+    transform: perspective(1200px) translateZ(-260px) scale(0.48, 0.42) rotateX(8deg);
+  }
+
+  86% {
+    filter: brightness(0.25) saturate(0.5);
+    opacity: 0.72;
+    transform: perspective(1200px) translateZ(-620px) scale(0.12) rotateX(15deg);
+  }
+
+  100% {
+    filter: brightness(0);
+    opacity: 0;
+    transform: perspective(1200px) translateZ(-900px) scale(0.001);
+  }
+}
+
+@supports (view-transition-name: none) {
+  .aurea-home > .aurea-story {
+    view-transition-name: aurea-story;
+  }
+
+  ::view-transition-old(root),
+  ::view-transition-new(root) {
+    animation: none;
+  }
+
+  ::view-transition-old(aurea-story) {
+    z-index: 1;
+    transform-origin: var(--tunnel-origin-x, 100%) var(--tunnel-origin-y, 50vh);
+    animation: aurea-tunnel-suction 900ms cubic-bezier(0.65, 0, 0.9, 0.35) forwards;
+  }
+
+  ::view-transition-new(aurea-story) {
+    z-index: 0;
+    animation: none;
+  }
+}
+
+@keyframes aurea-home-reveal {
+  0% {
+    filter: brightness(0.55) blur(8px);
+    opacity: 0;
+    transform: scale(0.96);
+  }
+
+  100% {
+    filter: brightness(1) blur(0);
+    opacity: 1;
+    transform: scale(1);
+  }
+}
+
+
+
+@keyframes aurea-catalog-suction {
+  0% {
+    opacity: 1;
+    border-radius: 0;
+    filter: brightness(1);
+    transform: scale(1) rotate(0);
+  }
+
+  58% {
+    opacity: 1;
+    border-radius: 50%;
+    filter: brightness(0.25);
+    transform: scale(0.42) rotate(210deg);
+  }
+
+  100% {
+    opacity: 0;
+    border-radius: 50%;
+    filter: brightness(0);
+    transform: scale(0.015) rotate(540deg);
+  }
+}
+
+@keyframes aurea-catalog-black-hole {
+  0% {
+    opacity: 0;
+    transform: scale(0.05);
+  }
+
+  52% {
+    opacity: 1;
+    transform: scale(1.5);
+  }
+
+  100% {
+    opacity: 0;
+    transform: scale(2.5);
+  }
 }
 
 .aurea-catalog-toggle {
@@ -199,15 +356,15 @@ img {
   width: 46px;
   height: 46px;
   place-items: center;
+  transform: translateY(-50%);
   color: var(--aurea-night);
   background: var(--aurea-gold);
   border: 1px solid rgb(12 43 48 / 16%);
   border-radius: 50%;
   box-shadow: 0 4px 18px rgb(0 0 0 / 18%);
   cursor: pointer;
-  transform: translateY(-50%);
   transition:
-    right 380ms cubic-bezier(.16, 1, .3, 1),
+    right 380ms cubic-bezier(0.16, 1, 0.3, 1),
     background 180ms ease,
     color 180ms ease;
 }
@@ -233,7 +390,7 @@ img {
   color: var(--aurea-gold);
   font-size: 11px;
   font-weight: 700;
-  letter-spacing: .22em;
+  letter-spacing: 0.22em;
   text-transform: uppercase;
 }
 
@@ -252,8 +409,8 @@ img {
 }
 
 .aurea-catalog-rail {
-  flex: 1 1 auto;
   display: grid;
+  flex: 1 1 auto;
   align-content: start;
   min-height: 0;
   gap: 0;
@@ -271,14 +428,14 @@ img {
   color: var(--aurea-gold);
   font-size: 10px;
   font-weight: 700;
-  letter-spacing: .18em;
+  letter-spacing: 0.18em;
   text-transform: uppercase;
 }
 
 .aurea-catalog-intro h3 {
   margin: 8px 0 0;
   color: var(--aurea-night);
-  font-family: 'Fraunces', Georgia, serif;
+  font-family: "Fraunces", Georgia, serif;
   font-size: clamp(22px, 2.4vw, 30px);
   font-weight: 400;
   line-height: 1.12;
@@ -308,17 +465,21 @@ img {
   color: var(--aurea-gold);
   font-size: 10px;
   font-weight: 700;
-  letter-spacing: .18em;
+  letter-spacing: 0.18em;
   text-transform: uppercase;
+}
+
+.aurea-catalog-label {
+  font-size: 160px;
 }
 
 .aurea-catalog-heading h3 {
   margin: 7px 0 0;
   color: var(--aurea-night);
-  font-family: 'Fraunces', Georgia, serif;
-  font-size: 25px;
+  font-family: "Fraunces", Georgia, serif;
+  font-size: clamp(26px, 2vw, 36px);
   font-weight: 400;
-  line-height: 1;
+  line-height: 1.08;
 }
 
 .aurea-catalog-desc {
@@ -335,7 +496,7 @@ img {
   color: var(--aurea-gold-dark);
   font-size: 9px;
   font-weight: 700;
-  letter-spacing: .16em;
+  letter-spacing: 0.16em;
   text-transform: uppercase;
 }
 
@@ -354,11 +515,11 @@ img {
   border: 1px solid var(--aurea-sand);
   border-radius: 50%;
   cursor: pointer;
-  transition: color .2s ease, background .2s ease;
+  transition: color 200ms ease, background 200ms ease;
 }
 
 .aurea-catalog-controls button:hover {
-  color: #fff;
+  color: var(--aurea-night);
   background: var(--aurea-night);
 }
 
@@ -390,7 +551,7 @@ button.aurea-catalog-card--grid {
 
 .aurea-catalog-image {
   position: relative;
-  aspect-ratio: 1.;
+  aspect-ratio: 1 / 1;
   overflow: hidden;
   background: var(--aurea-night-light);
 }
@@ -458,7 +619,7 @@ button.aurea-catalog-card--grid {
   width: 100%;
   height: 100%;
   object-fit: cover;
-  animation: aurea-catalog-slide .6s ease;
+  animation: aurea-catalog-slide 600ms ease;
 }
 
 .aurea-catalog-image-loading {
@@ -472,13 +633,25 @@ button.aurea-catalog-card--grid {
 }
 
 @keyframes aurea-catalog-slide {
-  from { opacity: .25; transform: scale(1.04); }
-  to { opacity: 1; transform: scale(1); }
+  from {
+    opacity: 0.25;
+    transform: scale(1.04);
+  }
+
+  to {
+    opacity: 1;
+    transform: scale(1);
+  }
 }
 
 @keyframes aurea-catalog-loading {
-  from { background-position: 200% 0; }
-  to { background-position: -20% 0; }
+  from {
+    background-position: 200% 0;
+  }
+
+  to {
+    background-position: -20% 0;
+  }
 }
 
 .aurea-catalog-count {
@@ -488,7 +661,7 @@ button.aurea-catalog-card--grid {
   padding: 5px 8px;
   color: #fff;
   font-size: 10px;
-  letter-spacing: .12em;
+  letter-spacing: 0.12em;
   background: rgb(12 43 48 / 72%);
   border-radius: 999px;
 }
@@ -516,7 +689,7 @@ button.aurea-catalog-card--grid {
 .aurea-catalog-copy h4 {
   margin: 0;
   color: var(--aurea-night);
-  font-family: 'Fraunces', Georgia, serif;
+  font-family: "Fraunces", Georgia, serif;
   font-size: 22px;
   font-weight: 400;
 }
@@ -543,9 +716,9 @@ button.aurea-catalog-card--grid {
 }
 
 .aurea-catalog-dots button {
+  flex: 0 0 auto;
   width: 9px;
   height: 9px;
-  flex: 0 0 auto;
   padding: 0;
   background: transparent;
   border: 1.5px solid rgb(255 255 255 / 90%);
@@ -554,7 +727,7 @@ button.aurea-catalog-card--grid {
   transition: background 180ms ease, transform 180ms ease;
 }
 
-.aurea-catalog-dots button[aria-current='true'] {
+.aurea-catalog-dots button[aria-current="true"] {
   background: #fff;
   transform: scale(1.15);
 }
@@ -592,7 +765,7 @@ button.aurea-catalog-card--grid {
   position: absolute;
   inset: 0;
   background: linear-gradient(180deg, rgb(12 43 48 / 12%) 20%, rgb(12 43 48 / 10%) 42%, rgb(12 43 48 / 82%) 100%);
-  content: '';
+  content: "";
   pointer-events: none;
 }
 
@@ -601,7 +774,7 @@ button.aurea-catalog-card--grid {
   width: 100%;
   height: 100%;
   object-fit: cover;
-  transition: transform 700ms cubic-bezier(.16, 1, .3, 1);
+  transition: transform 700ms cubic-bezier(0.16, 1, 0.3, 1);
 }
 
 .aurea-catalog-slide-link:hover > img {
@@ -626,7 +799,7 @@ button.aurea-catalog-card--grid {
 }
 
 .aurea-catalog-slide-copy strong {
-  font-family: 'Fraunces', Georgia, serif;
+  font-family: "Fraunces", Georgia, serif;
   font-size: clamp(22px, 2.3vw, 30px);
   font-weight: 400;
   line-height: 1.05;
@@ -695,6 +868,10 @@ button.aurea-catalog-card--grid {
   transform: scale(1.08);
 }
 
+/* =========================================================
+   3. Home video section
+   ========================================================= */
+
 .aurea-video-section {
   padding: 110px clamp(24px, 5vw, 72px);
   color: var(--color-white);
@@ -705,7 +882,7 @@ button.aurea-catalog-card--grid {
 
 .aurea-video-heading {
   display: grid;
-  grid-template-columns: minmax(0, 1.1fr) minmax(220px, .7fr);
+  grid-template-columns: minmax(0, 1.1fr) minmax(220px, 0.7fr);
   align-items: end;
   gap: 32px;
   max-width: 980px;
@@ -721,7 +898,7 @@ button.aurea-catalog-card--grid {
   margin: 0;
   font-size: clamp(38px, 5vw, 68px);
   font-weight: 400;
-  line-height: .98;
+  line-height: 0.98;
 }
 
 .aurea-video-heading p {
@@ -750,9 +927,9 @@ button.aurea-catalog-card--grid {
 }
 
 /* =========================================================
-   PDF HOME — Maison Havre
-   Same palette + fonts as the rest of the site.
+   4. PDF home — shared section styles
    ========================================================= */
+
 .aurea-pdf-home {
   --aurea-night: #0c2b30;
   --aurea-night-light: #12393f;
@@ -763,14 +940,16 @@ button.aurea-catalog-card--grid {
   --pdf-body: #44565a;
   --pdf-line: rgb(12 43 48 / 14%);
   --pdf-label: color-mix(in srgb, var(--aurea-gold-dark) 78%, var(--aurea-night));
-  --pdf-serif: 'Fraunces', Georgia, serif;
+  --pdf-serif: "Fraunces", Georgia, serif;
+
   color: var(--aurea-night);
   background: var(--aurea-paper);
 }
 
-/* ---------- Sections & backgrounds ---------- */
+/* Sections and backgrounds */
+
 .aurea-pdf-section {
-  padding-block: clamp(56px, 7vw, 96px);
+  padding-block: 24px;
 }
 
 .aurea-pdf-section.is-paper {
@@ -783,7 +962,7 @@ button.aurea-catalog-card--grid {
 
 .aurea-pdf-section.is-night {
   color: #fff;
-  background: var(--aurea-night); 
+  background: var(--aurea-night);
 }
 
 .aurea-pdf-section--expertise {
@@ -793,20 +972,30 @@ button.aurea-catalog-card--grid {
   background: var(--aurea-night);
 }
 
+.aurea-pdf-section--expertise::after {
+  position: absolute;
+  z-index: 0;
+  inset: 0;
+  background:
+    linear-gradient(90deg, rgb(0 0 0 / 48%), rgb(0 0 0 / 30%) 65%, rgb(0 0 0 / 16%)),
+    linear-gradient(0deg, rgb(0 0 0 / 24%), transparent 55%);
+  content: "";
+  pointer-events: none;
+}
+
+.aurea-pdf-section--expertise h2,
+.aurea-pdf-section--expertise h3,
+.aurea-pdf-section--expertise p,
+.aurea-pdf-section--expertise .aurea-pdf-features li {
+  color: #f7f5f0;
+  text-shadow: 0 2px 6px rgb(0 0 0 / 90%);
+}
+
 .aurea-pdf-expertise-background {
   position: absolute;
   z-index: -1;
   inset: 0;
   pointer-events: none;
-}
-
-.aurea-pdf-expertise-background::after {
-  position: absolute;
-  inset: 0;
-  background:
-    linear-gradient(90deg, rgb(12 43 48 / 82%), rgb(12 43 48 / 54%) 70%),
-    linear-gradient(0deg, rgb(12 43 48 / 58%), transparent 70%);
-  content: '';
 }
 
 .aurea-pdf-expertise-background img {
@@ -819,9 +1008,11 @@ button.aurea-catalog-card--grid {
 
 .aurea-pdf-section--expertise > .mx-auto {
   position: relative;
+  z-index: 1;
 }
 
-/* ---------- Typography ---------- */
+/* Typography */
+
 .aurea-pdf-home h2 {
   margin: 18px 0 0;
   font-family: var(--pdf-serif);
@@ -853,7 +1044,6 @@ button.aurea-catalog-card--grid {
   color: rgb(255 255 255 / 74%);
 }
 
-/* Small section markers (2.1, 2.2 …) */
 .aurea-pdf-eyebrow,
 .aurea-pdf-kicker {
   display: inline-flex;
@@ -870,7 +1060,7 @@ button.aurea-catalog-card--grid {
   width: 28px;
   height: 1px;
   background: currentColor;
-  content: '';
+  content: "";
 }
 
 .aurea-pdf-eyebrow-dark {
@@ -881,10 +1071,11 @@ button.aurea-catalog-card--grid {
   color: var(--aurea-gold);
 }
 
-/* ---------- Hero ---------- */
+/* Hero section */
+
 .aurea-pdf-hero {
   padding-block: clamp(68px, 9vh, 88px) 17px;
-  background: var(--aurea-paper) url('/images/hero-paper-texture.png') repeat center / 280px auto;
+  background: var(--aurea-paper) url("/images/hero-paper-texture.png") repeat center / 280px auto;
 }
 
 .aurea-pdf-hero-frame {
@@ -892,10 +1083,10 @@ button.aurea-catalog-card--grid {
   width: 100%;
   max-width: 1320px;
   margin-inline: auto;
-  padding: 0px;
+  padding: 0;
   overflow: hidden;
-  background: url('/images/hero-paper-texture.png') repeat center / 280px auto;
-  transition: width 380ms cubic-bezier(.16, 1, .3, 1);
+  background: url("/images/hero-paper-texture.png") repeat center / 280px auto;
+  transition: width 380ms cubic-bezier(0.16, 1, 0.3, 1);
 }
 
 .aurea-pdf-hero-frame > img {
@@ -972,7 +1163,8 @@ button.aurea-catalog-card--grid {
   white-space: nowrap;
 }
 
-/* ---------- Feature lists ---------- */
+/* Feature lists */
+
 .aurea-pdf-features {
   display: flex;
   flex-wrap: wrap;
@@ -986,8 +1178,8 @@ button.aurea-catalog-card--grid {
 .aurea-pdf-features--hero {
   flex-direction: column;
   align-items: flex-start;
-  gap: 9px;
   justify-content: flex-start;
+  gap: 9px;
 }
 
 .aurea-pdf-features li {
@@ -1002,9 +1194,9 @@ button.aurea-catalog-card--grid {
 
 .aurea-pdf-features li > span {
   display: grid;
+  flex: none;
   width: 22px;
   height: 22px;
-  flex: none;
   place-items: center;
   color: var(--aurea-night);
   background: var(--aurea-gold);
@@ -1026,8 +1218,8 @@ button.aurea-catalog-card--grid {
 }
 
 .aurea-pdf-features--hero li {
-  color: rgba(0, 0, 0, 0.92);
   gap: 8px;
+  color: rgb(0 0 0 / 92%);
   font-size: 14px;
 }
 
@@ -1036,7 +1228,8 @@ button.aurea-catalog-card--grid {
   height: 18px;
 }
 
-/* ---------- Read more ---------- */
+/* Read-more controls */
+
 .aurea-pdf-readmore p {
   white-space: pre-line;
 }
@@ -1045,7 +1238,7 @@ button.aurea-catalog-card--grid {
   margin-top: 14px;
   padding: 4px 0;
   color: var(--pdf-label);
-  font-family: 'Figtree', sans-serif;
+  font-family: "Figtree", sans-serif;
   font-size: 15px;
   font-weight: 600;
   text-decoration: underline;
@@ -1065,19 +1258,20 @@ button.aurea-catalog-card--grid {
   outline-offset: 4px;
 }
 
-/* ---------- Section heading (title left / intro right) ---------- */
+/* Section headings */
+
 .aurea-pdf-heading {
   display: grid;
   grid-template-columns: minmax(0, 1.15fr) minmax(0, 0.85fr);
-  gap: clamp(24px, 5vw, 80px);
   align-items: end;
+  gap: clamp(24px, 5vw, 80px);
 }
 
 .aurea-pdf-heading p {
   margin: 0;
 }
 
-/* ---------- Video ---------- */
+/* Video and media */
 
 .aurea-pdf-video video {
   display: block;
@@ -1091,7 +1285,7 @@ button.aurea-catalog-card--grid {
 .aurea-pdf-media {
   width: 100%;
   margin-inline: auto;
-  transition: width 380ms cubic-bezier(.16, 1, .3, 1);
+  transition: width 380ms cubic-bezier(0.16, 1, 0.3, 1);
 }
 
 .aurea-pdf-media video {
@@ -1119,38 +1313,44 @@ button.aurea-catalog-card--grid {
   pointer-events: none;
 }
 
-/* ---------- Solution: video + copy ---------- */
+/* Solution layouts */
+
 .aurea-pdf-solution {
   display: grid;
   grid-template-columns: minmax(0, 1.25fr) minmax(0, 1fr);
-  gap: clamp(32px, 5vw, 80px);
   align-items: center;
+  gap: clamp(32px, 5vw, 80px);
   margin-top: clamp(40px, 5vw, 72px);
 }
 
 .aurea-pdf-solution--end {
   grid-template-columns: minmax(0, 1fr);
-  gap: clamp(24px, 3vw, 40px);
   align-items: start;
+  gap: 12px;
+  margin-top: 0;
+}
+
+.aurea-pdf-solution--end > h2 + div > h3 {
   margin-top: 0;
 }
 
 .aurea-pdf-solution-end-video {
   width: min(100%, 900px);
   justify-self: center;
-  transition: width 380ms cubic-bezier(.16, 1, .3, 1);
+  transition: width 380ms cubic-bezier(0.16, 1, 0.3, 1);
 }
 
 .aurea-pdf-solution .aurea-pdf-kicker {
   color: var(--pdf-label);
 }
 
-/* ---------- Split: photo + copy ---------- */
+/* Photo-and-copy split layouts */
+
 .aurea-pdf-split {
   display: grid;
   grid-template-columns: minmax(0, 0.9fr) minmax(0, 1.1fr);
-  gap: clamp(32px, 6vw, 96px);
   align-items: center;
+  gap: clamp(32px, 6vw, 96px);
 }
 
 .aurea-pdf-split-reverse {
@@ -1163,7 +1363,7 @@ button.aurea-catalog-card--grid {
   margin-inline: auto;
   overflow: hidden;
   background: var(--aurea-night);
-  transition: width 380ms cubic-bezier(.16, 1, .3, 1);
+  transition: width 380ms cubic-bezier(0.16, 1, 0.3, 1);
 }
 
 .aurea-pdf-feature-title {
@@ -1268,6 +1468,19 @@ button.aurea-catalog-card--grid {
   padding-top: 16px;
 }
 
+.aurea-pdf-home #notre-produit .aurea-pdf-feature-copy .aurea-pdf-features,
+.aurea-pdf-home #notre-expertise .aurea-pdf-feature-copy .aurea-pdf-features {
+  flex-direction: row;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 8px clamp(14px, 2vw, 28px);
+}
+
+.aurea-pdf-home #notre-produit .aurea-pdf-feature-copy .aurea-pdf-features li,
+.aurea-pdf-home #notre-expertise .aurea-pdf-feature-copy .aurea-pdf-features li {
+  white-space: nowrap;
+}
+
 .aurea-pdf-feature-copy .aurea-pdf-features li {
   color: var(--aurea-night);
 }
@@ -1276,9 +1489,16 @@ button.aurea-catalog-card--grid {
   color: rgb(255 255 255 / 90%);
 }
 
+.aurea-pdf-home #notre-expertise h2,
+.aurea-pdf-home #notre-expertise h3,
+.aurea-pdf-home #notre-expertise p,
+.aurea-pdf-home #notre-expertise .aurea-pdf-features li {
+  color: #fbd581;
+  text-shadow: 0 2px 6px rgb(0 0 0 / 90%);
+}
 
+/* Catalog sliders */
 
-/* ---------- Catalog sliders ---------- */
 .aurea-pdf-catalog-layout {
   margin-top: clamp(36px, 4vw, 56px);
 }
@@ -1303,7 +1523,8 @@ button.aurea-catalog-card--grid {
 
 .aurea-pdf-catalog-layout .aurea-catalog-heading h3 {
   margin-top: 6px;
-  font-size: clamp(22px, 2.4vw, 30px);
+  font-size: clamp(28px, 3vw, 42px);
+  line-height: 1.08;
 }
 
 .aurea-pdf-catalog-layout .aurea-catalog-controls {
@@ -1374,16 +1595,22 @@ button.aurea-catalog-card--grid {
   height: 9px;
 }
 
-/* ---------- Equipment list ---------- */
+/* Process and equipment lists */
+
 .aurea-pdf-process-grid {
   display: grid;
   grid-template-columns: minmax(0, 0.8fr) minmax(0, 1.2fr);
-  gap: clamp(32px, 6vw, 96px);
   align-items: start;
+  gap: clamp(32px, 6vw, 96px);
 }
 
 .aurea-pdf-process-grid--equipment {
   grid-template-columns: minmax(0, 1fr);
+}
+
+.aurea-pdf-process-grid--equipment > div > h3 {
+  margin: 0 0 12px;
+  margin-top: -5%;
 }
 
 .aurea-pdf-process-intro {
@@ -1400,14 +1627,14 @@ button.aurea-catalog-card--grid {
 }
 
 .aurea-pdf-process-grid--equipment .aurea-pdf-process-list {
-  margin-top: 28px;
+  margin-top: -7%;
 }
 
 .aurea-pdf-process-row {
   display: grid;
   grid-template-columns: 56px minmax(0, 1fr);
-  gap: 16px;
   align-items: baseline;
+  gap: 16px;
   padding: 26px 0;
   border-bottom: 1px solid var(--pdf-line);
 }
@@ -1424,7 +1651,8 @@ button.aurea-catalog-card--grid {
   line-height: 1.25;
 }
 
-/* ---------- Pool (closing image) ---------- */
+/* Pool closing section */
+
 .aurea-pdf-pool {
   position: relative;
   display: flex;
@@ -1469,7 +1697,394 @@ button.aurea-catalog-card--grid {
   line-height: 1.7;
 }
 
-/* ---------- Tablet / mobile ---------- */
+/* =========================================================
+   5. Revised Maison Havre accueil hero
+   Scoped to #accueil to avoid affecting other sections.
+   ========================================================= */
+
+.aurea-pdf-home #accueil.aurea-pdf-hero--revised {
+  padding-block: clamp(28px, 4vh, 48px) clamp(28px, 4vw, 52px);
+  background: var(--hero-image) center / cover no-repeat;
+}
+
+.aurea-pdf-home #accueil .aurea-pdf-hero-stage {
+  position: relative;
+  width: 100%;
+  max-width: 1320px;
+  margin-inline: auto;
+}
+
+.aurea-home--catalog-hidden .aurea-pdf-hero-stage {
+  width: min(100%, calc(100vw - var(--aurea-catalog-width) - 64px));
+}
+
+.aurea-pdf-home #accueil .aurea-pdf-hero-stage .aurea-pdf-hero-frame {
+  position: relative;
+  isolation: isolate;
+  width: 100%;
+  max-width: none;
+  margin: 0;
+  padding: 0;
+  overflow: hidden;
+  background: var(--aurea-night, #0c2b30);
+  border-radius: clamp(14px, 1.8vw, 24px);
+  box-shadow:
+    0 34px 70px -30px rgb(12 43 48 / 50%),
+    0 10px 24px -12px rgb(12 43 48 / 28%);
+}
+
+.aurea-pdf-home #accueil .aurea-pdf-hero-frame > img {
+  display: block;
+  width: 100%;
+  height: auto !important;
+  max-width: 100%;
+  object-fit: contain !important;
+  object-position: center;
+}
+
+.aurea-pdf-home #accueil .aurea-pdf-hero-frame::after {
+  position: absolute;
+  z-index: 2;
+  inset: 0;
+  border-radius: inherit;
+  box-shadow: inset 0 0 0 1px rgb(255 255 255 / 14%);
+  content: "";
+  pointer-events: none;
+}
+
+.aurea-pdf-home #accueil .aurea-pdf-hero-content {
+  position: absolute;
+  z-index: 1;
+  inset: 0;
+  display: flex;
+  flex-direction: column;
+  align-items: stretch;
+  justify-content: space-between;
+  gap: 20px;
+  padding: clamp(22px, 4vw, 56px);
+  padding-bottom: clamp(52px, 6.4vw, 92px);
+  color: #fff;
+  text-align: left;
+  background: transparent;
+}
+
+/* Hero heading */
+
+.aurea-pdf-home #accueil .aurea-pdf-hero-heading {
+  align-self: flex-end;
+  max-width: min(760px, 86%);
+  text-align: right;
+}
+
+.aurea-pdf-home #accueil .aurea-pdf-hero-heading::before {
+  display: block;
+  width: 56px;
+  height: 2px;
+  margin: 0 0 clamp(12px, 1.4vw, 20px) auto;
+  background: linear-gradient(90deg, transparent, #e3c995);
+  content: "";
+}
+
+.aurea-pdf-home #accueil .aurea-pdf-hero h1 {
+  max-width: none;
+  margin: 0 0 0 auto;
+  color: #fff;
+  font-family: var(--pdf-serif, "Fraunces", Georgia, serif);
+  font-size: clamp(30px, 4.7vw, 70px);
+  font-weight: 400;
+  line-height: 1.02;
+  letter-spacing: -0.035em;
+  text-shadow: 0 3px 28px rgb(0 0 0 / 38%);
+}
+
+.aurea-pdf-home #accueil .aurea-pdf-hero h1 span:last-child {
+  white-space: normal;
+}
+
+/* Hero lead */
+
+.aurea-pdf-home #accueil .aurea-pdf-hero p.aurea-pdf-hero-lead {
+  max-width: 52ch;
+  align-self: flex-start;
+  margin: 0;
+  padding-left: clamp(12px, 1.4vw, 18px);
+  border-left: 2px solid #c9a45c;
+  color: #fff;
+  font-size: clamp(30px, 3.2vw, 42px);
+  font-weight: 500;
+  line-height: 1.45;
+  text-shadow: 0 2px 16px rgb(0 0 0 / 45%);
+}
+
+.aurea-pdf-home #accueil .aurea-pdf-hero-lead .aurea-pdf-hero-description-line {
+  display: block;
+  color: rgb(255 255 255 / 86%);
+  font-size: inherit;
+  font-weight: 400;
+  white-space: normal;
+}
+
+/* Moving feature band */
+
+.aurea-pdf-home #accueil .aurea-pdf-hero-bar {
+  position: relative;
+  z-index: 3;
+  width: 100%;
+  margin: 0;
+  padding-block: 14px;
+  overflow: hidden;
+  background: rgb(12 43 48 / 48%);
+  border-block: 1px solid rgb(255 255 255 / 24%);
+  -webkit-backdrop-filter: blur(10px);
+  backdrop-filter: blur(10px);
+}
+
+.aurea-pdf-home #accueil .aurea-pdf-hero-marquee {
+  overflow: hidden;
+}
+
+.aurea-pdf-home #accueil .aurea-pdf-hero-marquee-track {
+  display: flex;
+  width: max-content;
+  align-items: center;
+  animation: aurea-hero-marquee 34s linear infinite;
+}
+
+.aurea-pdf-home #accueil .aurea-pdf-hero-bar:hover .aurea-pdf-hero-marquee-track {
+  animation-play-state: paused;
+}
+
+.aurea-pdf-home #accueil .aurea-pdf-hero-bar .aurea-pdf-features {
+  display: flex;
+  flex: none;
+  flex-direction: row;
+  flex-wrap: nowrap;
+  align-items: center;
+  gap: clamp(22px, 4vw, 56px);
+  margin: 0;
+  padding: 0 clamp(16px, 2.4vw, 34px);
+  border: 0;
+}
+
+.aurea-pdf-home #accueil .aurea-pdf-hero-bar .aurea-pdf-features li {
+  display: flex;
+  flex: none;
+  align-items: center;
+  gap: 9px;
+  color: #fff;
+  font-size: clamp(12px, 1vw, 14px);
+  font-weight: 500;
+  line-height: 1.3;
+  white-space: nowrap;
+}
+
+.aurea-pdf-home #accueil .aurea-pdf-hero-bar .aurea-pdf-features li > span {
+  flex: none;
+  width: 19px;
+  height: 19px;
+  color: #0c2b30;
+  background: #c9a45c;
+  border-radius: 50%;
+}
+
+.aurea-pdf-home #notre-offre .aurea-pdf-readmore p {
+  max-width: none;
+  margin-top: 4px;
+  line-height: 1.4;
+  white-space: normal;
+}
+
+.aurea-pdf-home #notre-offre .aurea-pdf-readmore button {
+  margin-top: 4px;
+}
+
+.aurea-pdf-home #notre-offre > .mx-auto > .aurea-pdf-features {
+  flex-direction: row;
+  flex-wrap: nowrap;
+  align-items: center;
+  gap: clamp(14px, 2vw, 28px);
+  margin-top: 8px;
+  padding-top: 8px;
+}
+
+.aurea-pdf-home #notre-offre > .mx-auto > .aurea-pdf-features li {
+  white-space: nowrap;
+}
+
+.aurea-pdf-home #notre-produit > .mx-auto {
+  max-width: none;
+  padding-inline: 0;
+}
+
+.aurea-pdf-home #notre-produit .aurea-pdf-feature-copy {
+  padding-inline: clamp(24px, 4vw, 64px);
+}
+
+.aurea-pdf-home #notre-produit {
+  padding-top: 0;
+}
+
+.aurea-pdf-home #notre-produit .aurea-pdf-product-hero {
+  position: relative;
+  width: 100%;
+  height: clamp(420px, 72svh, 760px);
+  overflow: hidden;
+}
+
+.aurea-pdf-home #notre-produit .aurea-pdf-product-hero::after {
+  position: absolute;
+  z-index: 1;
+  inset: 0;
+  background:
+    linear-gradient(90deg, rgb(0 0 0 / 48%), rgb(0 0 0 / 30%) 65%, rgb(0 0 0 / 16%)),
+    linear-gradient(0deg, rgb(0 0 0 / 24%), transparent 55%);
+  content: "";
+  pointer-events: none;
+}
+
+.aurea-pdf-home #notre-produit .aurea-pdf-product-hero img {
+  display: block;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: center;
+}
+
+.aurea-pdf-home #notre-produit .aurea-pdf-product-overlay {
+  position: absolute;
+  z-index: 2;
+  inset: 0;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  justify-content: center;
+  padding: clamp(28px, 6vw, 88px);
+}
+
+.aurea-pdf-home #notre-produit .aurea-pdf-product-overlay h2,
+.aurea-pdf-home #notre-produit .aurea-pdf-product-overlay h3,
+.aurea-pdf-home #notre-produit .aurea-pdf-product-highlights li {
+  color: #f7f5f0;
+  text-shadow: 0 2px 6px rgb(0 0 0 / 90%);
+}
+
+.aurea-pdf-home #notre-produit .aurea-pdf-product-overlay h2 {
+  margin: 0;
+}
+
+.aurea-pdf-home #notre-produit .aurea-pdf-product-overlay h3 {
+  max-width: 20ch;
+  margin-top: clamp(20px, 3vw, 36px);
+  font-size: clamp(30px, 4vw, 52px);
+}
+
+.aurea-pdf-home #notre-produit .aurea-pdf-product-highlights {
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 9px;
+  margin-top: clamp(20px, 3vw, 32px);
+  padding-top: 20px;
+  border-top-color: rgb(255 255 255 / 28%);
+}
+
+.aurea-pdf-home #notre-produit .aurea-pdf-feature-copy {
+  max-width: none;
+  margin-top: 20px;
+}
+
+.aurea-pdf-home #notre-produit .aurea-pdf-readmore p {
+  max-width: none;
+}
+
+.aurea-pdf-home #notre-produit .aurea-pdf-readmore button {
+  margin-top: 4px;
+}
+
+@keyframes aurea-hero-marquee {
+  to {
+    transform: translateX(-50%);
+  }
+}
+
+/* =========================================================
+   6. Responsive layouts
+   ========================================================= */
+
+@media (min-width: 901px) {
+  .aurea-pdf-home #accueil.aurea-pdf-hero--revised {
+    display: flex;
+    min-height: 100vh;
+    min-height: 100svh;
+    align-items: center;
+    box-sizing: border-box;
+  }
+
+  .aurea-pdf-home #accueil .aurea-pdf-hero-frame > img {
+    height: 100% !important;
+    object-fit: cover !important;
+  }
+
+  .aurea-pdf-home #accueil.aurea-pdf-hero--revised {
+    height: 100vh;
+    height: 100svh;
+    min-height: 0;
+    align-items: stretch;
+    padding: clamp(88px, 12vh, 104px) 0 0;
+  }
+
+  .aurea-pdf-home #accueil > .mx-auto {
+    display: flex;
+    flex: 1;
+    flex-direction: column;
+    max-width: none;
+    min-height: 0;
+    padding-inline: 0;
+  }
+
+  .aurea-pdf-home #accueil .aurea-pdf-hero-stage {
+    display: flex;
+    flex: 1;
+    flex-direction: column;
+    min-height: 0;
+  }
+
+  .aurea-pdf-home #accueil .aurea-pdf-hero-stage .aurea-pdf-hero-frame {
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    flex: none;
+    border-radius: clamp(14px, 1.8vw, 24px);
+  }
+
+  .aurea-pdf-home #accueil .aurea-pdf-hero-bar {
+    position: absolute;
+    right: 0;
+    bottom: 0;
+    left: 0;
+  }
+
+}
+
+@media (min-width: 1200px) {
+  .aurea-pdf-home #accueil.aurea-pdf-hero--revised {
+    align-items: stretch;
+    padding-block: clamp(88px, 12vh, 104px) 0;
+  }
+
+  .aurea-pdf-home #accueil .aurea-pdf-hero-stage .aurea-pdf-hero-frame {
+    flex: 1;
+    min-height: 0;
+  }
+
+}
+
+@media (max-width: 1100px) {
+  .aurea-home {
+    --aurea-catalog-width: max(290px, 35vw);
+  }
+}
+
 @media (max-width: 900px) {
   .aurea-pdf-heading,
   .aurea-pdf-solution,
@@ -1496,8 +2111,6 @@ button.aurea-catalog-card--grid {
   .aurea-pdf-split-reverse > :first-child {
     order: 2;
   }
-
-
 
   .aurea-pdf-process-intro {
     position: static;
@@ -1533,9 +2146,101 @@ button.aurea-catalog-card--grid {
   .aurea-pdf-features--hero {
     gap: 8px;
   }
+
+  .aurea-home {
+    display: block;
+  }
+
+  .aurea-home-preview__content {
+    width: 100%;
+  }
+
+  .aurea-configurator {
+    position: relative;
+    height: auto;
+    min-height: 0;
+    overflow: visible;
+  }
+
+  .aurea-configurator__panel {
+    width: 100%;
+    height: auto;
+    min-height: 0;
+    overflow: visible;
+  }
+
+  .aurea-configurator__panel[aria-hidden="true"] {
+    opacity: 1;
+  }
+
+  .aurea-catalog-rail {
+    min-height: auto;
+    overflow: visible;
+  }
+
+  .aurea-catalog-toggle {
+    display: none;
+  }
+
+  .aurea-configurator__header {
+    padding-top: 56px;
+  }
+
+  .aurea-video-heading {
+    grid-template-columns: 1fr;
+  }
+
+  .aurea-home--catalog-hidden .aurea-pdf-hero-frame,
+  .aurea-home--catalog-hidden .aurea-pdf-feature-hero,
+  .aurea-home--catalog-hidden .aurea-pdf-media,
+  .aurea-home--catalog-hidden .aurea-pdf-solution-end-video {
+    width: 100%;
+  }
+
+  .aurea-pdf-home #accueil .aurea-pdf-hero-heading {
+    max-width: 100%;
+  }
 }
 
-@media (max-width: 560px) {
+@media (max-width: 640px) {
+  .aurea-pdf-home #notre-offre > .mx-auto > .aurea-pdf-features {
+    flex-wrap: wrap;
+  }
+
+  .aurea-pdf-home #accueil.aurea-pdf-hero--revised {
+    padding-block: 20px 24px;
+  }
+
+  .aurea-pdf-home #accueil .aurea-pdf-hero-content {
+    position: static;
+    gap: 16px;
+    padding: 22px 20px 56px;
+    background: linear-gradient(180deg, var(--aurea-night-light, #12393f), var(--aurea-night, #0c2b30));
+  }
+
+  .aurea-pdf-home #accueil .aurea-pdf-hero-heading {
+    align-self: flex-start;
+    text-align: left;
+  }
+
+  .aurea-pdf-home #accueil .aurea-pdf-hero-heading::before {
+    margin: 0 0 12px;
+    background: linear-gradient(90deg, #e3c995, transparent);
+  }
+
+  .aurea-pdf-home #accueil .aurea-pdf-hero h1 {
+    margin: 0;
+    font-size: clamp(28px, 8.4vw, 40px);
+  }
+
+  .aurea-pdf-home #accueil .aurea-pdf-hero p.aurea-pdf-hero-lead {
+    font-size: 26px;
+  }
+
+  .aurea-pdf-home #accueil .aurea-pdf-hero-bar {
+    position: relative;
+  }
+
   .aurea-pdf-feature-hero--expertise {
     aspect-ratio: 4 / 3;
   }
@@ -1608,8 +2313,31 @@ button.aurea-catalog-card--grid {
   }
 }
 
+/* =========================================================
+   7. Global texture and motion accessibility
+   ========================================================= */
+
+body::before {
+  position: fixed;
+  z-index: 9999;
+  inset: 0;
+  background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)' opacity='.35'/%3E%3C/svg%3E");
+  content: "";
+  opacity: 0.025;
+  pointer-events: none;
+}
+
 @media (prefers-reduced-motion: reduce) {
+  .aurea-values-track {
+    animation: none;
+  }
+
+  .aurea-pdf-home #accueil .aurea-pdf-hero-marquee-track {
+    animation: none;
+  }
+
   .aurea-home,
+  .aurea-home-preview,
   .aurea-pdf-hero-frame,
   .aurea-pdf-feature-hero,
   .aurea-pdf-media,
@@ -1618,77 +2346,13 @@ button.aurea-catalog-card--grid {
     transition: none;
   }
 
+  .aurea-home--catalog-closing .aurea-configurator__panel,
+  .aurea-home--catalog-closing .aurea-configurator__panel::after,
+  .aurea-home--returning-home .aurea-story {
+    animation-duration: 1ms;
+  }
+
   .aurea-pdf-catalog-layout .aurea-catalog-image img {
     animation: none;
   }
-}
-
-@media (max-width: 900px) {
-  .aurea-home--catalog-hidden .aurea-pdf-hero-frame,
-  .aurea-home--catalog-hidden .aurea-pdf-feature-hero,
-  .aurea-home--catalog-hidden .aurea-pdf-media,
-  .aurea-home--catalog-hidden .aurea-pdf-solution-end-video {
-    width: 100%;
-  }
-}
-
-@media (max-width: 1100px) {
-  .aurea-home {
-    --aurea-catalog-width: max(290px, 38.462vw);
-  }
-}
-
-@media (max-width: 900px) {
-  .aurea-home {
-    display: block;
-  }
-
-  .aurea-configurator {
-    position: relative;
-    height: auto;
-    min-height: 0;
-    overflow: visible;
-  }
-
-  .aurea-configurator__panel {
-    width: 100%;
-    height: auto;
-    min-height: 0;
-    overflow: visible;
-  }
-
-  .aurea-configurator__panel[aria-hidden='true'] {
-    opacity: 1;
-  }
-
-  .aurea-catalog-rail {
-    min-height: auto;
-    overflow: visible;
-  }
-
-  .aurea-catalog-toggle {
-    display: none;
-  }
-
-  .aurea-configurator__header {
-    padding-top: 56px;
-  }
-
-  .aurea-catalog-rail {
-    overflow: visible;
-  }
-
-  .aurea-video-heading {
-    grid-template-columns: 1fr;
-  }
-}
-
-body::before {
-  content: '';
-  position: fixed;
-  inset: 0;
-  z-index: 9999;
-  pointer-events: none;
-  opacity: 0.025;
-  background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)' opacity='.35'/%3E%3C/svg%3E");
 }
