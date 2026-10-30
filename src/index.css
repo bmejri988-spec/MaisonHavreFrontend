@@ -220,7 +220,10 @@ img {
 .aurea-home-preview {
   position: fixed;
   z-index: 0;
-  inset: 0;
+  top: 0;
+  bottom: 0;
+  left: var(--aurea-preview-left, 0px);
+  width: var(--aurea-preview-width, calc(100% - var(--aurea-catalog-width)));
   overflow: hidden;
   opacity: 0;
   pointer-events: none;
@@ -229,7 +232,7 @@ img {
 
 .aurea-home-preview__content {
   position: relative;
-  width: calc(100% - var(--aurea-catalog-width));
+  width: 100%;
 }
 
 .aurea-home-preview__content > .aurea-story {
@@ -243,89 +246,57 @@ img {
   animation: aurea-tunnel-suction 900ms cubic-bezier(0.65, 0, 0.9, 0.35) forwards;
 }
 
+.aurea-home--restoring-home > .aurea-story {
+  visibility: hidden;
+}
+
 @keyframes aurea-tunnel-suction {
   0% {
-    filter: brightness(1) saturate(1);
     opacity: 1;
     transform: perspective(1200px) scale(1) rotateX(0);
   }
 
   58% {
-    filter: brightness(0.65) saturate(0.8);
     opacity: 0.95;
     transform: perspective(1200px) translateZ(-260px) scale(0.48, 0.42) rotateX(8deg);
   }
 
   86% {
-    filter: brightness(0.25) saturate(0.5);
     opacity: 0.72;
     transform: perspective(1200px) translateZ(-620px) scale(0.12) rotateX(15deg);
   }
 
   100% {
-    filter: brightness(0);
     opacity: 0;
     transform: perspective(1200px) translateZ(-900px) scale(0.001);
   }
 }
 
-@supports (view-transition-name: none) {
-  .aurea-home > .aurea-story {
-    view-transition-name: aurea-story;
-  }
-
-  ::view-transition-old(root),
-  ::view-transition-new(root) {
-    animation: none;
-  }
-
-  ::view-transition-old(aurea-story) {
-    z-index: 1;
-    transform-origin: var(--tunnel-origin-x, 100%) var(--tunnel-origin-y, 50vh);
-    animation: aurea-tunnel-suction 900ms cubic-bezier(0.65, 0, 0.9, 0.35) forwards;
-  }
-
-  ::view-transition-new(aurea-story) {
-    z-index: 0;
-    animation: none;
-  }
-}
-
 @keyframes aurea-home-reveal {
   0% {
-    filter: brightness(0.55) blur(8px);
     opacity: 0;
     transform: scale(0.96);
   }
 
   100% {
-    filter: brightness(1) blur(0);
     opacity: 1;
     transform: scale(1);
   }
 }
 
-
-
 @keyframes aurea-catalog-suction {
   0% {
     opacity: 1;
-    border-radius: 0;
-    filter: brightness(1);
     transform: scale(1) rotate(0);
   }
 
   58% {
     opacity: 1;
-    border-radius: 50%;
-    filter: brightness(0.25);
     transform: scale(0.42) rotate(210deg);
   }
 
   100% {
     opacity: 0;
-    border-radius: 50%;
-    filter: brightness(0);
     transform: scale(0.015) rotate(540deg);
   }
 }
@@ -1149,11 +1120,11 @@ button.aurea-catalog-card--grid {
 }
 
 .aurea-pdf-hero p {
-  max-width: 380px;
+  max-width: 480px;
   align-self: flex-end;
   margin: 20px auto 0 -40px;
   color: rgb(255 255 255 / 90%);
-  font-size: clamp(12px, 1vw, 14px);
+  font-size: clamp(16px, 1.15vw, 18px);
   line-height: 1.5;
   text-shadow: 0 2px 14px rgb(0 0 0 / 32%);
 }
@@ -2330,6 +2301,12 @@ body::before {
 @media (prefers-reduced-motion: reduce) {
   .aurea-values-track {
     animation: none;
+  }
+
+  .aurea-home-preview {
+    animation: none;
+    opacity: 1;
+    transform: none;
   }
 
   .aurea-pdf-home #accueil .aurea-pdf-hero-marquee-track {

@@ -50,11 +50,7 @@ function Navbar({ contained = false, imageBackdrop = false }) {
 
   return (
     <header
-      className={`${positionClass} left-0 top-0 z-50 ${
-        contained
-          ? 'w-[calc(100vw-var(--aurea-catalog-width))] max-[900px]:w-full'
-          : 'w-full'
-      } transition-all duration-500 ${
+      className={`${positionClass} left-0 top-0 z-50 w-full transition-all duration-500 ${
         isHidden ? '-translate-y-full' : 'translate-y-0'
       } ${
         scrolled
