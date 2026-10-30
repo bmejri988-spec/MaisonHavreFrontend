@@ -22,7 +22,7 @@ import Options from './pages/Options/Options'
 import BuildYourOwn from './pages/BuildYourOwn/BuildYourOwn'
 import CatalogRail from './components/home/CatalogRail'
 
-const catalogTogglePaths = new Set(['/', '/terrains', '/chalet-models', '/options'])
+const catalogTogglePaths = new Set(['/terrains', '/options', '/chalet-models'])
 
 function nextFrame() {
   return new Promise((resolve) => window.requestAnimationFrame(resolve))
