@@ -22,9 +22,6 @@ import { useState } from 'react'
 import Container from '../../components/common/Container'
 import Reveal from '../../components/common/Reveal'
 
-import videoSource from '../../../video1.mp4'
-import videoSource2 from '../../../video2.mp4'
-
 const heroImage =
   'https://jfoprtlfgdwaslsqizut.supabase.co/storage/v1/object/public/images/acceuil2.png'
 
@@ -214,7 +211,7 @@ function PdfHome() {
 
           <div>
             <Reveal className="aurea-pdf-media">
-              <VideoCard src={videoSource} />
+              <VideoCard src="https://jfoprtlfgdwaslsqizut.supabase.co/storage/v1/object/public/Videos/video1.mp4"/>
             </Reveal>
 
             <Reveal delay={0.1}>
@@ -305,7 +302,7 @@ function PdfHome() {
               className="aurea-pdf-solution-end-video"
             >
               <VideoCard
-                src={videoSource2}
+                src="https://jfoprtlfgdwaslsqizut.supabase.co/storage/v1/object/public/Videos/video2.mp4"
                 label="Découvrez notre solution Maison Havre"
               />
             </Reveal>
