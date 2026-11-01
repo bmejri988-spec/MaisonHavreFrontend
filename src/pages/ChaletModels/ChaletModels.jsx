@@ -8,11 +8,11 @@ import { useCatalog } from '../../context/useCatalog'
 function ChaletModels() {
   const { models } = useCatalog()
   return (
-    <main className="bg-[#F7F5F0]">
+    <main className="bg-[#E6DECC]">
 
-      <Navbar contained />
+      <Navbar contained imageBackdrop />
       {/* COLLECTION */}
-      <section className="bg-[#EFEBE2] py-24 md:py-32">
+      <section className="bg-[#E6DECC] py-24 md:py-32">
 
         <Container>
 

@@ -10,9 +10,9 @@ function Terrains() {
   const { terrains } = useCatalog()
 
   return (
-    <main className="bg-[#F7F5F0]">
+    <main className="bg-[#E6DECC]">
 
-      <Navbar contained />
+      <Navbar contained imageBackdrop />
 
       {/* Main content */}
       <section className="py-24 md:py-32">

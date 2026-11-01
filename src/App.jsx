@@ -23,6 +23,11 @@ import BuildYourOwn from './pages/BuildYourOwn/BuildYourOwn'
 import CatalogRail from './components/home/CatalogRail'
 
 const catalogTogglePaths = new Set(['/terrains', '/options', '/chalet-models'])
+const catalogWindowPaths = new Set([
+  '/',
+  '/about',
+  ...catalogTogglePaths,
+])
 
 function nextFrame() {
   return new Promise((resolve) => window.requestAnimationFrame(resolve))
@@ -358,6 +363,7 @@ function AppLayout() {
 
   const catalogClassName = [
     'aurea-home',
+    catalogWindowPaths.has(currentPath) && 'aurea-home--catalog-window',
     !isCatalogOpen && 'aurea-home--catalog-hidden',
     isCatalogClosing && 'aurea-home--catalog-closing',
     isReturningHome && 'aurea-home--returning-home',

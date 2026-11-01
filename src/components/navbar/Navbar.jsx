@@ -1,13 +1,14 @@
+import { Fragment } from 'react'
 import { useEffect, useRef, useState } from 'react'
 import { Menu, X, ArrowUpRight } from 'lucide-react'
 import { Link, NavLink } from 'react-router-dom'
 
 const navLinks = [
-  { label: 'Accueil', path: '/' },
-  { label: 'Terrains', path: '/terrains' },
-  { label: 'Modèles', path: '/chalet-models' },
-  { label: 'Options', path: '/options' },
-  { label: 'À propos', path: '/about' },
+  { label: 'ACCEUIL', path: '/' },
+  { label: 'TERRAINS', path: '/terrains' },
+  { label: 'MODELES', path: '/chalet-models' },
+  { label: 'OPTIONS', path: '/options' },
+  { label: 'À PROPOS', path: '/about' },
 ]
 
 function Navbar({ contained = false, imageBackdrop = false }) {
@@ -53,88 +54,99 @@ function Navbar({ contained = false, imageBackdrop = false }) {
       className={`${positionClass} left-0 top-0 z-50 w-full transition-all duration-500 ${
         isHidden ? '-translate-y-full' : 'translate-y-0'
       } ${
-        scrolled
-          ? 'bg-[#1D2923]/95 shadow-lg backdrop-blur-md'
-          : imageBackdrop
-            ? 'bg-[#1D2923]/35 backdrop-blur-md'
-            : 'bg-transparent'
+        scrolled && !imageBackdrop ? 'bg-[#1D2923]/20' : 'bg-transparent'
       }`}
     >
       <div
-        className={`mx-auto max-w-375 px-5 transition-all duration-500 md:px-8 lg:px-12 ${
+        className={`relative mx-auto max-w-375 px-5 transition-all duration-500 md:px-8 lg:px-12 ${
           scrolled ? 'py-4' : 'py-6'
         }`}
       >
         <nav className="flex items-center justify-between gap-6">
 
           {/* Logo */}
-          <div className="flex items-center gap-4">
+          <div className="flex items-center gap-0">
               <Link
                 to="/"
                 aria-label="Accueil Maison Havre"
-                className="inline-flex h-9 w-9 shrink-0 items-center justify-center"
+                className="inline-flex h-12 w-12 shrink-0 items-center justify-center"
               >
                 <img
-                  src="/favicon-32x32.png"
+                  src="/favicon-48x48.png"
                   alt=""
                   aria-hidden="true"
-                  className={`h-8 w-8 ${
+                  className={`h-11 w-11 ${
                     contained && !imageBackdrop && !scrolled
                       ? ''
                       : 'brightness-0 invert'
                   }`}
                 />
               </Link>
-            <Link
-              to="/"
-              className={`relative z-50 shrink-0 whitespace-nowrap font-serif text-xl tracking-[0.129m] md:text-[1rem] ${
-                contained && !imageBackdrop && !scrolled
-                  ? 'text-[#0C2B30]'
-                  : 'text-white'
-              }`}
-            >
-            MAISON HAVRE
-            </Link>
-            <span
-              className={`hidden h-5 w-px sm:block ${
-                contained && !imageBackdrop && !scrolled
-                  ? 'bg-[#0C2B30]/25'
-                  : 'bg-white/25'
-              }`}
-            />
-            <span
-              className={`hidden shrink-0 whitespace-nowrap text-[9px] font-semibold uppercase tracking-[0.19em] sm:block ${
-                contained && !imageBackdrop && !scrolled
-                  ? 'text-[#0C2B30]/60'
-                  : 'text-white/55'
-              }`}
-            >
-              Chalets d’exception
-            </span>
+            <div className="flex flex-col items-start">
+              <Link
+                to="/"
+                className={`relative z-50 shrink-0 whitespace-nowrap font-serif text-xl tracking-[0.129m] md:text-[1rem] ${
+                  contained && !imageBackdrop && !scrolled
+                    ? 'text-[#0C2B30]'
+                    : 'text-[#FFF9EC] drop-shadow-[0_1px_3px_rgba(12,43,48,0.8)]'
+                }`}
+              >
+                MAISON HAVRE
+              </Link>
+              <p
+                className={`m-0 text-xs font-semibold leading-tight ${
+                  contained && !imageBackdrop && !scrolled
+                    ? 'text-[#0C2B30]/60'
+                    : 'text-[#FFF9EC]/95 drop-shadow-[0_1px_3px_rgba(12,43,48,0.9)]'
+                }`}
+              >
+                Solution Pour Maisons et Chalets en Bois
+              </p>
+            </div>
+    
+
           </div>
+          
+
+          
 
           {/* Desktop */}
           <div
-            className={`hidden items-center gap-1 rounded-full border p-1 backdrop-blur-md lg:flex ${
+            className={`hidden items-center gap-1 rounded-full border p-1 ${
+              imageBackdrop ? '' : 'backdrop-blur-md'
+            } lg:-translate-x-30 lg:flex ${
               contained && !scrolled && !imageBackdrop
                 ? 'border-[#0C2B30]/15 bg-white/45'
-                : 'border-white/15 bg-black/15'
+                : imageBackdrop
+                  ? 'border-white/15 bg-transparent'
+                  : 'border-white/15 bg-black/15'
             }`}
           >
-            {navLinks.map((link) => (
-              <NavLink
-                key={link.path}
-                to={link.path}
-                className={({ isActive }) => `whitespace-nowrap rounded-full px-3 py-2 text-[11px] font-semibold tracking-wide transition-colors ${
-                  isActive
-                    ? 'bg-white text-[#0C2B30]'
-                    : contained && !scrolled && !imageBackdrop
-                      ? 'text-[#0C2B30]/70 hover:bg-[#0C2B30]/10 hover:text-[#0C2B30]'
-                      : 'text-white/70 hover:bg-white/10 hover:text-white'
-                }`}
-              >
-                {link.label}
-              </NavLink>
+            {navLinks.map((link, index) => (
+              <Fragment key={link.path}>
+                {index > 0 && (
+                  <span
+                    aria-hidden="true"
+                    className={`h-4 w-px ${
+                      contained && !scrolled && !imageBackdrop
+                        ? 'bg-[#0C2B30]/20'
+                        : 'bg-white/25'
+                    }`}
+                  />
+                )}
+                <NavLink
+                  to={link.path}
+                  className={({ isActive }) => `whitespace-nowrap rounded-full px-3 py-2 text-[13px] font-semibold tracking-wide transition-colors ${
+                    isActive
+                      ? 'bg-white text-[#0C2B30]'
+                      : contained && !scrolled && !imageBackdrop
+                        ? 'text-[#0C2B30]/70 hover:bg-[#0C2B30]/10 hover:text-[#0C2B30]'
+                        : 'text-[#FFF9EC] drop-shadow-[0_1px_3px_rgba(12,43,48,0.8)] hover:bg-white/10 hover:text-white'
+                  }`}
+                >
+                  {link.label}
+                </NavLink>
+              </Fragment>
             ))}
           </div>
 

@@ -10,7 +10,7 @@ import Reveal from '../../components/common/Reveal'
 function About() {
   return (
     <main className="bg-[#F7F5F0]">
-      <Navbar contained />
+      <Navbar contained imageBackdrop />
 
       {/* =========================================================
           HERO

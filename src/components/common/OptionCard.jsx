@@ -42,7 +42,7 @@ function OptionCard({
       <ImageLightbox
         src={option.image}
         alt={localizedName(option)}
-        className="aurea-catalog-image"
+        className="aurea-catalog-image aurea-option-catalog-image"
       >
         <img
           src={option.image}

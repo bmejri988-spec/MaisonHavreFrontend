@@ -89,6 +89,99 @@ img {
   transition-duration: 720ms;
 }
 
+@media (min-width: 901px) {
+  .aurea-home--catalog-window {
+    display: block;
+  }
+
+  .aurea-home--catalog-window > .aurea-story {
+    width: 100%;
+  }
+
+  .aurea-home--catalog-window .aurea-pdf-home > section:not(#accueil) {
+    width: calc(100% - var(--aurea-catalog-width) - clamp(16px, 2vw, 32px));
+  }
+
+  .aurea-home--catalog-window > .aurea-story > main > section {
+    width: calc(100% - var(--aurea-catalog-width) - clamp(16px, 2vw, 32px));
+  }
+
+  .aurea-home--catalog-window > .aurea-story > main > footer {
+    width: calc(100% - var(--aurea-catalog-width) - clamp(16px, 2vw, 32px));
+  }
+
+  .aurea-home--catalog-window > .aurea-story > .aurea-story {
+    background: #151d19;
+  }
+
+  .aurea-home--catalog-window .aurea-pdf-hero-heading {
+    margin-right: calc(var(--aurea-catalog-width) - 80px);
+  }
+
+  .aurea-home--catalog-window .aurea-pdf-home #accueil.aurea-pdf-hero p.aurea-pdf-hero-lead {
+    align-self: flex-start;
+    width: calc(100% - var(--aurea-catalog-width) - clamp(16px, 2vw, 32px));
+    max-width: 62ch;
+    margin: auto 0 0;
+    text-align: left;
+  }
+
+  .aurea-home--catalog-window .aurea-pdf-home #accueil .aurea-pdf-hero-lead .aurea-pdf-hero-description-line {
+    white-space: normal;
+  }
+
+  .aurea-home--catalog-window > .aurea-configurator {
+    --aurea-catalog-window-top: clamp(1px, 0vh, 128px);
+    --aurea-catalog-window-radius: 18px;
+
+    position: fixed;
+    z-index: 80;
+    top: var(--aurea-catalog-window-top);
+    right: clamp(16px, 2vw, 0px);
+    width: var(--aurea-catalog-width);
+    height: calc(100vh - var(--aurea-catalog-window-top) - 50px);
+    overflow: hidden;
+    border-radius: var(--aurea-catalog-window-radius);
+    clip-path: inset(0 round var(--aurea-catalog-window-radius));
+    background: transparent;
+  }
+
+  .aurea-home--catalog-window .aurea-configurator__panel {
+    width: 100%;
+    overflow: hidden;
+    border: 1px solid rgb(255 255 255 / 68%);
+    border-radius: var(--aurea-catalog-window-radius);
+    background: rgba(240, 247, 247, 0.3);
+    box-shadow: 0 20px 60px rgb(0 0 0 / 28%);
+    backdrop-filter: blur(0%);
+  }
+
+  .aurea-home--catalog-window .aurea-catalog-heading > div:first-child > span,
+  .aurea-home--catalog-window .aurea-catalog-heading-cat {
+    color: #8b6424;
+  }
+
+  .aurea-home--catalog-window .aurea-catalog-heading h3 {
+    color: #12353b;
+    text-shadow: 0 1px 3px rgb(255 255 255 / 55%);
+  }
+
+  .aurea-home--catalog-window .aurea-catalog-desc {
+    color: #344f53;
+    text-shadow: 0 1px 3px rgb(255 255 255 / 55%);
+  }
+
+  .aurea-home--catalog-window .aurea-catalog-rail {
+    background: transparent;
+    scrollbar-width: none;
+    -ms-overflow-style: none;
+  }
+
+  .aurea-home--catalog-window .aurea-catalog-rail::-webkit-scrollbar {
+    display: none;
+  }
+}
+
 .aurea-keyword {
   display: inline-block;
   color: #d6b982;
@@ -593,6 +686,11 @@ button.aurea-catalog-card--grid {
   animation: aurea-catalog-slide 600ms ease;
 }
 
+.aurea-option-catalog-image img {
+  object-position: center top;
+  transform-origin: center top;
+}
+
 .aurea-catalog-image-loading {
   width: 100%;
   height: 100%;
@@ -940,6 +1038,8 @@ button.aurea-catalog-card--grid {
   position: relative;
   isolation: isolate;
   overflow: hidden;
+  min-height: 620px;
+  padding-block: clamp(64px, 8vw, 104px);
   background: var(--aurea-night);
 }
 
@@ -948,8 +1048,8 @@ button.aurea-catalog-card--grid {
   z-index: 0;
   inset: 0;
   background:
-    linear-gradient(90deg, rgb(0 0 0 / 48%), rgb(0 0 0 / 30%) 65%, rgb(0 0 0 / 16%)),
-    linear-gradient(0deg, rgb(0 0 0 / 24%), transparent 55%);
+    linear-gradient(90deg, rgb(12 43 48 / 16%) 0%, rgb(12 43 48 / 10%) 42%, rgb(12 43 48 / 3%) 76%, transparent 100%),
+    linear-gradient(0deg, rgb(0 0 0 / 10%), transparent 55%);
   content: "";
   pointer-events: none;
 }
@@ -959,7 +1059,7 @@ button.aurea-catalog-card--grid {
 .aurea-pdf-section--expertise p,
 .aurea-pdf-section--expertise .aurea-pdf-features li {
   color: #f7f5f0;
-  text-shadow: 0 2px 6px rgb(0 0 0 / 90%);
+  text-shadow: none;
 }
 
 .aurea-pdf-expertise-background {
@@ -974,12 +1074,14 @@ button.aurea-catalog-card--grid {
   width: 100%;
   height: 100%;
   object-fit: cover;
-  object-position: center;
+  object-position: center 56%;
 }
 
 .aurea-pdf-section--expertise > .mx-auto {
   position: relative;
   z-index: 1;
+  width: min(100% - 48px, 1180px);
+  margin-inline: auto;
 }
 
 /* Typography */
@@ -1412,13 +1514,16 @@ button.aurea-catalog-card--grid {
 }
 
 .aurea-pdf-feature-copy--expertise {
-  margin-top: clamp(32px, 5vw, 64px);
+  max-width: 760px;
+  margin-top: clamp(24px, 3vw, 40px);
 }
 
 .aurea-pdf-feature-copy--expertise > h3 {
-  max-width: 22ch;
-  color: #fff;
-  font-size: clamp(30px, 4vw, 52px);
+  max-width: 24ch;
+  color: #f7f5f0;
+  font-size: clamp(32px, 4vw, 48px);
+  line-height: 1.08;
+  text-wrap: balance;
 }
 
 .aurea-home--catalog-hidden .aurea-pdf-hero-frame,
@@ -1464,8 +1569,29 @@ button.aurea-catalog-card--grid {
 .aurea-pdf-home #notre-expertise h3,
 .aurea-pdf-home #notre-expertise p,
 .aurea-pdf-home #notre-expertise .aurea-pdf-features li {
-  color: #fbd581;
-  text-shadow: 0 2px 6px rgb(0 0 0 / 90%);
+  color: #f7f5f0;
+  text-shadow: none;
+}
+
+.aurea-pdf-home #notre-expertise h2 {
+  color: #e3c995;
+}
+
+.aurea-pdf-home #notre-expertise p {
+  max-width: 62ch;
+  color: rgb(247 245 240 / 88%);
+  font-size: clamp(16px, 1.25vw, 18px);
+  line-height: 1.75;
+}
+
+.aurea-pdf-home #notre-expertise .aurea-pdf-features {
+  max-width: 760px;
+  border-top-color: rgb(255 255 255 / 28%);
+}
+
+.aurea-pdf-home #notre-expertise .aurea-pdf-features li > span {
+  color: #0c2b30;
+  background: #e3c995;
 }
 
 /* Catalog sliders */
@@ -1577,11 +1703,12 @@ button.aurea-catalog-card--grid {
 
 .aurea-pdf-process-grid--equipment {
   grid-template-columns: minmax(0, 1fr);
+  gap: clamp(8px, 1vw, 16px);
 }
 
 .aurea-pdf-process-grid--equipment > div > h3 {
-  margin: 0 0 12px;
-  margin-top: -5%;
+  margin: 0 0 8px;
+  font-size: clamp(24px, 2.8vw, 36px);
 }
 
 .aurea-pdf-process-intro {
@@ -1598,28 +1725,38 @@ button.aurea-catalog-card--grid {
 }
 
 .aurea-pdf-process-grid--equipment .aurea-pdf-process-list {
-  margin-top: -7%;
+  margin-top: 0;
+  border-top: 0;
 }
 
 .aurea-pdf-process-row {
   display: grid;
-  grid-template-columns: 56px minmax(0, 1fr);
-  align-items: baseline;
-  gap: 16px;
-  padding: 26px 0;
-  border-bottom: 1px solid var(--pdf-line);
+  grid-template-columns: 112px minmax(0, 1fr);
+  align-items: center;
+  gap: clamp(20px, 4vw, 48px);
+  padding: 0;
 }
 
-.aurea-pdf-process-row > span {
-  color: var(--pdf-label);
-  font-family: var(--pdf-serif);
-  font-size: 20px;
+.aurea-pdf-process-icon {
+  display: grid;
+  min-height: 100px;
+  place-items: center;
+  color: #15515a;
 }
 
 .aurea-pdf-process-row > h3 {
+  align-self: stretch;
+  display: flex;
+  align-items: center;
   margin: 0;
+  padding: 18px 0;
+  border-bottom: 1px solid var(--pdf-line);
   font-size: clamp(20px, 2vw, 26px);
   line-height: 1.25;
+}
+
+.aurea-pdf-process-list > :first-child .aurea-pdf-process-row > h3 {
+  border-top: 1px solid var(--pdf-line);
 }
 
 /* Pool closing section */
@@ -1697,30 +1834,9 @@ button.aurea-catalog-card--grid {
   margin: 0;
   padding: 0;
   overflow: hidden;
-  background: var(--aurea-night, #0c2b30);
-  border-radius: clamp(14px, 1.8vw, 24px);
-  box-shadow:
-    0 34px 70px -30px rgb(12 43 48 / 50%),
-    0 10px 24px -12px rgb(12 43 48 / 28%);
-}
-
-.aurea-pdf-home #accueil .aurea-pdf-hero-frame > img {
-  display: block;
-  width: 100%;
-  height: auto !important;
-  max-width: 100%;
-  object-fit: contain !important;
-  object-position: center;
-}
-
-.aurea-pdf-home #accueil .aurea-pdf-hero-frame::after {
-  position: absolute;
-  z-index: 2;
-  inset: 0;
-  border-radius: inherit;
-  box-shadow: inset 0 0 0 1px rgb(255 255 255 / 14%);
-  content: "";
-  pointer-events: none;
+  background: transparent;
+  border-radius: 0;
+  box-shadow: none;
 }
 
 .aurea-pdf-home #accueil .aurea-pdf-hero-content {
@@ -1776,23 +1892,24 @@ button.aurea-catalog-card--grid {
 
 .aurea-pdf-home #accueil .aurea-pdf-hero p.aurea-pdf-hero-lead {
   max-width: 52ch;
-  align-self: flex-start;
-  margin: 0;
-  padding-left: clamp(12px, 1.4vw, 18px);
-  border-left: 2px solid #c9a45c;
+  align-self: center;
+  margin: auto 0 0;
+  padding-left: 0;
+  border-left: 0;
   color: #fff;
-  font-size: clamp(30px, 3.2vw, 42px);
+  font-size: 40px;
   font-weight: 500;
   line-height: 1.45;
   text-shadow: 0 2px 16px rgb(0 0 0 / 45%);
+  text-align: center;
 }
 
 .aurea-pdf-home #accueil .aurea-pdf-hero-lead .aurea-pdf-hero-description-line {
   display: block;
-  color: rgb(255 255 255 / 86%);
-  font-size: inherit;
-  font-weight: 400;
-  white-space: normal;
+  color: #fff;
+  font-size: clamp(12px, 1.8vw, 26px);
+  font-weight: 700;
+  white-space: nowrap;
 }
 
 /* Moving feature band */
@@ -1898,7 +2015,7 @@ button.aurea-catalog-card--grid {
 .aurea-pdf-home #notre-produit .aurea-pdf-product-hero {
   position: relative;
   width: 100%;
-  height: clamp(420px, 72svh, 760px);
+  height: clamp(460px, 80svh, 840px);
   overflow: hidden;
 }
 
@@ -1907,8 +2024,8 @@ button.aurea-catalog-card--grid {
   z-index: 1;
   inset: 0;
   background:
-    linear-gradient(90deg, rgb(0 0 0 / 48%), rgb(0 0 0 / 30%) 65%, rgb(0 0 0 / 16%)),
-    linear-gradient(0deg, rgb(0 0 0 / 24%), transparent 55%);
+    linear-gradient(90deg, rgb(0 0 0 / 28%), rgb(0 0 0 / 18%) 65%, rgb(0 0 0 / 8%)),
+    linear-gradient(0deg, rgb(0 0 0 / 12%), transparent 55%);
   content: "";
   pointer-events: none;
 }
@@ -1982,17 +2099,16 @@ button.aurea-catalog-card--grid {
    ========================================================= */
 
 @media (min-width: 901px) {
+  .aurea-pdf-home #accueil .aurea-pdf-hero-content {
+    padding-top: calc(clamp(22px, 4vw, 56px) + clamp(88px, 12vh, 104px));
+  }
+
   .aurea-pdf-home #accueil.aurea-pdf-hero--revised {
     display: flex;
     min-height: 100vh;
     min-height: 100svh;
     align-items: center;
     box-sizing: border-box;
-  }
-
-  .aurea-pdf-home #accueil .aurea-pdf-hero-frame > img {
-    height: 100% !important;
-    object-fit: cover !important;
   }
 
   .aurea-pdf-home #accueil.aurea-pdf-hero--revised {
@@ -2021,18 +2137,21 @@ button.aurea-catalog-card--grid {
 
   .aurea-pdf-home #accueil .aurea-pdf-hero-stage .aurea-pdf-hero-frame {
     position: absolute;
-    inset: 0;
+    top: calc(-1 * clamp(88px, 12vh, 104px));
+    right: 0;
+    bottom: 0;
+    left: 0;
     width: 100%;
-    height: 100%;
+    height: auto;
     flex: none;
-    border-radius: clamp(14px, 1.8vw, 24px);
   }
 
   .aurea-pdf-home #accueil .aurea-pdf-hero-bar {
     position: absolute;
-    right: 0;
+    left: 50%;
     bottom: 0;
-    left: 0;
+    width: 100vw;
+    transform: translateX(-50%);
   }
 
 }
@@ -2057,6 +2176,10 @@ button.aurea-catalog-card--grid {
 }
 
 @media (max-width: 900px) {
+  .aurea-pdf-home #accueil .aurea-pdf-hero-frame {
+    min-height: clamp(320px, 52vh, 460px);
+  }
+
   .aurea-pdf-heading,
   .aurea-pdf-solution,
   .aurea-pdf-solution--end,
@@ -2174,6 +2297,44 @@ button.aurea-catalog-card--grid {
 }
 
 @media (max-width: 640px) {
+  .aurea-pdf-section--expertise {
+    min-height: 0;
+  }
+
+  .aurea-pdf-section--expertise::after {
+    background:
+      linear-gradient(180deg, rgb(12 43 48 / 10%), rgb(12 43 48 / 14%) 58%, rgb(12 43 48 / 10%)),
+      linear-gradient(90deg, rgb(0 0 0 / 12%), transparent);
+  }
+
+  .aurea-pdf-home #notre-expertise .aurea-pdf-features {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 14px 12px;
+  }
+
+  .aurea-pdf-home #notre-expertise .aurea-pdf-features li {
+    white-space: normal;
+  }
+
+  .aurea-pdf-process-row {
+    grid-template-columns: 72px minmax(0, 1fr);
+    gap: 16px;
+  }
+
+  .aurea-pdf-process-icon {
+    min-height: 84px;
+  }
+
+  .aurea-pdf-process-icon svg {
+    width: 48px;
+    height: 48px;
+  }
+
+  .aurea-pdf-process-row > h3 {
+    font-size: 18px;
+  }
+
   .aurea-pdf-home #notre-offre > .mx-auto > .aurea-pdf-features {
     flex-wrap: wrap;
   }

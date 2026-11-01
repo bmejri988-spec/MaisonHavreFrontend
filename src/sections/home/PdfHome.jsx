@@ -1,4 +1,22 @@
-import { Check } from 'lucide-react'
+import {
+  Award,
+  BatteryCharging,
+  BriefcaseBusiness,
+  ClipboardList,
+  Droplets,
+  House,
+  KeyRound,
+  Leaf,
+  MapPin,
+  Mountain,
+  Ruler,
+  ShieldCheck,
+  SlidersHorizontal,
+  Sofa,
+  Sun,
+  Zap,
+  Waves,
+} from 'lucide-react'
 import { useState } from 'react'
 
 import Container from '../../components/common/Container'
@@ -8,59 +26,63 @@ import videoSource from '../../../video1.mp4'
 import videoSource2 from '../../../video2.mp4'
 
 const heroImage =
-  'https://jfoprtlfgdwaslsqizut.supabase.co/storage/v1/object/public/images/acceuil.jpg'
+  'https://jfoprtlfgdwaslsqizut.supabase.co/storage/v1/object/public/images/acceuil2.png'
 
 const highlights = [
-  'Solution complète : terrain + maison',
-  'Projet sur mesure : besoins + budget',
-  'À moins d’une heure de Tunis',
-  'Maisons autonomes',
-  'Maisons écologiques',
+  { label: 'Solution complète : terrain + maison', Icon: House },
+  { label: 'Projet sur mesure : besoins + budget', Icon: SlidersHorizontal },
+  { label: 'À moins d’une heure de Tunis', Icon: MapPin },
+  { label: 'Maisons autonomes', Icon: Zap },
+  { label: 'Maisons écologiques', Icon: Leaf },
 ]
 
 const offerHighlights = [
-  'Emplacements stratégiques',
-  'Solution clé en main',
-  'Maisons écologiques',
+  { label: 'Emplacements stratégiques', Icon: MapPin },
+  { label: 'Solution clé en main', Icon: KeyRound },
+  { label: 'Maisons écologiques', Icon: Leaf },
 ]
 
 const productHighlights = [
-  'Maisons écologiques',
-  'Autonomes',
-  'Confortables',
+  { label: 'Maisons écologiques', Icon: Leaf },
+  { label: 'Autonomes', Icon: Sun },
+  { label: 'Confortables', Icon: Sofa },
 ]
 
 const productImageHighlights = [
-  'Cadre unique',
-  'Écologique',
-  'Autonomes',
-  'À moins de 1h de Tunis',
+  { label: 'Cadre unique', Icon: Mountain },
+  { label: 'Écologique', Icon: Leaf },
+  { label: 'Autonomes', Icon: Zap },
+  { label: 'À moins de 1h de Tunis', Icon: MapPin },
 ]
 
 const expertiseHighlights = [
-  'Compétences métier',
-  '30 ans d’expérience',
-  'Étude personnalisée',
-  'Suivi de chantier',
+  { label: 'Compétences métier', Icon: BriefcaseBusiness },
+  { label: '30 ans d’expérience', Icon: Award },
+  { label: 'Étude personnalisée', Icon: Ruler },
+  { label: 'Suivi de chantier', Icon: ClipboardList },
 ]
 
 const equipmentItems = [
   {
     number: '01',
     title: 'Choix et installation des piscines',
+    Icon: Waves,
   },
   {
     number: '02',
     title:
       'Production et stockage de l’électricité grâce à la technologie photovoltaïque',
+    Icon: BatteryCharging,
   },
   {
     number: '03',
     title: 'Alimentation en eau et stockage dans des réservoirs adaptés',
+    Icon: Droplets,
   },
   {
     number: '04',
     title: 'Sécurité et contrôle à distance',
+    Icon: ShieldCheck,
   },
 ]
 
@@ -70,12 +92,12 @@ function FeatureList({ items, className = '', ariaHidden }) {
       className={`aurea-pdf-features ${className}`.trim()}
       aria-hidden={ariaHidden}
     >
-      {items.map((item) => (
-        <li key={item}>
+      {items.map(({ label, Icon }) => (
+        <li key={label}>
           <span>
-            <Check size={12} strokeWidth={3} />
+            <Icon aria-hidden="true" size={13} strokeWidth={2} />
           </span>
-          {item}
+          {label}
         </li>
       ))}
     </ul>
@@ -138,11 +160,6 @@ function PdfHome() {
         <Container>
           <div className="aurea-pdf-hero-stage">
             <Reveal className="aurea-pdf-hero-frame">
-              <img
-                src={heroImage}
-                alt="Chalet Maison Havre dans un paysage tunisien"
-              />
-
               <div className="aurea-pdf-hero-content">
                 <div className="aurea-pdf-hero-heading">
                   <h1>
@@ -151,9 +168,9 @@ function PdfHome() {
                   </h1>
                 </div>
 
-                <p className="aurea-pdf-hero-lead">
-                  Des maisons et chalets en bois,
+                <p className="aurea-pdf-hero-lead" >
                   <span className="aurea-pdf-hero-description-line">
+                    Des maisons et chalets en bois,
                     écologiques et autonomes en eau et en électricité
                   </span>
                 </p>
@@ -233,7 +250,7 @@ function PdfHome() {
         <Container>
           <div className="aurea-pdf-product-hero">
             <img
-              src="https://jfoprtlfgdwaslsqizut.supabase.co/storage/v1/object/public/images/notre_prod.jpg"
+              src="https://jfoprtlfgdwaslsqizut.supabase.co/storage/v1/object/public/images/notreProd.jpg"
               alt="Chalet en bois Maison Havre"
             />
             <div className="aurea-pdf-product-overlay">
@@ -306,7 +323,7 @@ function PdfHome() {
           aria-hidden="true"
         >
           <img
-            src="https://jfoprtlfgdwaslsqizut.supabase.co/storage/v1/object/public/images/planning1.jpg"
+            src="https://images.unsplash.com/photo-1503387762-592deb58ef4e?auto=format&fit=crop&w=1800&q=85"
             alt=""
           />
         </div>
@@ -358,7 +375,9 @@ function PdfHome() {
                   delay={index * 0.08}
                 >
                   <div className="aurea-pdf-process-row">
-                    <span>{item.number}</span>
+                    <span className="aurea-pdf-process-icon" aria-hidden="true">
+                      <item.Icon size={58} strokeWidth={1.5} />
+                    </span>
                     <h3>{item.title}</h3>
                   </div>
                 </Reveal>

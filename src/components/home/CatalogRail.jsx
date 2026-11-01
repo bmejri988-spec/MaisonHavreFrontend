@@ -91,10 +91,10 @@ export function CatalogSlider({ label, desc, title, items, getDescription, getPa
     <section className={`aurea-catalog-section${stacked ? ' aurea-catalog-section--stacked' : ''}`}>
       <div className="aurea-catalog-heading">
         <div>
-          <span style={{ fontSize: '19px' }}>{label}</span>
+          <span style={{ fontSize: '30px' }}>{label}</span>
           <h3>{title}</h3>
-          <h4 className="aurea-catalog-desc">{desc}</h4>
-          <span className="aurea-catalog-heading-cat">{cat}</span>
+          <h4 style={{ fontSize: '20px' }} className="aurea-catalog-desc">{desc}</h4>
+          <span style={{ fontSize: '20px' }} className="aurea-catalog-heading-cat">{cat}</span>
         </div>
       </div>
 
@@ -167,7 +167,7 @@ function CatalogRail() {
   return (
     <div className="aurea-catalog-rail">
       <CatalogSlider
-        label="offre terrain"
+        label="offre terrains"
         title="Votre havre existe quelque part, à moins d’une heure de Tunis."
         desc="Nous allons le trouver, le construire et vous le remettre clé en main."
         cat="Catalogue des terrains"

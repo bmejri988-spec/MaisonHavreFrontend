@@ -13,20 +13,19 @@ function Footer() {
             <Link
               to="/"
               aria-label="Accueil Maison Havre"
-              className="inline-flex items-center gap-3 font-serif text-4xl"
+              className="inline-flex items-end gap-3 whitespace-nowrap font-serif text-[clamp(1rem,2vw,2.25rem)]"
             >
               <img
                 src="/favicon-32x32.png"
                 alt=""
                 aria-hidden="true"
-                className="h-10 w-10 brightness-0 invert"
+                className="h-10 w-10 shrink-0 brightness-0 invert"
               />
-              <span>MAISON HAVRE</span>
+              <span className="whitespace-nowrap leading-none">MAISON HAVRE</span>
             </Link>
 
             <p className="mt-5 max-w-sm text-sm leading-6 text-white/45">
-              Des lieux d’exception et une architecture attentive.
-              Un second chez-vous pensé autour de vous.
+              Solution Pour Maisons et Chalets en Bois            
             </p>
           </div>
 
@@ -53,9 +52,6 @@ function Footer() {
                 Options
               </Link>
 
-              <Link to="" className="text-sm text-white/65 transition-colors duration-300 hover:text-white">
-                Composer votre chalet
-              </Link>
             </div>
           </div>
 
@@ -70,14 +66,14 @@ function Footer() {
                 href="mailto:hello@example.com"
                 className="text-sm text-white/65 transition-colors duration-300 hover:text-white"
               >
-                hello@example.com
+                bj@ad.com.tn
               </a>
 
               <a
                 href="tel:+21600000000"
                 className="text-sm text-white/65 transition-colors duration-300 hover:text-white"
               >
-                +216 00 000 000
+                +216 98 306 360
               </a>
 
               <span className="text-sm text-white/45">
@@ -92,7 +88,7 @@ function Footer() {
           <span>
             © 2026 MAISON HAVRE. Tous droits réservés.
           </span>
-
+          {/* Social Links 
           <div className="flex gap-6">
             <a href="#" className="hover:text-white">
               Instagram
@@ -102,7 +98,9 @@ function Footer() {
               LinkedIn
             </a>
           </div>
+          */}
         </div>
+        
 
       </div>
     </footer>
