@@ -2543,3 +2543,254 @@ body::before {
     animation: none;
   }
 }
+
+
+/* =========================================================
+   8. Phone layout refinements
+   Scoped to small screens and the revised homepage only.
+   Desktop and application behavior remain unchanged.
+   ========================================================= */
+
+@media (max-width: 767px) {
+  .aurea-pdf-home {
+    overflow: clip;
+  }
+
+  .aurea-pdf-home .aurea-pdf-section {
+    padding-block: clamp(40px, 10vw, 56px);
+  }
+
+  .aurea-pdf-home .aurea-pdf-section h2 {
+    margin-top: 0;
+    font-size: clamp(30px, 8vw, 36px);
+    line-height: 1.08;
+    text-wrap: balance;
+  }
+
+  .aurea-pdf-home .aurea-pdf-section h3 {
+    font-size: clamp(22px, 6vw, 27px);
+    line-height: 1.18;
+    text-wrap: pretty;
+  }
+
+  .aurea-pdf-home .aurea-pdf-section p {
+    font-size: 15px;
+    line-height: 1.65;
+  }
+
+  /* Hero: readable copy without changing its desktop composition. */
+  .aurea-pdf-home #accueil.aurea-pdf-hero--revised {
+    padding-block: 14px 20px;
+    background-position: center;
+  }
+
+  .aurea-pdf-home #accueil .aurea-pdf-hero-stage {
+    width: 100%;
+  }
+
+  .aurea-pdf-home #accueil .aurea-pdf-hero-stage .aurea-pdf-hero-frame {
+    min-height: 0;
+  }
+
+  .aurea-pdf-home #accueil .aurea-pdf-hero-content {
+    gap: 18px;
+    padding: 24px 20px 28px;
+  }
+
+  .aurea-pdf-home #accueil .aurea-pdf-hero-heading {
+    width: 100%;
+    max-width: 100%;
+  }
+
+  .aurea-pdf-home #accueil .aurea-pdf-hero h1 {
+    max-width: 15ch;
+    font-size: clamp(30px, 8.2vw, 38px);
+    line-height: 1.06;
+    text-wrap: balance;
+  }
+
+  .aurea-pdf-home #accueil p.aurea-pdf-hero-lead {
+    width: 100%;
+    max-width: 36ch;
+    margin: 0;
+    font-size: 14px;
+    font-weight: 500;
+    line-height: 1.55;
+    text-align: left;
+  }
+
+  .aurea-pdf-home #accueil .aurea-pdf-hero-lead .aurea-pdf-hero-description-line {
+    font-size: 14px;
+    font-weight: 500;
+    line-height: 1.55;
+    white-space: normal;
+  }
+
+  .aurea-pdf-home #accueil .aurea-pdf-hero-bar {
+    padding-block: 11px;
+  }
+
+  .aurea-pdf-home #accueil .aurea-pdf-hero-bar .aurea-pdf-features {
+    gap: 20px;
+  }
+
+  .aurea-pdf-home #accueil .aurea-pdf-hero-bar .aurea-pdf-features li {
+    font-size: 12px;
+  }
+
+  /* Offer and product content. */
+  .aurea-pdf-home #notre-offre > .mx-auto > .aurea-pdf-features {
+    align-items: flex-start;
+    gap: 12px 16px;
+    padding-top: 16px;
+  }
+
+  .aurea-pdf-home #notre-offre > .mx-auto > .aurea-pdf-features li {
+    max-width: 100%;
+    white-space: normal;
+  }
+
+  .aurea-pdf-home #notre-produit .aurea-pdf-product-hero {
+    height: clamp(360px, 68svh, 560px);
+  }
+
+  .aurea-pdf-home #notre-produit .aurea-pdf-product-overlay {
+    justify-content: flex-end;
+    padding: 28px 24px 32px;
+  }
+
+  .aurea-pdf-home #notre-produit .aurea-pdf-product-overlay h2 {
+    font-size: clamp(30px, 8vw, 36px);
+  }
+
+  .aurea-pdf-home #notre-produit .aurea-pdf-product-overlay h3 {
+    max-width: 18ch;
+    margin-top: 14px;
+    font-size: clamp(27px, 7vw, 34px);
+    line-height: 1.12;
+  }
+
+  .aurea-pdf-home #notre-produit .aurea-pdf-product-highlights {
+    gap: 8px;
+    margin-top: 18px;
+    padding-top: 14px;
+  }
+
+  .aurea-pdf-home #notre-produit .aurea-pdf-feature-copy {
+    padding-inline: 20px;
+  }
+
+  .aurea-pdf-home #notre-produit .aurea-pdf-feature-copy > .aurea-pdf-features {
+    flex-wrap: wrap;
+    gap: 10px 16px;
+  }
+
+  /* Solution, expertise and equipment. */
+  .aurea-pdf-home .aurea-pdf-solution--end {
+    gap: 18px;
+  }
+
+  .aurea-pdf-home .aurea-pdf-solution-end-video,
+  .aurea-pdf-home .aurea-pdf-media {
+    width: 100%;
+    max-width: 100%;
+  }
+
+  .aurea-pdf-home .aurea-pdf-solution-end-video video,
+  .aurea-pdf-home .aurea-pdf-media video {
+    display: block;
+    width: 100%;
+    height: auto;
+    aspect-ratio: 16 / 9;
+    object-fit: cover;
+  }
+
+  .aurea-pdf-home .aurea-pdf-section--expertise {
+    padding-block: 48px;
+  }
+
+  .aurea-pdf-home .aurea-pdf-section--expertise > .mx-auto {
+    width: min(100% - 40px, 1180px);
+  }
+
+  .aurea-pdf-home .aurea-pdf-process-grid--equipment {
+    gap: 16px;
+  }
+
+  .aurea-pdf-home .aurea-pdf-process-row {
+    grid-template-columns: 56px minmax(0, 1fr);
+    gap: 14px;
+  }
+
+  .aurea-pdf-home .aurea-pdf-process-icon {
+    min-height: 76px;
+  }
+
+  .aurea-pdf-home .aurea-pdf-process-icon svg {
+    width: 40px;
+    height: 40px;
+  }
+
+  .aurea-pdf-home .aurea-pdf-process-row > h3 {
+    padding-block: 14px;
+    font-size: 17px;
+    line-height: 1.3;
+  }
+
+  /* Keep catalog cards and footer content inside the phone viewport. */
+  .aurea-configurator,
+  .aurea-configurator__panel,
+  .aurea-catalog-rail {
+    min-width: 0;
+    max-width: 100%;
+  }
+
+  .aurea-configurator__header,
+  .aurea-catalog-intro,
+  .aurea-catalog-section {
+    padding-right: 20px;
+    padding-left: 20px;
+  }
+
+  footer > .mx-auto {
+    padding-top: 48px;
+    padding-bottom: 36px;
+  }
+
+  footer .grid {
+    gap: 36px;
+  }
+
+  footer .mt-16 {
+    margin-top: 40px;
+  }
+}
+
+@media (max-width: 390px) {
+  .aurea-pdf-home #accueil .aurea-pdf-hero-content {
+    padding-inline: 18px;
+  }
+
+  .aurea-pdf-home #accueil .aurea-pdf-hero h1 {
+    font-size: clamp(28px, 8vw, 32px);
+  }
+
+  .aurea-pdf-home #accueil p.aurea-pdf-hero-lead,
+  .aurea-pdf-home #accueil .aurea-pdf-hero-lead .aurea-pdf-hero-description-line {
+    font-size: 13px;
+  }
+
+  .aurea-pdf-home #notre-produit .aurea-pdf-product-overlay {
+    padding-inline: 20px;
+  }
+
+  .aurea-pdf-home .aurea-pdf-process-row {
+    grid-template-columns: 48px minmax(0, 1fr);
+    gap: 12px;
+  }
+
+  .aurea-pdf-home .aurea-pdf-process-icon svg {
+    width: 36px;
+    height: 36px;
+  }
+}
