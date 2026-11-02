@@ -159,15 +159,16 @@ img {
   }
 
   .aurea-home--catalog-window > .aurea-configurator {
-    --aurea-catalog-window-top: clamp(1px, 0vh, 128px);
-    --aurea-catalog-window-radius: 18px;
+    --aurea-catalog-window-top: clamp(26px, 3vh, 32px);
+    --aurea-catalog-window-radius: 30px;
 
     position: fixed;
     z-index: 80;
     top: var(--aurea-catalog-window-top);
     right: clamp(16px, 2vw, 0px);
     width: var(--aurea-catalog-width);
-    height: calc(100vh - var(--aurea-catalog-window-top) - 50px);
+    height: calc(100vh - var(--aurea-catalog-window-top) - 96px);
+    height: calc(100svh - var(--aurea-catalog-window-top) - 50px);
     overflow: hidden;
     border-radius: var(--aurea-catalog-window-radius);
     clip-path: inset(0 round var(--aurea-catalog-window-radius));
