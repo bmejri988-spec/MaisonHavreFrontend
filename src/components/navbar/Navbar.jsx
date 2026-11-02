@@ -62,7 +62,7 @@ function Navbar({ contained = false, imageBackdrop = false }) {
           scrolled ? 'py-4' : 'py-6'
         }`}
       >
-        <nav className="flex items-center justify-between gap-6">
+        <nav className="grid grid-cols-[minmax(0,1fr)_auto_minmax(0,1fr)] items-center gap-6">
 
           {/* Logo */}
           <div className="flex items-center gap-0">
@@ -112,9 +112,9 @@ function Navbar({ contained = false, imageBackdrop = false }) {
 
           {/* Desktop */}
           <div
-            className={`hidden items-center gap-1 rounded-full border p-1 ${
+            className={`hidden items-center gap-1 rounded-full border p-1 min-[1200px]:flex ${
               imageBackdrop ? '' : 'backdrop-blur-md'
-            } lg:-translate-x-30 lg:flex ${
+            } ${
               contained && !scrolled && !imageBackdrop
                 ? 'border-[#0C2B30]/15 bg-white/45'
                 : imageBackdrop
@@ -150,13 +150,10 @@ function Navbar({ contained = false, imageBackdrop = false }) {
             ))}
           </div>
 
-          <div className="hidden lg:block"> 
-          </div>
-
           {/* Mobile button */}
           <button
             onClick={() => setIsOpen(!isOpen)}
-            className={`relative z-50 flex h-11 w-11 items-center justify-center lg:hidden ${
+            className={`relative z-50 col-start-3 flex h-11 w-11 items-center justify-center min-[1200px]:hidden ${
               contained && !imageBackdrop && !scrolled && !isOpen
                 ? 'text-[#0C2B30]'
                 : 'text-white'
@@ -175,7 +172,7 @@ function Navbar({ contained = false, imageBackdrop = false }) {
 
       {/* Mobile menu */}
       <div
-        className={`fixed inset-0 z-40 bg-[#1D2923] transition-all duration-500 lg:hidden ${
+        className={`fixed inset-0 z-40 bg-[#1D2923] transition-all duration-500 min-[1200px]:hidden ${
           isOpen
             ? 'visible opacity-100'
             : 'invisible opacity-0'
