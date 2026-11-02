@@ -102,6 +102,34 @@ img {
     width: calc(100% - var(--aurea-catalog-width) - clamp(16px, 2vw, 32px));
   }
 
+  .aurea-home--catalog-window .aurea-pdf-home #notre-produit {
+    position: relative;
+    isolation: isolate;
+  }
+
+  .aurea-home--catalog-window .aurea-pdf-home #notre-produit::before {
+    position: absolute;
+    z-index: -1;
+    inset: 0;
+    width: 100vw;
+    background: var(--aurea-sand);
+    content: "";
+    pointer-events: none;
+  }
+
+  .aurea-home--catalog-window .aurea-pdf-home #notre-produit .aurea-pdf-product-hero {
+    width: 100vw;
+  }
+
+  .aurea-home--catalog-window #notre-expertise {
+    overflow: visible;
+  }
+
+  .aurea-home--catalog-window #notre-expertise::after,
+  .aurea-home--catalog-window #notre-expertise .aurea-pdf-expertise-background {
+    width: 100vw;
+  }
+
   .aurea-home--catalog-window > .aurea-story > main > section {
     width: calc(100% - var(--aurea-catalog-width) - clamp(16px, 2vw, 32px));
   }
@@ -151,9 +179,15 @@ img {
     overflow: hidden;
     border: 1px solid rgb(255 255 255 / 68%);
     border-radius: var(--aurea-catalog-window-radius);
-    background: rgba(240, 247, 247, 0.3);
+    background: rgba(240, 247, 247, 0.18);
     box-shadow: 0 20px 60px rgb(0 0 0 / 28%);
-    backdrop-filter: blur(0%);
+    backdrop-filter: blur(6px);
+    -webkit-backdrop-filter: blur(6px);
+  }
+
+  .aurea-home--catalog-window .aurea-catalog-section:nth-child(2),
+  .aurea-home--catalog-window .aurea-catalog-section:nth-child(3) {
+    background: transparent;
   }
 
   .aurea-home--catalog-window .aurea-catalog-heading > div:first-child > span,
