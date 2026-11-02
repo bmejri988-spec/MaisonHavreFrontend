@@ -168,7 +168,7 @@ img {
     right: clamp(16px, 2vw, 0px);
     width: var(--aurea-catalog-width);
     height: calc(100vh - var(--aurea-catalog-window-top) - 96px);
-    height: calc(100svh - var(--aurea-catalog-window-top) - 50px);
+    height: calc(100svh - var(--aurea-catalog-window-top) - 4px);
     overflow: hidden;
     border-radius: var(--aurea-catalog-window-radius);
     clip-path: inset(0 round var(--aurea-catalog-window-radius));
