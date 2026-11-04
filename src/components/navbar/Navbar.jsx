@@ -68,7 +68,7 @@ function Navbar({ contained = false, imageBackdrop = false }) {
 
   return (
     <header
-      className={`site-navbar ${positionClass} left-0 top-0 z-50 w-full transition-all duration-500 ${
+      className={`site-navbar ${isOpen ? 'is-menu-open' : ''} ${positionClass} left-0 top-0 z-50 w-full transition-all duration-500 ${
         isHidden ? '-translate-y-full' : 'translate-y-0'
       } ${
         scrolled && !imageBackdrop ? 'bg-[#1D2923]/20' : 'bg-transparent'
@@ -201,7 +201,10 @@ function Navbar({ contained = false, imageBackdrop = false }) {
           onClick={(event) => event.stopPropagation()}
         >
           <div className="mobile-nav-heading">
-            <span>MAISON HAVRE</span>
+            <div className="mobile-nav-brand">
+              <img src="/favicon-48x48.png" alt="" aria-hidden="true" />
+              <span>MAISON HAVRE</span>
+            </div>
             <span>Explorer</span>
           </div>
           <div className="mobile-nav-links flex flex-col">
