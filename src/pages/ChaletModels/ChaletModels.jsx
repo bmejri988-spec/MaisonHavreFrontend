@@ -1,6 +1,7 @@
 import Navbar from '../../components/navbar/Navbar'
 import Footer from '../../components/footer/Footer'
 import Container from '../../components/common/Container'
+import MobileCatalogCarousel from '../../components/common/MobileCatalogCarousel'
 import Reveal from '../../components/common/Reveal'
 import ChaletModelCard from '../../components/common/ChaletModelCard'
 import { useCatalog } from '../../context/useCatalog'
@@ -32,8 +33,10 @@ function ChaletModels() {
             </div>
           </Reveal>
 
-          <div className="mt-16 grid gap-6 md:grid-cols-2 lg:grid-cols-3">
-
+          <MobileCatalogCarousel
+            label="Catalogue des modèles de chalet"
+            className="mt-16 gap-6 md:grid-cols-2 lg:grid-cols-3"
+          >
             {models.map((model, index) => (
               <ChaletModelCard
                 key={model.id}
@@ -41,15 +44,13 @@ function ChaletModels() {
                 index={index}
               />
             ))}
-
-          </div>
+          </MobileCatalogCarousel>
 
         </Container>
 
       </section>
 
 
-      
 
       <Footer />
 

@@ -1,6 +1,5 @@
-import { motion } from 'framer-motion'
-
 import Container from '../../components/common/Container'
+import MobileCatalogCarousel from '../../components/common/MobileCatalogCarousel'
 import TerrainCard from '../../components/common/TerrainCard'
 import Footer from '../../components/footer/Footer'
 import Navbar from '../../components/navbar/Navbar'
@@ -34,9 +33,9 @@ function Terrains() {
           </div>
 
           {/* Results */}
-          <motion.div
-            layout
-            className="mt-12 grid gap-x-6 gap-y-12 md:grid-cols-2 lg:grid-cols-3"
+          <MobileCatalogCarousel
+            label="Catalogue des terrains"
+            className="mt-12 gap-x-6 gap-y-12 md:grid-cols-2 lg:grid-cols-3"
           >
             {terrains.map((terrain, index) => (
               <TerrainCard
@@ -45,7 +44,7 @@ function Terrains() {
                 index={index}
               />
             ))}
-          </motion.div>
+          </MobileCatalogCarousel>
 
           {/* Empty state */}
           {terrains.length === 0 && (

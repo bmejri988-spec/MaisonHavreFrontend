@@ -2358,12 +2358,25 @@ button.aurea-catalog-card--grid {
 
   .aurea-pdf-home #notre-expertise .aurea-pdf-features {
     display: grid;
-    grid-template-columns: repeat(2, minmax(0, 1fr));
-    gap: 14px 12px;
+    grid-template-columns: minmax(0, 1fr);
+    align-items: start;
+    gap: 20px;
+  }
+
+  .aurea-pdf-home #notre-expertise .aurea-pdf-feature-copy .aurea-pdf-features {
+    gap: 20px;
   }
 
   .aurea-pdf-home #notre-expertise .aurea-pdf-features li {
+    align-items: flex-start;
+    gap: 12px;
+    line-height: 1.45;
     white-space: normal;
+  }
+
+  .aurea-pdf-home #notre-expertise .aurea-pdf-features li > span {
+    flex: 0 0 22px;
+    margin-top: 1px;
   }
 
   .aurea-pdf-process-row {
@@ -3285,17 +3298,27 @@ body::before {
 
 @media (max-width: 767px) and (orientation: portrait) {
   .aurea-pdf-home #accueil.aurea-pdf-hero--revised {
+    height: 100vh;
+    height: 100svh;
+    height: 100dvh;
+    min-height: 100svh;
+    box-sizing: border-box;
     background-color: #0c2b30;
-    background-image:
-      linear-gradient(180deg, rgb(7 28 31 / 8%) 12%, rgb(7 28 31 / 16%) 42%, rgb(7 28 31 / 82%) 100%),
-      url("https://jfoprtlfgdwaslsqizut.supabase.co/storage/v1/object/public/images/phone_acceuil.jpg");
-    background-position: center, center 42%;
+    background-image: url("https://jfoprtlfgdwaslsqizut.supabase.co/storage/v1/object/public/images/phone_acceuil.jpg");
+    background-position: center 42%;
     background-repeat: no-repeat;
     background-size: cover;
+    padding-bottom: 0;
+  }
+
+  .aurea-pdf-home #accueil > .mx-auto {
+    min-height: 0;
+    flex: 1;
   }
 
   .aurea-pdf-home #accueil .aurea-pdf-hero-stage {
-    min-height: clamp(500px, 72svh, 660px);
+    min-height: 0;
+    flex: 1;
   }
 
   .aurea-pdf-home #accueil .aurea-pdf-hero-stage .aurea-pdf-hero-frame {
@@ -3542,5 +3565,72 @@ body::before {
     border-radius: 11px;
     color: #0c2b30;
     background: #f7f5f0;
+  }
+}
+
+.mobile-catalog-carousel__controls,
+.mobile-catalog-carousel__hint {
+  display: none;
+}
+
+@media (max-width: 767px) {
+  .mobile-catalog-carousel__track {
+    display: flex;
+    grid-template-columns: none;
+    gap: 16px;
+    overflow-x: auto;
+    overscroll-behavior-x: contain;
+    padding-bottom: 4px;
+    scroll-padding-inline: 1px;
+    scroll-snap-type: x mandatory;
+    scrollbar-width: none;
+    -ms-overflow-style: none;
+    touch-action: pan-x pan-y;
+  }
+
+  .mobile-catalog-carousel__track::-webkit-scrollbar {
+    display: none;
+  }
+
+  .mobile-catalog-carousel__slide {
+    min-width: 100%;
+    flex: 0 0 100%;
+    scroll-snap-align: start;
+    scroll-snap-stop: always;
+  }
+
+  .mobile-catalog-carousel__slide > * {
+    width: 100%;
+  }
+
+  .mobile-catalog-carousel__controls {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 18px;
+    margin-top: 16px;
+    color: #1d2923;
+    font-size: 12px;
+    font-variant-numeric: tabular-nums;
+    letter-spacing: 0.1em;
+  }
+
+  .mobile-catalog-carousel__controls button {
+    display: grid;
+    width: 36px;
+    height: 36px;
+    place-items: center;
+    border: 1px solid rgb(29 41 35 / 20%);
+    border-radius: 50%;
+    color: #1d2923;
+    background: transparent;
+  }
+
+  .mobile-catalog-carousel__hint {
+    display: block;
+    margin: 8px 0 0;
+    color: #77766f;
+    font-size: 11px;
+    text-align: center;
   }
 }

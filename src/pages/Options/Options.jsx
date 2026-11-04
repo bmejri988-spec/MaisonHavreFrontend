@@ -1,7 +1,7 @@
-import { motion } from 'framer-motion'
 import Navbar from '../../components/navbar/Navbar'
 import Footer from '../../components/footer/Footer'
 import Container from '../../components/common/Container'
+import MobileCatalogCarousel from '../../components/common/MobileCatalogCarousel'
 import Reveal from '../../components/common/Reveal'
 import OptionCard from '../../components/common/OptionCard'
 
@@ -34,14 +34,14 @@ function Options() {
             </div>
           </Reveal>
 
-          <motion.div
-            layout
-            className="mt-12 grid gap-5 md:grid-cols-2 lg:grid-cols-3"
+          <MobileCatalogCarousel
+            label="Catalogue des options"
+            className="mt-12 gap-5 md:grid-cols-2 lg:grid-cols-3"
           >
             {options.map((option, index) => (
               <OptionCard key={option.id} option={option} index={index} />
             ))}
-          </motion.div>
+          </MobileCatalogCarousel>
 
         </Container>
 
@@ -117,7 +117,6 @@ function Options() {
 
       </section>
 
-      
 
       <Footer />
 
