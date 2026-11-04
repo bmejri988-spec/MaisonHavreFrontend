@@ -4,7 +4,7 @@ import { Menu, X, ArrowUpRight } from 'lucide-react'
 import { Link, NavLink } from 'react-router-dom'
 
 const navLinks = [
-  { label: 'ACCEUIL', path: '/' },
+  { label: 'ACCUEIL', path: '/' },
   { label: 'TERRAINS', path: '/terrains' },
   { label: 'MODELES', path: '/chalet-models' },
   { label: 'OPTIONS', path: '/options' },
@@ -49,20 +49,38 @@ function Navbar({ contained = false, imageBackdrop = false }) {
     }
   }, [isOpen])
 
+  useEffect(() => {
+    if (!isOpen) return undefined
+
+    const previousOverflow = document.body.style.overflow
+    const handleKeyDown = (event) => {
+      if (event.key === 'Escape') setIsOpen(false)
+    }
+
+    document.body.style.overflow = 'hidden'
+    window.addEventListener('keydown', handleKeyDown)
+
+    return () => {
+      document.body.style.overflow = previousOverflow
+      window.removeEventListener('keydown', handleKeyDown)
+    }
+  }, [isOpen])
+
   return (
     <header
-      className={`${positionClass} left-0 top-0 z-50 w-full transition-all duration-500 ${
+      className={`site-navbar ${positionClass} left-0 top-0 z-50 w-full transition-all duration-500 ${
         isHidden ? '-translate-y-full' : 'translate-y-0'
       } ${
         scrolled && !imageBackdrop ? 'bg-[#1D2923]/20' : 'bg-transparent'
       }`}
+      data-image-backdrop={imageBackdrop}
     >
       <div
-        className={`relative mx-auto max-w-375 px-5 transition-all duration-500 md:px-8 lg:px-12 ${
+        className={`site-navbar__inner relative mx-auto max-w-375 px-5 transition-all duration-500 md:px-8 lg:px-12 ${
           scrolled ? 'py-4' : 'py-6'
         }`}
       >
-        <nav className="grid grid-cols-[minmax(0,1fr)_auto_minmax(0,1fr)] items-center gap-6">
+        <nav className="site-navbar__row grid grid-cols-[minmax(0,1fr)_auto_minmax(0,1fr)] items-center gap-6">
 
           {/* Logo */}
           <div className="flex items-center gap-0">
@@ -103,12 +121,9 @@ function Navbar({ contained = false, imageBackdrop = false }) {
                 Solution Pour Maisons et Chalets en Bois
               </p>
             </div>
-    
 
           </div>
-          
 
-          
 
           {/* Desktop */}
           <div
@@ -153,12 +168,14 @@ function Navbar({ contained = false, imageBackdrop = false }) {
           {/* Mobile button */}
           <button
             onClick={() => setIsOpen(!isOpen)}
-            className={`relative z-50 col-start-3 flex h-11 w-11 items-center justify-center min-[1200px]:hidden ${
+            className={`mobile-menu-toggle relative z-50 col-start-3 flex h-11 w-11 items-center justify-center min-[1200px]:hidden ${
               contained && !imageBackdrop && !scrolled && !isOpen
                 ? 'text-[#0C2B30]'
                 : 'text-white'
             }`}
-            aria-label="Ouvrir le menu"
+            aria-label={isOpen ? 'Fermer le menu' : 'Ouvrir le menu'}
+            aria-expanded={isOpen}
+            aria-controls="mobile-navigation"
           >
             {isOpen ? (
               <X size={26} strokeWidth={1.5} />
@@ -172,35 +189,44 @@ function Navbar({ contained = false, imageBackdrop = false }) {
 
       {/* Mobile menu */}
       <div
-        className={`fixed inset-0 z-40 bg-[#1D2923] transition-all duration-500 min-[1200px]:hidden ${
-          isOpen
-            ? 'visible opacity-100'
-            : 'invisible opacity-0'
+        id="mobile-navigation"
+        className={`mobile-nav-overlay fixed inset-0 z-40 transition-all duration-500 min-[1200px]:hidden ${
+          isOpen ? 'is-open visible opacity-100' : 'invisible opacity-0'
         }`}
+        aria-hidden={!isOpen}
+        onClick={() => setIsOpen(false)}
       >
-        <div className="flex h-full flex-col px-6 pt-32">
-
-          <div className="flex flex-col">
+        <div
+          className="mobile-nav-sheet flex flex-col"
+          onClick={(event) => event.stopPropagation()}
+        >
+          <div className="mobile-nav-heading">
+            <span>MAISON HAVRE</span>
+            <span>Explorer</span>
+          </div>
+          <div className="mobile-nav-links flex flex-col">
             {navLinks.map((link, index) => (
-              <Link
+              <NavLink
                 key={link.path}
                 to={link.path}
                 onClick={() => setIsOpen(false)}
-                className="border-b border-white/10 py-5 font-serif text-4xl text-white"
+                className={({ isActive }) =>
+                  `mobile-nav-link border-b border-white/10 py-5 font-serif text-4xl text-white ${
+                    isActive ? 'is-active' : ''
+                  }`
+                }
               >
                 <span className="mr-4 font-sans text-sm text-white/30">
                   0{index + 1}
                 </span>
-
                 {link.label}
-              </Link>
+              </NavLink>
             ))}
           </div>
-
           <Link
             to="/build-your-own"
             onClick={() => setIsOpen(false)}
-            className="mt-10 inline-flex w-fit items-center gap-3 bg-white px-6 py-4 text-sm font-semibold text-[#1D2923]"
+            className="mobile-nav-cta mt-10 inline-flex w-fit items-center gap-3 bg-white px-6 py-4 text-sm font-semibold text-[#1D2923]"
           >
             Composer votre chalet
             <ArrowUpRight size={17} />
