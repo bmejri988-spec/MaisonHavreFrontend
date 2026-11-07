@@ -23,7 +23,7 @@ import Container from '../../components/common/Container'
 import Reveal from '../../components/common/Reveal'
 
 const heroImage =
-  'https://jfoprtlfgdwaslsqizut.supabase.co/storage/v1/object/public/images/acceuil2.png'
+  'https://jfoprtlfgdwaslsqizut.supabase.co/storage/v1/object/public/images/acceuil3.png'
 
 const highlights = [
   { label: 'Solution complète : terrain + maison', Icon: House },
