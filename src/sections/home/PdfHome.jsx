@@ -114,7 +114,14 @@ function ReadMore({ children, initialLength = 180 }) {
 
   return (
     <div className="aurea-pdf-readmore">
-      <p>{visibleText}</p>
+      <p>
+        {visibleText.split('\n').map((line, index) => (
+          <span key={index}>
+            {index > 0 && <br />}
+            {line}
+          </span>
+        ))}
+      </p>
 
       {needsToggle && (
         <button
@@ -220,17 +227,7 @@ function PdfHome() {
               </span>
 
               <ReadMore initialLength={210}>
-                Avec Maison Havre, bénéficiez d'une prise en charge complète.
-                Composez votre projet en trois étapes simples : 1. Sélectionnez
-                l’emplacement de votre future maison parmi une sélection de
-                terrains rigoureusement étudiés pour leur accessibilité et leur
-                potentiel. 2. Personnalisez votre modèle en bois à partir de
-                notre catalogue, conçu avec nos fabricants partenaires. 3.
-                Choisissez vos finitions et équipements selon vos besoins :
-                piscine, installations solaires, ameublement et aménagement
-                paysager. Nous vous accompagnons à chaque étape, des démarches
-                administratives et juridiques au suivi du chantier, jusqu’à la
-                remise des clés.
+                {"Avec Maison Havre, bénéficiez d'une prise en charge complète. Composez votre projet en trois étapes simples :\n1. Sélectionnez l’emplacement de votre future maison parmi une sélection de terrains rigoureusement étudiés pour leur accessibilité et leur potentiel.\n2. Personnalisez votre modèle en bois à partir de notre catalogue, conçu avec nos fabricants partenaires.\n3. Choisissez vos finitions et équipements selon vos besoins : piscine, installations solaires, ameublement et aménagement paysager.\nNous vous accompagnons à chaque étape, des démarches administratives et juridiques au suivi du chantier, jusqu’à la remise des clés."}
               </ReadMore>
             </Reveal>
           </div>
