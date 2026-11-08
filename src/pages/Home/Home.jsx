@@ -5,7 +5,7 @@ import Footer from '../../components/footer/Footer'
 function Home() {
   return (
     <main className="aurea-story aurea-home-page">
-      <Navbar contained imageBackdrop />
+      <Navbar contained imageBackdrop responsiveHome />
       <PdfHome />
       <Footer />
 

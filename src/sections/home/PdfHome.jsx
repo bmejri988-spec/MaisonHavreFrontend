@@ -177,6 +177,7 @@ function PdfHome() {
                     Des maisons et chalets en bois,
                     écologiques et autonomes en eau et en électricité
                   </span>
+                  
                 </p>
               </div>
             </Reveal>

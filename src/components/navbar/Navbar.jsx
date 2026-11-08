@@ -11,13 +11,23 @@ const navLinks = [
   { label: 'À PROPOS', path: '/about' },
 ]
 
-function Navbar({ contained = false, imageBackdrop = false }) {
+function Navbar({
+  contained = false,
+  imageBackdrop = false,
+  responsiveHome = false,
+}) {
   const [isOpen, setIsOpen] = useState(false)
   const [scrolled, setScrolled] = useState(false)
   const [hasScrolled, setHasScrolled] = useState(false)
   const [isHidden, setIsHidden] = useState(false)
   const lastScrollY = useRef(0)
   const positionClass = contained && !hasScrolled ? 'absolute' : 'fixed'
+  const desktopNavClass = responsiveHome
+    ? 'min-[1360px]:flex'
+    : 'min-[1200px]:flex'
+  const compactNavClass = responsiveHome
+    ? 'min-[1360px]:hidden'
+    : 'min-[1200px]:hidden'
 
   useEffect(() => {
     const handleScroll = () => {
@@ -68,7 +78,7 @@ function Navbar({ contained = false, imageBackdrop = false }) {
 
   return (
     <header
-      className={`site-navbar ${isOpen ? 'is-menu-open' : ''} ${positionClass} left-0 top-0 z-50 w-full transition-all duration-500 ${
+      className={`site-navbar ${responsiveHome ? 'site-navbar--responsive-home' : ''} ${isOpen ? 'is-menu-open' : ''} ${positionClass} left-0 top-0 z-50 w-full transition-all duration-500 ${
         isHidden ? '-translate-y-full' : 'translate-y-0'
       } ${
         scrolled && !imageBackdrop ? 'bg-[#1D2923]/20' : 'bg-transparent'
@@ -127,7 +137,7 @@ function Navbar({ contained = false, imageBackdrop = false }) {
 
           {/* Desktop */}
           <div
-            className={`hidden items-center gap-1 rounded-full border p-1 min-[1200px]:flex ${
+            className={`hidden items-center gap-1 rounded-full border p-1 ${desktopNavClass} ${
               imageBackdrop ? '' : 'backdrop-blur-md'
             } ${
               contained && !scrolled && !imageBackdrop
@@ -168,7 +178,7 @@ function Navbar({ contained = false, imageBackdrop = false }) {
           {/* Mobile button */}
           <button
             onClick={() => setIsOpen(!isOpen)}
-            className={`mobile-menu-toggle relative z-50 col-start-3 flex h-11 w-11 items-center justify-center min-[1200px]:hidden ${
+            className={`mobile-menu-toggle relative z-50 col-start-3 flex h-11 w-11 items-center justify-center ${compactNavClass} ${
               contained && !imageBackdrop && !scrolled && !isOpen
                 ? 'text-[#0C2B30]'
                 : 'text-white'
@@ -190,7 +200,7 @@ function Navbar({ contained = false, imageBackdrop = false }) {
       {/* Mobile menu */}
       <div
         id="mobile-navigation"
-        className={`mobile-nav-overlay fixed inset-0 z-40 transition-all duration-500 min-[1200px]:hidden ${
+        className={`mobile-nav-overlay fixed inset-0 z-40 transition-all duration-500 ${compactNavClass} ${
           isOpen ? 'is-open visible opacity-100' : 'invisible opacity-0'
         }`}
         aria-hidden={!isOpen}
