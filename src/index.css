@@ -3364,6 +3364,7 @@ body::before {
     top: clamp(24px, 6svh, 42px);
     right: 22px;
     max-width: 62%;
+    transform: translateX(-16px);
     text-align: right;
   }
 
