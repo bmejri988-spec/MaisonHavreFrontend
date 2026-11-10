@@ -10,24 +10,27 @@ function Footer() {
         <div className="grid gap-12 md:grid-cols-2 lg:grid-cols-[1.5fr_1fr_1fr] lg:gap-16">
 
           {/* Brand */}
-          <div>
+          <div className="w-fit">
             <Link
               to="/"
               aria-label="Accueil Terre & Toit"
-              className="inline-flex items-center gap-3 whitespace-nowrap font-serif text-[clamp(1.2rem,2vw,2.5rem)] text-[#0C2B30]"
+              className="inline-flex w-fit flex-col items-start text-[#0C2B30]"
             >
-              <img
-                src="/terre-toit-mark.png"
-                alt=""
-                aria-hidden="true"
-                className="h-10 w-10 shrink-0 md:h-12 md:w-12"
-              />
-              <span className="whitespace-nowrap leading-none">Terre &amp; Toit</span>
+              <span className="flex items-center gap-0.5 whitespace-nowrap font-serif text-[clamp(1.2rem,2vw,2.5rem)]">
+                <span
+                  aria-hidden="true"
+                  className="h-10 w-10 shrink-0 bg-current md:h-12 md:w-12"
+                  style={{
+                    mask: 'url(/terre-toit-mark.png) center / contain no-repeat',
+                    WebkitMask: 'url(/terre-toit-mark.png) center / contain no-repeat',
+                  }}
+                />
+                <span className="leading-none">Terre &amp; Toit</span>
+              </span>
+              <span className="ml-3 whitespace-nowrap text-[0.55rem] font-semibold uppercase leading-tight tracking-[0.02em] md:text-[0.62rem]">
+                Solution pour Maisons Écologiques et Autonomes
+              </span>
             </Link>
-
-            <p className="mt-5 max-w-sm text-sm leading-6 text-[#5A6A6C]">
-              Solution pour Maisons Écologiques et Autonomes
-            </p>
           </div>
 
           {/* Explore */}
