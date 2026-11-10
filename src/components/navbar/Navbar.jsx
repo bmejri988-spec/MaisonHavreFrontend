@@ -122,7 +122,7 @@ function Navbar({
               </span>
             </span>
             <span
-              className={`mt-0.5 ml-1 self-start whitespace-nowrap text-[0.56rem] font-semibold uppercase leading-tight tracking-[0.06em] md:text-[0.62rem] lg:absolute lg:inset-x-0 lg:bottom-0 lg:ml-0 lg:mt-0 lg:w-full lg:text-[0.55rem] lg:tracking-[0.02em] ${
+              className={`mt-0.5 ml-1 self-start whitespace-nowrap text-[0.56rem] font-semibold uppercase leading-tight tracking-[0.06em] md:text-[0.62rem] lg:absolute lg:bottom-0 lg:left-3 lg:right-0 lg:ml-0 lg:mt-0 lg:w-auto lg:text-[0.53rem] lg:tracking-[0.02em] ${
                 contained && !imageBackdrop && !scrolled
                 ? 'text-[#0C2B30]/60'
                 : 'text-[#FFF9EC]/95 drop-shadow-[0_1px_3px_rgba(12,43,48,0.9)]'
