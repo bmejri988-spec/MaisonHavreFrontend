@@ -41,7 +41,7 @@ function BuildCTA() {
           className="mx-auto mt-8 max-w-xl text-sm leading-6 text-[#1D2923]/65 md:text-base"
         >
           Choisissez votre terrain, sélectionnez votre modèle et composez une
-          résidence qui traduit votre style de vie. Maison Havre vous accompagne de
+          résidence qui traduit votre style de vie. Terre &amp; Toit vous accompagne de
           la première inspiration jusqu’à la remise des clés.
         </motion.p>
 

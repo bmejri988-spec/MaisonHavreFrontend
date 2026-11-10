@@ -177,7 +177,7 @@ function CatalogRail() {
       />
       <CatalogSlider
         label="Offre maisons"
-        title="Maison Havre — L’habitat qui vous ressemble."
+        title="Terre & Toit — L’habitat qui vous ressemble."
         desc="Composez votre future maison en fonction du terrain et selon votre budget."
         cat="Catalogue des maisons"
         items={models}

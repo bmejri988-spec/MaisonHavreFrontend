@@ -13,22 +13,20 @@ function Footer() {
           <div>
             <Link
               to="/"
-              aria-label="Accueil Maison Havre"
-              className="inline-flex items-end gap-3 whitespace-nowrap font-serif text-[clamp(1rem,2vw,2.25rem)] text-[#0C2B30]"
+              aria-label="Accueil Terre & Toit"
+              className="inline-flex items-center gap-3 whitespace-nowrap font-serif text-[clamp(1.2rem,2vw,2.5rem)] text-[#0C2B30]"
             >
-              <span
+              <img
+                src="/terre-toit-logo.svg"
+                alt=""
                 aria-hidden="true"
-                className="h-10 w-10 shrink-0 bg-current"
-                style={{
-                  mask: 'url(/favicon-32x32.png) center / contain no-repeat',
-                  WebkitMask: 'url(/favicon-32x32.png) center / contain no-repeat',
-                }}
+                className="h-10 w-10 shrink-0 md:h-12 md:w-12"
               />
-              <span className="whitespace-nowrap leading-none">MAISON HAVRE</span>
+              <span className="whitespace-nowrap leading-none">Terre &amp; Toit</span>
             </Link>
 
             <p className="mt-5 max-w-sm text-sm leading-6 text-[#5A6A6C]">
-              Solution Pour Maisons et Chalets en Bois            
+              Solution pour Maisons Écologiques et Autonomes
             </p>
           </div>
 
@@ -100,7 +98,7 @@ function Footer() {
 
         <div className="mt-16 flex flex-col gap-4 border-t border-[#0C2B30]/15 pt-6 text-xs text-[#5A6A6C] md:flex-row md:items-center md:justify-between">
           <span>
-            © 2026 MAISON HAVRE. Tous droits réservés.
+            © 2026 Terre &amp; Toit. Tous droits réservés.
           </span>
           {/* Social Links 
           <div className="flex gap-6">

@@ -13,7 +13,7 @@ const values = [
 
 function AureaValues() {
   return (
-    <section className="aurea-values" aria-label="Les engagements Maison Havre">
+    <section className="aurea-values" aria-label="Les engagements Terre & Toit">
       <div className="aurea-values-track">
         {[...values, ...values].map((value, index) => (
           <motion.div
