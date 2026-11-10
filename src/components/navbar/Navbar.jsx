@@ -93,45 +93,44 @@ function Navbar({
         <nav className="site-navbar__row grid grid-cols-[minmax(0,1fr)_auto_minmax(0,1fr)] items-center gap-6">
 
           {/* Logo */}
-          <div className="flex items-center gap-3 sm:gap-4">
-            <Link
-              to="/"
-              aria-label="Accueil Terre & Toit"
-              className="inline-flex h-14 w-14 shrink-0 items-center justify-center md:h-16 md:w-16"
-            >
+          <Link
+            to="/"
+            aria-label="Accueil Terre & Toit"
+            className="relative flex w-fit flex-col items-start lg:pb-2 lg:-translate-x-1 xl:-translate-x-2"
+          >
+            <span className="flex items-center gap-0.5">
+              <span className="inline-flex h-12 w-12 shrink-0 items-center justify-center md:h-14 md:w-14 lg:h-16 lg:w-16">
               <img
-                src="/terre-toit-logo.svg"
+                src="/terre-toit-mark.png"
                 alt=""
                 aria-hidden="true"
-                className={`h-12 w-12 md:h-14 md:w-14 ${
+                className={`h-11 w-11 md:h-13 md:w-13 lg:h-14 lg:w-14 ${
                   contained && !imageBackdrop && !scrolled
                     ? ''
                     : 'brightness-0 invert'
                 }`}
               />
-            </Link>
-            <div className="flex flex-col items-start">
-              <Link
-                to="/"
-                className={`relative z-50 shrink-0 whitespace-nowrap font-serif text-[2rem] leading-none tracking-[-0.06em] md:text-[3rem] ${
-                  contained && !imageBackdrop && !scrolled
-                    ? 'text-[#0C2B30]'
-                    : 'text-[#FFF9EC] drop-shadow-[0_1px_3px_rgba(12,43,48,0.8)]'
+              </span>
+              <span
+                className={`relative z-50 shrink-0 whitespace-nowrap font-serif text-[1.55rem] leading-none tracking-[-0.05em] md:text-[1.9rem] lg:text-[2.35rem] ${
+                contained && !imageBackdrop && !scrolled
+                  ? 'text-[#0C2B30]'
+                  : 'text-[#FFF9EC] drop-shadow-[0_1px_3px_rgba(12,43,48,0.8)]'
                 }`}
               >
                 Terre &amp; Toit
-              </Link>
-              <p
-                className={`m-0 max-w-[24rem] text-[0.64rem] font-semibold uppercase leading-tight tracking-[0.08em] ${
-                  contained && !imageBackdrop && !scrolled
-                    ? 'text-[#0C2B30]/60'
-                    : 'text-[#FFF9EC]/95 drop-shadow-[0_1px_3px_rgba(12,43,48,0.9)]'
-                }`}
-              >
-                Solution pour Maisons Écologiques et Autonomes
-              </p>
-            </div>
-          </div>
+              </span>
+            </span>
+            <span
+              className={`mt-0.5 ml-1 self-start whitespace-nowrap text-[0.56rem] font-semibold uppercase leading-tight tracking-[0.06em] md:text-[0.62rem] lg:absolute lg:inset-x-0 lg:bottom-0 lg:ml-0 lg:mt-0 lg:w-full lg:text-[0.55rem] lg:tracking-[0.02em] ${
+                contained && !imageBackdrop && !scrolled
+                ? 'text-[#0C2B30]/60'
+                : 'text-[#FFF9EC]/95 drop-shadow-[0_1px_3px_rgba(12,43,48,0.9)]'
+              }`}
+            >
+              Solution pour Maisons Écologiques et Autonomes
+            </span>
+          </Link>
 
 
           {/* Desktop */}
@@ -211,7 +210,7 @@ function Navbar({
         >
           <div className="mobile-nav-heading">
             <div className="mobile-nav-brand">
-              <img src="/terre-toit-logo.svg" alt="" aria-hidden="true" />
+              <img src="/terre-toit-mark.png" alt="" aria-hidden="true" />
               <span>Terre &amp; Toit</span>
             </div>
             <span>Explorer</span>

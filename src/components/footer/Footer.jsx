@@ -17,7 +17,7 @@ function Footer() {
               className="inline-flex items-center gap-3 whitespace-nowrap font-serif text-[clamp(1.2rem,2vw,2.5rem)] text-[#0C2B30]"
             >
               <img
-                src="/terre-toit-logo.svg"
+                src="/terre-toit-mark.png"
                 alt=""
                 aria-hidden="true"
                 className="h-10 w-10 shrink-0 md:h-12 md:w-12"
