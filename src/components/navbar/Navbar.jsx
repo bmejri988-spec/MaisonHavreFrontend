@@ -95,7 +95,7 @@ function Navbar({
           {/* Logo */}
           <Link
             to="/"
-            aria-label="Accueil Terre & Toit"
+            aria-label="Accueil Maison Havre"
             className="relative flex w-fit flex-col items-start lg:pb-2 lg:-translate-x-1 xl:-translate-x-2"
           >
             <span className="flex items-center gap-0.5">
@@ -112,13 +112,13 @@ function Navbar({
               />
               </span>
               <span
-                className={`relative z-50 shrink-0 whitespace-nowrap font-serif text-[1.55rem] leading-none tracking-[-0.05em] md:text-[1.9rem] lg:text-[2.35rem] ${
+                className={`relative z-50 shrink-0 whitespace-nowrap font-serif text-[1.55rem] leading-none tracking-[-0.05em] md:text-[1.9rem] lg:text-[2.1rem] ${
                 contained && !imageBackdrop && !scrolled
                   ? 'text-[#0C2B30]'
                   : 'text-[#FFF9EC] drop-shadow-[0_1px_3px_rgba(12,43,48,0.8)]'
                 }`}
               >
-                Terre &amp; Toit
+                Maison Havre
               </span>
             </span>
             <span
@@ -211,7 +211,7 @@ function Navbar({
           <div className="mobile-nav-heading">
             <div className="mobile-nav-brand">
               <img src="/terre-toit-mark.png" alt="" aria-hidden="true" />
-              <span>Terre &amp; Toit</span>
+              <span>Maison Havre</span>
             </div>
             <span>Explorer</span>
           </div>

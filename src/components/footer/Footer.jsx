@@ -13,21 +13,23 @@ function Footer() {
           <div className="w-fit">
             <Link
               to="/"
-              aria-label="Accueil Terre & Toit"
-              className="inline-flex w-fit flex-col items-start text-[#0C2B30]"
+              aria-label="Accueil Maison Havre"
+              className="relative flex w-fit flex-col items-start text-[#0C2B30] lg:pb-2 lg:-translate-x-1 xl:-translate-x-2"
             >
-              <span className="flex items-center gap-0.5 whitespace-nowrap font-serif text-[clamp(1.2rem,2vw,2.5rem)]">
-                <span
-                  aria-hidden="true"
-                  className="h-10 w-10 shrink-0 bg-current md:h-12 md:w-12"
-                  style={{
-                    mask: 'url(/terre-toit-mark.png) center / contain no-repeat',
-                    WebkitMask: 'url(/terre-toit-mark.png) center / contain no-repeat',
-                  }}
-                />
-                <span className="leading-none">Terre &amp; Toit</span>
+              <span className="flex items-center gap-0.5">
+                <span className="inline-flex h-12 w-12 shrink-0 items-center justify-center md:h-14 md:w-14 lg:h-16 lg:w-16">
+                  <img
+                    src="/terre-toit-mark.png"
+                    alt=""
+                    aria-hidden="true"
+                    className="h-11 w-11 brightness-0 md:h-13 md:w-13 lg:h-14 lg:w-14"
+                  />
+                </span>
+                <span className="relative z-50 shrink-0 whitespace-nowrap font-serif text-[1.55rem] leading-none tracking-[-0.05em] text-[#0C2B30] md:text-[1.9rem] lg:text-[2.1rem]">
+                  Maison Havre
+                </span>
               </span>
-              <span className="ml-3 whitespace-nowrap text-[0.55rem] font-semibold uppercase leading-tight tracking-[0.02em] md:text-[0.62rem]">
+              <span className="mt-0.5 ml-1 self-start whitespace-nowrap text-[0.56rem] font-semibold uppercase leading-tight tracking-[0.06em] text-[#0C2B30] md:text-[0.62rem] lg:absolute lg:bottom-0 lg:left-3 lg:right-0 lg:ml-0 lg:mt-0 lg:w-auto lg:text-[0.53rem] lg:tracking-[0.02em]">
                 Solution pour Maisons Écologiques et Autonomes
               </span>
             </Link>
@@ -101,7 +103,7 @@ function Footer() {
 
         <div className="mt-16 flex flex-col gap-4 border-t border-[#0C2B30]/15 pt-6 text-xs text-[#5A6A6C] md:flex-row md:items-center md:justify-between">
           <span>
-            © 2026 Terre &amp; Toit. Tous droits réservés.
+            © 2026 Maison Havre. Tous droits réservés.
           </span>
           {/* Social Links 
           <div className="flex gap-6">

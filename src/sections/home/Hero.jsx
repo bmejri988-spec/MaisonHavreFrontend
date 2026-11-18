@@ -63,7 +63,7 @@ function Hero() {
             <Reveal>
 
               <p className="max-w-md text-sm leading-6 text-white/75 md:text-base">
-                Terre &amp; Toit imagine des résidences de caractère, adaptées à la nature,
+                Maison Havre imagine des résidences de caractère, adaptées à la nature,
                 à l’autonomie et à un confort durable.
               </p>
 
@@ -71,7 +71,7 @@ function Hero() {
                 to="/build-your-own"
                 className="group inline-flex w-fit items-center gap-4 bg-white px-6 py-4 text-sm font-semibold text-[#1D2923] transition-all duration-300 hover:bg-[#EFEBE2]"
               >
-                Découvrir l’univers Terre &amp; Toit
+                Découvrir l’univers Maison Havre
 
                 <span className="flex h-7 w-7 items-center justify-center rounded-full bg-[#1D2923] text-white transition-transform duration-300 group-hover:rotate-45">
                   <ArrowUpRight size={15} />
