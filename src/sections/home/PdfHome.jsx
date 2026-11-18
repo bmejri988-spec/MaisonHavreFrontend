@@ -318,7 +318,7 @@ function PdfHome() {
           aria-hidden="true"
         >
           <img
-            src="https://images.unsplash.com/photo-1503387762-592deb58ef4e?auto=format&fit=crop&w=1800&q=85"
+            src="https://jfoprtlfgdwaslsqizut.supabase.co/storage/v1/object/public/images/notre-expertise.jpg"
             alt=""
           />
         </div>
