@@ -9,6 +9,7 @@ function BackgroundAudioControl() {
   const isMutedRef = useRef(false)
   const hasUserInteractedRef = useRef(false)
   const autoplayBlockedRef = useRef(false)
+  const shouldResumeAfterVideoRef = useRef(false)
   const [isMuted, setIsMuted] = useState(false)
 
   useEffect(() => {
@@ -24,9 +25,42 @@ function BackgroundAudioControl() {
         return
       }
 
+      const anotherVideoIsPlaying = [
+        ...document.querySelectorAll('video'),
+      ].some((video) => video !== event.target && !video.paused && !video.ended)
+      if (!anotherVideoIsPlaying) {
+        shouldResumeAfterVideoRef.current = !isMutedRef.current
+      }
+
       isMutedRef.current = true
       audio.muted = true
       setIsMuted(true)
+    }
+
+    const resumeAfterVideoPauses = (event) => {
+      if (
+        !(event.target instanceof HTMLVideoElement) ||
+        !shouldResumeAfterVideoRef.current
+      ) {
+        return
+      }
+
+      const anotherVideoIsPlaying = [
+        ...document.querySelectorAll('video'),
+      ].some((video) => !video.paused && !video.ended)
+      if (anotherVideoIsPlaying) {
+        return
+      }
+
+      shouldResumeAfterVideoRef.current = false
+      isMutedRef.current = false
+      audio.muted = false
+      setIsMuted(false)
+      audio.play().catch(() => {
+        isMutedRef.current = true
+        audio.muted = true
+        setIsMuted(true)
+      })
     }
 
     const resumeAfterInteraction = (event) => {
@@ -59,6 +93,8 @@ function BackgroundAudioControl() {
     }
 
     document.addEventListener('play', muteWhenVideoStarts, true)
+    document.addEventListener('pause', resumeAfterVideoPauses, true)
+    document.addEventListener('ended', resumeAfterVideoPauses, true)
     document.addEventListener('pointerdown', resumeAfterInteraction, true)
     document.addEventListener('keydown', resumeAfterInteraction, true)
 
@@ -73,6 +109,8 @@ function BackgroundAudioControl() {
 
     return () => {
       document.removeEventListener('play', muteWhenVideoStarts, true)
+      document.removeEventListener('pause', resumeAfterVideoPauses, true)
+      document.removeEventListener('ended', resumeAfterVideoPauses, true)
       document.removeEventListener('pointerdown', resumeAfterInteraction, true)
       document.removeEventListener('keydown', resumeAfterInteraction, true)
       audio.pause()
@@ -87,6 +125,7 @@ function BackgroundAudioControl() {
 
     hasUserInteractedRef.current = true
     const nextMuted = !isMutedRef.current
+    shouldResumeAfterVideoRef.current = false
     isMutedRef.current = nextMuted
     audio.muted = nextMuted
     setIsMuted(nextMuted)
