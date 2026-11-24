@@ -21,10 +21,12 @@ terrains-contact-sheet.jpg
 
 images/
 video/*
+*wav
 
 *jpg
 *png
 *jpeg
 
 !public/images/
+!public/videoResources/
 !public/images/hero-paper-texture.png

@@ -101,7 +101,7 @@ function Navbar({
             <span className="flex items-center gap-0.5">
               <span className="inline-flex h-12 w-12 shrink-0 items-center justify-center md:h-14 md:w-14 lg:h-16 lg:w-16">
               <img
-                src="/terre-toit-mark.png"
+                src="/android-chrome-192x192.png"
                 alt=""
                 aria-hidden="true"
                 className={`h-11 w-11 md:h-13 md:w-13 lg:h-14 lg:w-14 ${
@@ -112,7 +112,7 @@ function Navbar({
               />
               </span>
               <span
-                className={`relative z-50 shrink-0 whitespace-nowrap font-serif text-[1.55rem] leading-none tracking-[-0.05em] md:text-[1.9rem] lg:text-[2.1rem] ${
+                className={`relative z-50 shrink-0 whitespace-nowrap font-serif text-[1.55rem] leading-none tracking- md:text-[1.9rem] lg:text-[2.1rem] ${
                 contained && !imageBackdrop && !scrolled
                   ? 'text-[#0C2B30]'
                   : 'text-[#FFF9EC] drop-shadow-[0_1px_3px_rgba(12,43,48,0.8)]'
@@ -210,7 +210,7 @@ function Navbar({
         >
           <div className="mobile-nav-heading">
             <div className="mobile-nav-brand">
-              <img src="/terre-toit-mark.png" alt="" aria-hidden="true" />
+              <img src="/android-chrome-192x192.png" alt="" aria-hidden="true" />
               <span>Maison Havre</span>
             </div>
             <span>Explorer</span>

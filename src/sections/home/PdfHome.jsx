@@ -219,7 +219,7 @@ function PdfHome() {
 
           <div>
             <Reveal className="aurea-pdf-media">
-              <VideoCard src="https://jfoprtlfgdwaslsqizut.supabase.co/storage/v1/object/public/Videos/video1.mp4"/>
+              <VideoCard src="https://jfoprtlfgdwaslsqizut.supabase.co/storage/v1/object/public/Videos/video1V2.mp4"/>
             </Reveal>
 
             <Reveal delay={0.1}>
@@ -300,7 +300,7 @@ function PdfHome() {
               className="aurea-pdf-solution-end-video"
             >
               <VideoCard
-                src="https://jfoprtlfgdwaslsqizut.supabase.co/storage/v1/object/public/Videos/video2.mp4"
+                src="https://jfoprtlfgdwaslsqizut.supabase.co/storage/v1/object/public/Videos/video2V2.mp4"
                 label="Découvrez notre solution Maison Havre"
               />
             </Reveal>

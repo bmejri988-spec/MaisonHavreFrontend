@@ -19,7 +19,7 @@ function Footer() {
               <span className="flex items-center gap-0.5">
                 <span className="inline-flex h-12 w-12 shrink-0 items-center justify-center md:h-14 md:w-14 lg:h-16 lg:w-16">
                   <img
-                    src="/terre-toit-mark.png"
+                    src="/android-chrome-192x192.png"
                     alt=""
                     aria-hidden="true"
                     className="h-11 w-11 brightness-0 md:h-13 md:w-13 lg:h-14 lg:w-14"

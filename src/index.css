@@ -477,6 +477,44 @@ img {
   background: var(--aurea-night);
 }
 
+.aurea-audio-toggle {
+  position: fixed;
+  z-index: 102;
+  right: 24px;
+  bottom: max(24px, env(safe-area-inset-bottom));
+  display: inline-flex;
+  min-height: 46px;
+  align-items: center;
+  justify-content: center;
+  gap: 9px;
+  padding: 0 16px;
+  color: var(--color-background);
+  background: rgb(12 43 48 / 92%);
+  border: 1px solid rgb(201 164 92 / 70%);
+  border-radius: 999px;
+  box-shadow: 0 4px 18px rgb(0 0 0 / 22%);
+  cursor: pointer;
+  font: inherit;
+  font-size: 0.82rem;
+  font-weight: 600;
+  backdrop-filter: blur(10px);
+  transition:
+    background 180ms ease,
+    color 180ms ease,
+    transform 180ms ease;
+}
+
+.aurea-audio-toggle:hover {
+  color: var(--aurea-night);
+  background: var(--aurea-gold);
+  transform: translateY(-2px);
+}
+
+.aurea-audio-toggle:focus-visible {
+  outline: 3px solid var(--aurea-gold);
+  outline-offset: 3px;
+}
+
 .aurea-home--catalog-hidden .aurea-catalog-toggle {
   right: 0;
 }

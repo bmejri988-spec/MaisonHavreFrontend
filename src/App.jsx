@@ -21,6 +21,7 @@ import ChaletModels from './pages/ChaletModels/ChaletModels'
 import Options from './pages/Options/Options'
 import BuildYourOwn from './pages/BuildYourOwn/BuildYourOwn'
 import CatalogRail from './components/home/CatalogRail'
+import BackgroundAudioControl from './components/common/BackgroundAudioControl'
 
 const catalogTogglePaths = new Set(['/terrains', '/options', '/chalet-models'])
 const catalogWindowPaths = new Set([
@@ -374,6 +375,7 @@ function AppLayout() {
 
   return (
     <>
+      <BackgroundAudioControl />
       <ScrollToTop
         isRestoringHome={isRestoringHome}
         onHomeRestored={handleHomeRestored}
