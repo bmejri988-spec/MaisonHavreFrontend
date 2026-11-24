@@ -3,11 +3,11 @@ import { Volume2, VolumeX } from 'lucide-react'
 
 const backgroundAudioUrl =
   'https://jfoprtlfgdwaslsqizut.supabase.co/storage/v1/object/public/audio/backSound.wav'
-{/* your comment */}
+
 function BackgroundAudioControl() {
   const audioRef = useRef(null)
   const isMutedRef = useRef(false)
-  const isManuallyMutedRef = useRef(false)
+  const hasUserInteractedRef = useRef(false)
   const autoplayBlockedRef = useRef(false)
   const [isMuted, setIsMuted] = useState(false)
 
@@ -29,78 +29,50 @@ function BackgroundAudioControl() {
       setIsMuted(true)
     }
 
-    const resumeWhenVideoStops = (event) => {
-      if (!(event.target instanceof HTMLVideoElement)) {
-        return
-      }
-
-      const anotherVideoIsPlaying = [
-        ...document.querySelectorAll('video'),
-      ].some(
-        (video) =>
-          video !== event.target && !video.paused && !video.ended,
-      )
-      if (anotherVideoIsPlaying || isManuallyMutedRef.current) {
-        return
-      }
-
-      isMutedRef.current = false
-      audio.muted = false
-      setIsMuted(false)
-
-      if (audio.paused) {
-        audio.play().catch(() => {
-          autoplayBlockedRef.current = true
-        })
-      }
-    }
-
     const resumeAfterInteraction = (event) => {
       if (
-        isManuallyMutedRef.current ||
+        hasUserInteractedRef.current ||
+        !autoplayBlockedRef.current ||
         (event.target instanceof Element &&
           event.target.closest('.aurea-audio-toggle'))
       ) {
         return
       }
 
+      hasUserInteractedRef.current = true
+      autoplayBlockedRef.current = false
       const videoIsPlaying = [...document.querySelectorAll('video')].some(
         (video) => !video.paused && !video.ended,
       )
-      if (
-        videoIsPlaying ||
-        (!autoplayBlockedRef.current && !audio.paused)
-      ) {
+      if (videoIsPlaying) {
         return
       }
 
-      autoplayBlockedRef.current = false
       isMutedRef.current = false
       audio.muted = false
       setIsMuted(false)
       audio.play().catch(() => {
-        if (!isMutedRef.current) {
-          autoplayBlockedRef.current = true
-        }
+        isMutedRef.current = true
+        audio.muted = true
+        setIsMuted(true)
       })
     }
 
     document.addEventListener('play', muteWhenVideoStarts, true)
-    document.addEventListener('pause', resumeWhenVideoStops, true)
-    document.addEventListener('ended', resumeWhenVideoStops, true)
     document.addEventListener('pointerdown', resumeAfterInteraction, true)
     document.addEventListener('keydown', resumeAfterInteraction, true)
 
     audio.play().catch(() => {
-      if (!isMutedRef.current) {
+      if (!isMutedRef.current && !hasUserInteractedRef.current) {
         autoplayBlockedRef.current = true
+        isMutedRef.current = true
+        audio.muted = true
+        setIsMuted(true)
       }
     })
 
     return () => {
       document.removeEventListener('play', muteWhenVideoStarts, true)
-      document.removeEventListener('pause', resumeWhenVideoStops, true)
-      document.removeEventListener('ended', resumeWhenVideoStops, true)
       document.removeEventListener('pointerdown', resumeAfterInteraction, true)
       document.removeEventListener('keydown', resumeAfterInteraction, true)
       audio.pause()
@@ -113,23 +85,17 @@ function BackgroundAudioControl() {
       return
     }
 
-    if (!isMutedRef.current && audio.paused) {
-      audio.muted = false
-      audio.play().catch(() => {
-        autoplayBlockedRef.current = true
-      })
-      return
-    }
-
+    hasUserInteractedRef.current = true
     const nextMuted = !isMutedRef.current
-    isManuallyMutedRef.current = nextMuted
     isMutedRef.current = nextMuted
     audio.muted = nextMuted
     setIsMuted(nextMuted)
 
     if (!nextMuted) {
       audio.play().catch(() => {
-        autoplayBlockedRef.current = true
+        isMutedRef.current = true
+        audio.muted = true
+        setIsMuted(true)
       })
     }
   }
