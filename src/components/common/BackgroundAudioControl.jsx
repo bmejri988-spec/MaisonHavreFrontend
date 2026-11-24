@@ -57,7 +57,6 @@ function BackgroundAudioControl() {
 
     const resumeAfterInteraction = (event) => {
       if (
-        !autoplayBlockedRef.current ||
         isManuallyMutedRef.current ||
         (event.target instanceof Element &&
           event.target.closest('.aurea-audio-toggle'))
@@ -65,14 +64,17 @@ function BackgroundAudioControl() {
         return
       }
 
-      autoplayBlockedRef.current = false
       const videoIsPlaying = [...document.querySelectorAll('video')].some(
         (video) => !video.paused && !video.ended,
       )
-      if (videoIsPlaying) {
+      if (
+        videoIsPlaying ||
+        (!autoplayBlockedRef.current && !audio.paused)
+      ) {
         return
       }
 
+      autoplayBlockedRef.current = false
       isMutedRef.current = false
       audio.muted = false
       setIsMuted(false)
